@@ -1,0 +1,13 @@
+*.iml
+## Directory-based project format:
+.idea/
+.gradle/
+
+### Android ###
+# Built application files
+*.apk
+*.ap_
+local.properties
+.DS_Store
+build/
+/captures
