@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">MonkeyAndroid</string>
     <string name="action_settings">Settings</string>
+
+    <!-- error -->
+    <string name="error_message_network">Network error</string>
+
+    <!-- msg -->
+    <string name="msg_win">win</string>
+
+    <!-- title -->
+    <string name="title_home">Home</string>
+
+    <!-- action -->
+    <string name="action_enter">Enter</string>
 </resources>
