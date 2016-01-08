@@ -1,15 +1,15 @@
-package com.yeungeek.monkeyandroid.mvp;
+package com.yeungeek.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.yeungeek.monkeyandroid.mvp.common.MvpPresenter;
-import com.yeungeek.monkeyandroid.mvp.common.MvpView;
-import com.yeungeek.monkeyandroid.mvp.core.delegate.ActivityMvpDelegate;
-import com.yeungeek.monkeyandroid.mvp.core.delegate.ActivityMvpDelegateCallback;
-import com.yeungeek.monkeyandroid.mvp.core.delegate.ActivityMvpDelegateImpl;
+import com.yeungeek.mvp.common.MvpPresenter;
+import com.yeungeek.mvp.common.MvpView;
+import com.yeungeek.mvp.core.delegate.ActivityMvpDelegate;
+import com.yeungeek.mvp.core.delegate.ActivityMvpDelegateCallback;
+import com.yeungeek.mvp.core.delegate.ActivityMvpDelegateImpl;
 
 /**
  * An Activity that uses an {@link MvpPresenter} to implement a Model-View-Presenter

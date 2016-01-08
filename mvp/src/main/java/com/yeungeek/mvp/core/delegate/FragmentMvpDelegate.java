@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yeungeek.monkeyandroid.mvp.core.delegate;
+package com.yeungeek.mvp.core.delegate;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -22,8 +22,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.yeungeek.monkeyandroid.mvp.common.MvpPresenter;
-import com.yeungeek.monkeyandroid.mvp.common.MvpView;
+import com.yeungeek.mvp.common.MvpPresenter;
+import com.yeungeek.mvp.common.MvpView;
 
 
 /**

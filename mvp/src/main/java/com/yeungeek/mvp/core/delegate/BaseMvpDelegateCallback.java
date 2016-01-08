@@ -1,9 +1,9 @@
-package com.yeungeek.monkeyandroid.mvp.core.delegate;
+package com.yeungeek.mvp.core.delegate;
 
 import android.app.Activity;
 
-import com.yeungeek.monkeyandroid.mvp.common.MvpPresenter;
-import com.yeungeek.monkeyandroid.mvp.common.MvpView;
+import com.yeungeek.mvp.common.MvpPresenter;
+import com.yeungeek.mvp.common.MvpView;
 
 /**
  * The MvpDelegate callback that will be called from  {@link

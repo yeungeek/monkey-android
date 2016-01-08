@@ -1,4 +1,4 @@
-package com.yeungeek.monkeyandroid.mvp.common;
+package com.yeungeek.mvp.common;
 
 /**
  * Created by yeungeek on 2015/12/24.

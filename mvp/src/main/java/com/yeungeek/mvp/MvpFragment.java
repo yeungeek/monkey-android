@@ -1,4 +1,4 @@
-package com.yeungeek.monkeyandroid.mvp;
+package com.yeungeek.mvp;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,11 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import com.yeungeek.monkeyandroid.mvp.common.MvpPresenter;
-import com.yeungeek.monkeyandroid.mvp.common.MvpView;
-import com.yeungeek.monkeyandroid.mvp.core.delegate.BaseMvpDelegateCallback;
-import com.yeungeek.monkeyandroid.mvp.core.delegate.FragmentMvpDelegate;
-import com.yeungeek.monkeyandroid.mvp.core.delegate.FragmentMvpDelegateImpl;
+import com.yeungeek.mvp.common.MvpPresenter;
+import com.yeungeek.mvp.common.MvpView;
+import com.yeungeek.mvp.core.delegate.BaseMvpDelegateCallback;
+import com.yeungeek.mvp.core.delegate.FragmentMvpDelegate;
+import com.yeungeek.mvp.core.delegate.FragmentMvpDelegateImpl;
 
 /**
  */

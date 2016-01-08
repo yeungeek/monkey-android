@@ -1,11 +1,11 @@
-package com.yeungeek.monkeyandroid.mvp.core.delegate;
+package com.yeungeek.mvp.core.delegate;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import com.yeungeek.monkeyandroid.mvp.common.MvpPresenter;
-import com.yeungeek.monkeyandroid.mvp.common.MvpView;
+import com.yeungeek.mvp.common.MvpPresenter;
+import com.yeungeek.mvp.common.MvpView;
 
 /**
  * A delegate for Activities to attach them to mosbies mvp.

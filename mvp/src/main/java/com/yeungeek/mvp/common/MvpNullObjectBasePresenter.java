@@ -1,4 +1,4 @@
-package com.yeungeek.monkeyandroid.mvp.common;
+package com.yeungeek.mvp.common;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

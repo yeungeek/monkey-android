@@ -34,4 +34,6 @@ ext {
     // Libraries
     supportLibVersion = '23.1.1'
 
+    // Test Libs
+    junitVersion = '4.12'
 }

@@ -1,7 +1,7 @@
-package com.yeungeek.monkeyandroid.mvp.core.delegate;
+package com.yeungeek.mvp.core.delegate;
 
-import com.yeungeek.monkeyandroid.mvp.common.MvpPresenter;
-import com.yeungeek.monkeyandroid.mvp.common.MvpView;
+import com.yeungeek.mvp.common.MvpPresenter;
+import com.yeungeek.mvp.common.MvpView;
 
 /**
  * This is just the internal implementation for the delegate. Don't use it by your own.

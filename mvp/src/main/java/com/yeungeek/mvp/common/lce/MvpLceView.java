@@ -1,6 +1,7 @@
-package com.yeungeek.monkeyandroid.mvp.common.lce;
+package com.yeungeek.mvp.common.lce;
 
-import com.yeungeek.monkeyandroid.mvp.common.MvpView;
+
+import com.yeungeek.mvp.common.MvpView;
 
 /**
  * Created by yeungeek on 2015/12/24.

@@ -1,4 +1,4 @@
-package com.yeungeek.monkeyandroid.mvp.common;
+package com.yeungeek.mvp.common;
 
 import android.support.annotation.Nullable;
 
