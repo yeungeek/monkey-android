@@ -1,25 +1,23 @@
 package com.yeungeek.mvp.core.lce;
 
-import android.os.Bundle;
 import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yeungeek.mvp.MvpFragment;
+import com.yeungeek.mvp.MvpActivity;
 import com.yeungeek.mvp.R;
 import com.yeungeek.mvp.common.MvpPresenter;
 import com.yeungeek.mvp.common.lce.MvpLceView;
 
 /**
- * A {@link MvpFragment} that implements {@link MvpLceView} which gives you 3 options:
+ * A {@link MvpActivity} that implements {@link MvpLceView} which gives you 3 options:
  * <ul>
  * <li>Display a loading view: A view with <b>R.id.loadingView</b> must be specified in your
  * inflated xml layout</li>
  * <li>Display a error view: A <b>TextView</b> with <b>R.id.errorView</b> must be declared in your
  * inflated xml layout</li>
- * <li>Display content view: A view with <b>R.id.contentView</b> must be specified in your
+ * <li>Display content view: A view witjh <b>R.id.contentView</b> must be specified in your
  * inflated
  * xml layout</li>
  * </ul>
@@ -33,22 +31,21 @@ import com.yeungeek.mvp.common.lce.MvpLceView;
  *             that
  *             extends from {@link MvpLceView}
  * @param <P>  The type of the Presenter. Must extend from {@link MvpPresenter}
- * @author Hannes Dorfmann
- * @since 1.0.0
  */
-public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
-        extends MvpFragment<V, P> implements MvpLceView<M> {
+public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
+        extends MvpActivity<V, P> implements MvpLceView<M> {
+
     protected View loadingView;
     protected CV contentView;
     protected TextView errorView;
 
     @CallSuper
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        loadingView = view.findViewById(R.id.loadingView);
-        contentView = (CV) view.findViewById(R.id.contentView);
-        errorView = (TextView) view.findViewById(R.id.errorView);
+    public void onContentChanged() {
+        super.onContentChanged();
+        loadingView = findViewById(R.id.loadingView);
+        contentView = (CV) findViewById(R.id.contentView);
+        errorView = (TextView) findViewById(R.id.errorView);
 
         if (loadingView == null) {
             throw new NullPointerException(
@@ -65,7 +62,7 @@ public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>
         if (errorView == null) {
             throw new NullPointerException(
                     "Error view is null! Have you specified a content view in your layout xml file?"
-                            + " You have to give your error View the id R.id.errorView");
+                            + " You have to give your error View the id R.id.contentView");
         }
 
         errorView.setOnClickListener(new View.OnClickListener() {
@@ -76,48 +73,6 @@ public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>
         });
     }
 
-    @Override
-    public void showLoading(boolean pullToRefresh) {
-        if (!pullToRefresh) {
-            animateLoadingViewIn();
-        }
-    }
-
-    @Override
-    public void showContent() {
-        animateLoadingViewIn();
-    }
-
-    @Override
-    public void showError(Throwable e, boolean pullToRefresh) {
-        String errorMsg = getErrorMessage(e, pullToRefresh);
-        if (pullToRefresh) {
-            showLightError(errorMsg);
-        } else {
-            errorView.setText(errorMsg);
-            animateErrorViewIn();
-        }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        loadingView = null;
-        contentView = null;
-        errorView = null;
-    }
-
-    /**
-     * The default behaviour is to display a toast message as light error (i.e. pull-to-refresh
-     * error).
-     * Override this method if you want to display the light error in another way (like crouton).
-     */
-    protected void showLightError(String msg) {
-        if (getActivity() != null) {
-            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-        }
-    }
-
     /**
      * Called if the error view has been clicked. To disable clicking on the errorView use
      * <code>errorView.setClickable(false)</code>
@@ -126,8 +81,60 @@ public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>
         loadData(false);
     }
 
+    @Override
+    public void showLoading(boolean pullToRefresh) {
+        if (!pullToRefresh) {
+            animateLoadingViewIn();
+        }
+
+        // otherwise the pull to refresh widget will already display a loading animation
+    }
+
+    /**
+     * Override this method if you want to provide your own animation for showing the loading view
+     */
     protected void animateLoadingViewIn() {
         LceAnimator.showLoading(loadingView, contentView, errorView);
+    }
+
+    @Override
+    public void showContent() {
+        animateContentViewIn();
+    }
+
+    /**
+     * Called to animate from loading view to content view
+     */
+    protected void animateContentViewIn() {
+        LceAnimator.showContent(loadingView, contentView, errorView);
+    }
+
+    /**
+     * Get the error message for a certain Exception that will be shown on {@link
+     * #showError(Throwable, boolean)}
+     */
+    protected abstract String getErrorMessage(Throwable e, boolean pullToRefresh);
+
+    /**
+     * The default behaviour is to display a toast message as light error (i.e. pull-to-refresh
+     * error).
+     * Override this method if you want to display the light error in another way (like crouton).
+     */
+    protected void showLightError(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showError(Throwable e, boolean pullToRefresh) {
+
+        String errorMsg = getErrorMessage(e, pullToRefresh);
+
+        if (pullToRefresh) {
+            showLightError(errorMsg);
+        } else {
+            errorView.setText(errorMsg);
+            animateErrorViewIn();
+        }
     }
 
     /**
@@ -136,10 +143,6 @@ public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>
     protected void animateErrorViewIn() {
         LceAnimator.showErrorView(loadingView, contentView, errorView);
     }
-
-    /**
-     * Get the error message for a certain Exception that will be shown on {@link
-     * #showError(Throwable, boolean)}
-     */
-    protected abstract String getErrorMessage(Throwable e, boolean pullToRefresh);
 }
+
+
