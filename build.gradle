@@ -34,6 +34,9 @@ ext {
     // Libraries
     supportLibVersion = '23.1.1'
 
+    // Inject
+    butterknifeVersion = '7.0.1'
+
     // Test Libs
     junitVersion = '4.12'
 }
