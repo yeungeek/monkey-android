@@ -1,25 +1,21 @@
-package com.yeungeek.monkeyandroid.base.view;
+package com.yeungeek.monkeyandroid.ui.base.view;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.yeungeek.mvp.common.MvpPresenter;
-import com.yeungeek.mvp.common.lce.MvpLceView;
-import com.yeungeek.mvp.core.lce.MvpLceFragment;
 
 import butterknife.ButterKnife;
 
 /**
  * Created by yeungeek on 2016/1/10.
  */
-public abstract class BaseLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
-        extends MvpLceFragment<CV, M, V, P> {
+public abstract class BaseFragment extends Fragment {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -33,7 +29,7 @@ public abstract class BaseLceFragment<CV extends View, M, V extends MvpLceView<M
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         injectDependencies();
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this,view);
     }
 
     @Override

@@ -4,7 +4,22 @@ package com.yeungeek.mvp.common.lce;
 import com.yeungeek.mvp.common.MvpView;
 
 /**
- * Created by yeungeek on 2015/12/24.
+ * A {@link MvpView} that assumes that there are 3 display operation:
+ * <ul>
+ * <li>{@link #showLoading(boolean)}: Display a loading animation while loading data in background
+ * by
+ * invoking the corresponding presenter method</li>
+ * <p/>
+ * <li>{@link #showError(Throwable, boolean)}: Display a error view (a TextView) on the screen if
+ * an error has occurred while loading data. You can distinguish between a pull-to-refresh error by
+ * checking the boolean parameter and display the error message in another, more suitable way like
+ * a
+ * Toast</li>
+ * <p/>
+ * <li>{@link #showContent()}: After the content has been loaded the presenter calls {@link
+ * #setData(Object)} to fill the view with data. Afterwards, the presenter calls {@link
+ * #showContent()} to display the data</li>
+ * </ul>
  */
 public interface MvpLceView<V> extends MvpView {
 

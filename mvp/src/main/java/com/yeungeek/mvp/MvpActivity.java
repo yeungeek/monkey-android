@@ -139,6 +139,11 @@ public abstract class MvpActivity<V extends MvpView, P extends MvpPresenter<V>>
         this.retainInstance = retainInstance;
     }
 
+    @Override
+    public Object onRetainNonMosbyCustomNonConfigurationInstance() {
+        return null;
+    }
+
     /**
      * Internally used by Mosby. Use {@link #onRetainNonMosbyCustomNonConfigurationInstance()} and
      * {@link #getNonMosbyLastCustomNonConfigurationInstance()}

@@ -1,4 +1,4 @@
-package com.yeungeek.monkeyandroid.base.view;
+package com.yeungeek.monkeyandroid.ui.base.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
