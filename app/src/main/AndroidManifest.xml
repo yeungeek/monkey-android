@@ -4,6 +4,7 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-sdk tools:overrideLibrary="timber.log"/>
 
     <application
         android:name=".MonkeyApplication"

@@ -34,7 +34,8 @@ public interface GithubApi {
             logging.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
 
             //@see https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor
-            final OkHttpClient okHttpClient = builder.addInterceptor(logging).build();
+            final OkHttpClient okHttpClient = builder.addInterceptor(logging)
+                    .build();
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(GithubApi.ENDPOINT)

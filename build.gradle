@@ -46,6 +46,9 @@ ext {
     javaxAnnotationVersion = '1.2'
     okhttpVersion ='3.0.0-RC1'
 
+    // log
+    timberVersion = '4.1.0'
+
     // Test Libs
     junitVersion = '4.12'
     leakcanaryVersion = '1.3.1'
