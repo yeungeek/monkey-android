@@ -44,6 +44,12 @@ public class SampleActivity extends BaseLceActivity<SwipeRefreshLayout, List<Rep
     }
 
     @Override
+    protected void injectDependencies() {
+        super.injectDependencies();
+        activityComponent().inject(this);
+    }
+
+    @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
         return null;
     }
@@ -80,11 +86,5 @@ public class SampleActivity extends BaseLceActivity<SwipeRefreshLayout, List<Rep
     @Override
     public void onRefresh() {
         loadData(true);
-    }
-
-    @Override
-    protected void injectDependencies() {
-        super.injectDependencies();
-        activityComponent().inject(this);
     }
 }

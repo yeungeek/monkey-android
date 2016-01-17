@@ -55,6 +55,8 @@ dependencies {
 
     compile 'com.squareup.retrofit2:retrofit:' + rootProject.ext.retrofitVersion
     compile 'com.squareup.retrofit2:converter-gson:' + rootProject.ext.retrofitVersion
+    compile 'com.squareup.retrofit2:adapter-rxjava:' + rootProject.ext.retrofitVersion
+
     compile 'com.squareup.okhttp3:okhttp:' + rootProject.ext.okhttpVersion
     compile 'com.squareup.okhttp3:logging-interceptor:'+ rootProject.ext.okhttpVersion
 

@@ -12,8 +12,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
+import retrofit2.RxJavaCallAdapterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import rx.Observable;
 
 /**
  * Created by yeungeek on 2016/1/10.
@@ -24,7 +26,7 @@ public interface GithubApi {
     String AUTH_HEADER = "Authorization";
 
     @GET("users/{user}/repos")
-    Call<List<Repo>> listRepos(@Path("user") String user);
+    Observable<List<Repo>> listRepos(@Path("user") String user);
 
     /********** Factory class that sets up a new github services *******/
     class Factory {
@@ -42,6 +44,7 @@ public interface GithubApi {
                     .baseUrl(GithubApi.ENDPOINT)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
 
             return retrofit.create(GithubApi.class);

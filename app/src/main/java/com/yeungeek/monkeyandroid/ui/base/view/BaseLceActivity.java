@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.yeungeek.monkeyandroid.MonkeyApplication;
 import com.yeungeek.monkeyandroid.injection.component.ActivityComponent;
+import com.yeungeek.monkeyandroid.injection.component.ApplicationComponent;
 import com.yeungeek.monkeyandroid.injection.component.DaggerActivityComponent;
 import com.yeungeek.monkeyandroid.injection.module.ActivityModule;
 import com.yeungeek.mvp.common.MvpPresenter;
@@ -37,11 +38,19 @@ public abstract class BaseLceActivity<CV extends View, M, V extends MvpLceView<M
     public ActivityComponent activityComponent() {
         if (null == mActivityComponent) {
             mActivityComponent = DaggerActivityComponent.builder()
-                    .activityModule(new ActivityModule(this))
-                    .applicationComponent(MonkeyApplication.get(this).getComponent())
+                    .activityModule(getActivityModule())
+                    .applicationComponent(getApplicationComponent())
                     .build();
         }
         return mActivityComponent;
+    }
+
+    protected ApplicationComponent getApplicationComponent() {
+        return MonkeyApplication.get(this).getComponent();
+    }
+
+    protected ActivityModule getActivityModule() {
+        return new ActivityModule(this);
     }
 
     private ActivityComponent mActivityComponent;
