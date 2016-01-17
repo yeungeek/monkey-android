@@ -18,6 +18,7 @@ import retrofit2.http.Path;
 /**
  * Created by yeungeek on 2016/1/10.
  */
+
 public interface GithubApi {
     String ENDPOINT = "https://api.github.com/";
     String AUTH_HEADER = "Authorization";

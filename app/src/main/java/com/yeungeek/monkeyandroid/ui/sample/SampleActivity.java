@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.yeungeek.monkeyandroid.R;
-import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -21,7 +23,11 @@ public class SampleActivity extends BaseLceActivity<SwipeRefreshLayout, List<Rep
         implements ReposView, SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+
     private ReposAdapter adapter;
+
+    @Inject
+    ReposPresenter reposPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +35,7 @@ public class SampleActivity extends BaseLceActivity<SwipeRefreshLayout, List<Rep
         setContentView(R.layout.activity_repos);
 
         contentView.setOnRefreshListener(this);
-        
+
         adapter = new ReposAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -58,7 +64,7 @@ public class SampleActivity extends BaseLceActivity<SwipeRefreshLayout, List<Rep
     @NonNull
     @Override
     public ReposPresenter createPresenter() {
-        return new ReposPresenter(this);
+        return reposPresenter;
     }
 
     @Override
@@ -74,5 +80,11 @@ public class SampleActivity extends BaseLceActivity<SwipeRefreshLayout, List<Rep
     @Override
     public void onRefresh() {
         loadData(true);
+    }
+
+    @Override
+    protected void injectDependencies() {
+        super.injectDependencies();
+        activityComponent().inject(this);
     }
 }

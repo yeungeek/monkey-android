@@ -1,7 +1,5 @@
 package com.yeungeek.monkeyandroid.ui.sample;
 
-import android.content.Context;
-
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.mvp.common.MvpBasePresenter;
@@ -17,11 +15,10 @@ import retrofit2.Response;
  * Created by yeungeek on 2016/1/10.
  */
 public class ReposPresenter extends MvpBasePresenter<ReposView> {
-    @Inject
     GithubApi githubApi;
 
-    public ReposPresenter(final Context context) {
-//        api = GithubApi.Factory.createGithubApi(context);
+    @Inject public ReposPresenter(GithubApi githubApi) {
+        this.githubApi = githubApi;
     }
 
     public void listRepos(final String user, final boolean pullToRefresh) {
