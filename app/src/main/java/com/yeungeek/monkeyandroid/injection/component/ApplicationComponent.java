@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.yeungeek.monkeyandroid.MonkeyApplication;
+import com.yeungeek.monkeyandroid.data.local.DatabaseHelper;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 import com.yeungeek.monkeyandroid.injection.module.ApplicationModule;
@@ -22,4 +23,5 @@ public interface ApplicationComponent {
     Context context();
     Application application();
     GithubApi githubApi();
+    DatabaseHelper databaseHelper();
 }

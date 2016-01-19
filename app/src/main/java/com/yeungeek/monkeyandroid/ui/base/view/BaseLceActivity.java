@@ -31,6 +31,12 @@ public abstract class BaseLceActivity<CV extends View, M, V extends MvpLceView<M
         ButterKnife.bind(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
     protected void injectDependencies() {
 
     }

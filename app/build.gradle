@@ -35,36 +35,46 @@ android {
 }
 
 dependencies {
+    def supportDependencies = rootProject.ext.supportDependencies
+    def injectDependencies = rootProject.ext.injectDependencies
+    def httpDependencies = rootProject.ext.httpDependencies
+    def rxDependencies = rootProject.ext.rxDependencies
+    def utilDependencies = rootProject.ext.utilDependencies
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':mvp')
 
-    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
-    compile 'com.android.support:design:' + rootProject.ext.supportLibVersion
-    compile 'com.android.support:recyclerview-v7:' + rootProject.ext.supportLibVersion
+    //support
+    compile supportDependencies.appcompat
+    compile supportDependencies.design
+    compile supportDependencies.recyclerview
 
     // rx
-    compile 'io.reactivex:rxjava:' + rootProject.ext.rxjavaVersion
-    compile 'io.reactivex:rxandroid:' + rootProject.ext.rxandroidVersion
+    compile rxDependencies.rxjava
+    compile rxDependencies.rxandroid
 
     // inject
-    compile 'com.jakewharton:butterknife:' + rootProject.ext.butterknifeVersion
+    compile injectDependencies.butterknife
     // dagger2
-    compile 'com.google.dagger:dagger:' + rootProject.ext.dagger2Version
-    apt 'com.google.dagger:dagger-compiler:' + rootProject.ext.dagger2Version
-    compile 'javax.annotation:javax.annotation-api:' + rootProject.ext.javaxAnnotationVersion
+    compile injectDependencies.dagger
+    apt injectDependencies.daggerCompiler
+    compile injectDependencies.javaxAnnotation
 
-    compile 'com.squareup.retrofit2:retrofit:' + rootProject.ext.retrofitVersion
-    compile 'com.squareup.retrofit2:converter-gson:' + rootProject.ext.retrofitVersion
-    compile 'com.squareup.retrofit2:adapter-rxjava:' + rootProject.ext.retrofitVersion
+    compile httpDependencies.retrofit
+    compile httpDependencies.converterGson
+    compile httpDependencies.adapterRxjava
 
-    compile 'com.squareup.okhttp3:okhttp:' + rootProject.ext.okhttpVersion
-    compile 'com.squareup.okhttp3:logging-interceptor:'+ rootProject.ext.okhttpVersion
+    compile httpDependencies.okhttp
+    compile httpDependencies.loggingInterceptor
+
+    compile utilDependencies.sqlbrite
 
     // log
-    compile 'com.jakewharton.timber:timber:' + rootProject.ext.timberVersion
+    compile utilDependencies.timber
 
     // Test
-    testCompile 'com.google.dagger:dagger:' + rootProject.ext.dagger2Version
-    testCompile 'com.google.dagger:dagger-compiler:' + rootProject.ext.dagger2Version
-    testCompile 'javax.annotation:javax.annotation-api:1.2'
+    testCompile injectDependencies.dagger
+    testCompile injectDependencies.javaxAnnotation
+
+    testApt injectDependencies.daggerCompiler
 }

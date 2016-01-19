@@ -1,5 +1,6 @@
 package com.yeungeek.monkeyandroid.ui.sample;
 
+import com.yeungeek.monkeyandroid.data.local.DatabaseHelper;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.ui.base.presenter.MvpLceRxPresenter;
@@ -18,9 +19,12 @@ import timber.log.Timber;
 public class ReposPresenter extends MvpLceRxPresenter<ReposView, List<Repo>> {
     GithubApi githubApi;
 
+    DatabaseHelper databaseHelper;
+
     @Inject
-    public ReposPresenter(GithubApi githubApi) {
+    public ReposPresenter(GithubApi githubApi, DatabaseHelper databaseHelper) {
         this.githubApi = githubApi;
+        this.databaseHelper = databaseHelper;
     }
 
     public void listRepos(final String user, final boolean pullToRefresh) {
@@ -34,24 +38,5 @@ public class ReposPresenter extends MvpLceRxPresenter<ReposView, List<Repo>> {
                 });
 
         subscribe(observable, pullToRefresh);
-
-//        getView().showLoading(pullToRefresh);
-
-//        githubApi.listRepos(user).enqueue(new Callback<List<Repo>>() {
-//            @Override
-//            public void onResponse(Response<List<Repo>> response) {
-//                if (isViewAttached()) {
-//                    getView().setData(response.body());
-//                    getView().showContent();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable t) {
-//                if (isViewAttached()) {
-//                    getView().showError(t, pullToRefresh);
-//                }
-//            }
-//        });
     }
 }
