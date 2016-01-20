@@ -1,5 +1,6 @@
 package com.yeungeek.monkeyandroid.ui.sample;
 
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.yeungeek.monkeyandroid.data.local.DatabaseHelper;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
@@ -33,10 +34,15 @@ public class ReposPresenter extends MvpLceRxPresenter<ReposView, List<Repo>> {
                 .flatMap(new Func1<List<Repo>, Observable<List<Repo>>>() {
                     @Override
                     public Observable<List<Repo>> call(List<Repo> repos) {
-                        return Observable.just(repos);
+                        return getObservableList(repos);
                     }
                 });
 
         subscribe(observable, pullToRefresh);
+    }
+
+    @RxLogObservable
+    private Observable<List<Repo>> getObservableList(final List<Repo> repos) {
+        return Observable.just(repos);
     }
 }

@@ -1,5 +1,6 @@
 package com.yeungeek.monkeyandroid.ui.base.presenter;
 
+import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 import com.yeungeek.mvp.common.MvpBasePresenter;
 import com.yeungeek.mvp.common.MvpPresenter;
 import com.yeungeek.mvp.common.lce.MvpLceView;
@@ -49,28 +50,35 @@ public abstract class MvpLceRxPresenter<V extends MvpLceView<M>, M>
 
         unsubscribe();
 
-        subscriber = new Subscriber<M>() {
-            final private boolean ptr = pullToRefresh;
-
-            @Override
-            public void onCompleted() {
-                MvpLceRxPresenter.this.onCompleted();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                MvpLceRxPresenter.this.onError(e, ptr);
-            }
-
-            @Override
-            public void onNext(M m) {
-                MvpLceRxPresenter.this.onNext(m);
-            }
-        };
+        subscriber = new RxSubscriber(pullToRefresh);
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
+    }
+
+    @RxLogSubscriber
+    private class RxSubscriber extends Subscriber<M> {
+        final private boolean ptr;
+
+        public RxSubscriber(final boolean pullToRefresh) {
+            this.ptr = pullToRefresh;
+        }
+
+        @Override
+        public void onCompleted() {
+            MvpLceRxPresenter.this.onCompleted();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            MvpLceRxPresenter.this.onError(e, ptr);
+        }
+
+        @Override
+        public void onNext(M m) {
+            MvpLceRxPresenter.this.onNext(m);
+        }
     }
 
     protected void onCompleted() {

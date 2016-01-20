@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.data.remote;
 
 import android.content.Context;
 
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.yeungeek.monkeyandroid.BuildConfig;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 
