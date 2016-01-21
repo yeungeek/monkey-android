@@ -34,7 +34,7 @@ public class ReposPresenter extends MvpLceRxPresenter<ReposView, List<Repo>> {
                 .flatMap(new Func1<List<Repo>, Observable<List<Repo>>>() {
                     @Override
                     public Observable<List<Repo>> call(List<Repo> repos) {
-                        return getObservableList(repos);
+                        return Observable.just(repos);
                     }
                 });
 
