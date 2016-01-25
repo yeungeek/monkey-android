@@ -3,6 +3,7 @@ package com.yeungeek.monkeyandroid.data.local;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
 import com.yeungeek.monkeyandroid.data.model.Repo;
@@ -47,6 +48,8 @@ public class DatabaseHelper {
 
                     transaction.markSuccessful();
 //                    subscriber.onCompleted();
+                    subscriber.onNext(repos);
+                    subscriber.onCompleted();
                 } finally {
                     transaction.end();
                 }

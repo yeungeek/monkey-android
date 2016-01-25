@@ -30,11 +30,17 @@ public class ReposPresenter extends MvpLceRxPresenter<ReposView, List<Repo>> {
 
     public void listRepos(final String user, final boolean pullToRefresh) {
         Timber.d("get list %s repos", user);
+        // 线程切换
+        //1. find db
+        //2. get data from net
+        //3. save db
+        //4. display main
+
         Observable<List<Repo>> observable = githubApi.listRepos(user)
                 .flatMap(new Func1<List<Repo>, Observable<List<Repo>>>() {
                     @Override
                     public Observable<List<Repo>> call(List<Repo> repos) {
-                        return Observable.just(repos);
+                        return databaseHelper.addRepos(repos);
                     }
                 });
 

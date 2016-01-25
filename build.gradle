@@ -12,6 +12,7 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath "com.fernandocejas.frodo:frodo-plugin:0.8.2"
+        classpath "net.rdrei.android.buildtimetracker:gradle-plugin:0.5.+"
     }
 }
 
