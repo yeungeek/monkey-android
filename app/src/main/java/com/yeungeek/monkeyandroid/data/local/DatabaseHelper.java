@@ -41,6 +41,9 @@ public class DatabaseHelper {
             public void call(Subscriber<? super List<Repo>> subscriber) {
                 BriteDatabase.Transaction transaction = mDb.newTransaction();
                 try {
+                    //clear
+                    mDb.delete(Db.RepoTable.TABLE_NAME,null);
+
                     for (Repo repo : repos) {
                         ContentValues contentValues = Db.RepoTable.toContentValues(repo);
                         mDb.insert(Db.RepoTable.TABLE_NAME, contentValues);
