@@ -16,6 +16,8 @@ ext {
     // Libraries
     final supportLibVersion = '23.1.1'
 
+    final latestVersion = 'latest.release'
+
     // RxJava
     rxjavaVersion = '1.1.0'
     rxandroidVersion = '1.1.0'
@@ -63,6 +65,10 @@ ext {
             rxandroid: "io.reactivex:rxandroid:${rxjavaVersion}",
     ]
 
+    analysisDependencies = [
+            bugly: "com.tencent.bugly:crashreport:${latestVersion}"
+    ]
+
     utilDependencies = [
             sqlbrite: "com.squareup.sqlbrite:sqlbrite:${sqlbriteVersion}",
 
@@ -73,6 +79,6 @@ ext {
             dagger         : "com.google.dagger:dagger:${dagger2Version}",
             daggerCompiler : "com.google.dagger:dagger-compiler:${dagger2Version}",
             javaxAnnotation: "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
-            junit: "junit:junit:${junitVersion}",
+            junit          : "junit:junit:${junitVersion}",
     ]
 }

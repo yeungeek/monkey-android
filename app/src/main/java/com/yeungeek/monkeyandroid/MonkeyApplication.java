@@ -3,6 +3,7 @@ package com.yeungeek.monkeyandroid;
 import android.app.Application;
 import android.content.Context;
 
+import com.tencent.bugly.crashreport.CrashReport;
 import com.yeungeek.monkeyandroid.injection.component.ApplicationComponent;
 import com.yeungeek.monkeyandroid.injection.component.DaggerApplicationComponent;
 import com.yeungeek.monkeyandroid.injection.module.ApplicationModule;
@@ -22,6 +23,7 @@ public class MonkeyApplication extends Application {
         }
 
         initComponent();
+        initAnalysis();
     }
 
     private void initComponent() {
@@ -32,6 +34,11 @@ public class MonkeyApplication extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .build();
         mApplicationComponent.inject(this);
+    }
+
+    private void initAnalysis() {
+        CrashReport.initCrashReport(this, BuildConfig.BUGLY_APPID, false);
+//        CrashReport.testJavaCrash();
     }
 
     public static MonkeyApplication get(final Context context) {

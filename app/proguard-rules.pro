@@ -22,3 +22,6 @@
 -keep class retrofit2.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
+
+# bugly
+-keep public class com.tencent.bugly.**{*;}
