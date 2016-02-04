@@ -21,6 +21,7 @@ ext {
     // RxJava
     rxjavaVersion = '1.1.0'
     rxandroidVersion = '1.1.0'
+    rxPreferencesVersion = '1.0.1'
 
     // Inject
     dagger2Version = '2.0'
@@ -63,6 +64,7 @@ ext {
     rxDependencies = [
             rxjava   : "io.reactivex:rxjava:${rxjavaVersion}",
             rxandroid: "io.reactivex:rxandroid:${rxjavaVersion}",
+            rxPreferences: "com.f2prateek.rx.preferences:rx-preferences:${rxPreferencesVersion}",
     ]
 
     analysisDependencies = [
