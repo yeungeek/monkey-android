@@ -49,9 +49,28 @@ android {
         }
     }
 
+    signingConfigs {
+        // You must set up an environment var before release signing
+        release {
+            storeFile file("${monkeyAppKeystoreReleaseLocation}")
+            keyAlias "${monkeyAppReleaseKeyAlias}"
+            storePassword "${monkeyAppReleaseStorePassword}"
+            keyPassword "${monkeyAppReleaseKeyPassword}"
+        }
+
+        debug {
+            storeFile file("${monkeyAppKeystoreDebugLocation}")
+            keyAlias "${monkeyAppDebugKeyAlias}"
+            storePassword "${monkeyAppDebugStorePassword}"
+            keyPassword "${monkeyAppDebugKeyPassword}"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

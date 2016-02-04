@@ -28,7 +28,7 @@ ext {
     butterknifeVersion = '7.0.1'
     retrofitVersion = '2.0.0-beta3'
     javaxAnnotationVersion = '1.2'
-    okhttpVersion = '3.0.0-RC1'
+    okhttpVersion = '3.0.0'
     sqlbriteVersion = '0.5.0'
 
     // log

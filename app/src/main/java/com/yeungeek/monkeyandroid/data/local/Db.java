@@ -28,7 +28,7 @@ public class Db {
                 "CREATE TABLE " + TABLE_NAME + " ("
                         + COLUMN_INDEX + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                         + COLUMN_ID + " INTEGER NOT NULL,"
-                        + COLUMN_NAME + " TEXT NOT NULL,"
+                        + COLUMN_NAME + " TEXT,"
                         + COLUMN_DESC + " TEXT,"
                         + COLUMN_OWERID + " INTEGER"
                         + " );";
