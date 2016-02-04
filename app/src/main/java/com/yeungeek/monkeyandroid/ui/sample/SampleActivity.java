@@ -15,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import timber.log.Timber;
 
 /**
  * Created by yeungeek on 2016/1/10.
@@ -58,7 +59,7 @@ public class SampleActivity extends BaseLceActivity<SwipeRefreshLayout, List<Rep
     public void showError(Throwable e, boolean pullToRefresh) {
         super.showError(e, pullToRefresh);
         contentView.setRefreshing(false);
-        e.printStackTrace();
+        Timber.e(e, "showError");
     }
 
     @Override

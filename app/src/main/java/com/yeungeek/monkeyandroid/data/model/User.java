@@ -1,10 +1,9 @@
 package com.yeungeek.monkeyandroid.data.model;
 
 public class User {
-
     long id;
     String login;
-    String avatar_url;
+    String avatarUrl;
 
     public long getId() {
         return id;
@@ -12,10 +11,6 @@ public class User {
 
     public String getLogin() {
         return login;
-    }
-
-    public String getAvatarUrl() {
-        return avatar_url;
     }
 
     public void setId(long id) {
@@ -26,8 +21,12 @@ public class User {
         this.login = login;
     }
 
-    public void setAvatar_url(String avatar_url) {
-        this.avatar_url = avatar_url;
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     @Override

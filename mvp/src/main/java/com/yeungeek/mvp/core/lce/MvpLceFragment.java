@@ -24,7 +24,7 @@ import com.yeungeek.mvp.common.lce.MvpLceView;
  * xml layout</li>
  * </ul>
  *
- * @param <CV> The type of the content view with the id = R.id.contentView. Can be any kind of
+ * @param <C> The type of the content view with the id = R.id.contentView. Can be any kind of
  *             android view widget like ListView, RecyclerView, ScrollView or a simple layout like Framelayout
  *             etc. (everything that extends from android.view.View)
  * @param <M>  The underlying data model that will be displayed with this view
@@ -36,10 +36,10 @@ import com.yeungeek.mvp.common.lce.MvpLceView;
  * @author Hannes Dorfmann
  * @since 1.0.0
  */
-public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
+public abstract class MvpLceFragment<C extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
         extends MvpFragment<V, P> implements MvpLceView<M> {
     protected View loadingView;
-    protected CV contentView;
+    protected C contentView;
     protected TextView errorView;
 
     @CallSuper
@@ -47,7 +47,7 @@ public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadingView = view.findViewById(R.id.loadingView);
-        contentView = (CV) view.findViewById(R.id.contentView);
+        contentView = (C) view.findViewById(R.id.contentView);
         errorView = (TextView) view.findViewById(R.id.errorView);
 
         if (loadingView == null) {

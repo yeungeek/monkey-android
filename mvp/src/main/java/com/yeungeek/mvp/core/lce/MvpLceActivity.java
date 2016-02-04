@@ -22,7 +22,7 @@ import com.yeungeek.mvp.common.lce.MvpLceView;
  * xml layout</li>
  * </ul>
  *
- * @param <CV> The type of the content view with the id = R.id.contentView. Can be any kind of
+ * @param <C> The type of the content view with the id = R.id.contentView. Can be any kind of
  *             android view widget like ListView, RecyclerView, ScrollView or a simple layout like Framelayout
  *             etc. (everything that extends from android.view.View)
  * @param <M>  The underlying data model that will be displayed with this view
@@ -32,11 +32,11 @@ import com.yeungeek.mvp.common.lce.MvpLceView;
  *             extends from {@link MvpLceView}
  * @param <P>  The type of the Presenter. Must extend from {@link MvpPresenter}
  */
-public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
+public abstract class MvpLceActivity<C extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
         extends MvpActivity<V, P> implements MvpLceView<M> {
 
     protected View loadingView;
-    protected CV contentView;
+    protected C contentView;
     protected TextView errorView;
 
     @CallSuper
@@ -44,7 +44,7 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
     public void onContentChanged() {
         super.onContentChanged();
         loadingView = findViewById(R.id.loadingView);
-        contentView = (CV) findViewById(R.id.contentView);
+        contentView = (C) findViewById(R.id.contentView);
         errorView = (TextView) findViewById(R.id.errorView);
 
         if (loadingView == null) {

@@ -4,6 +4,8 @@ apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'build-time-tracker'
 apply plugin: 'bugly'
 
+apply from: '../config/quality/quality.gradle'
+
 buildtimetracker {
     reporters {
         csv {
@@ -38,6 +40,8 @@ android {
         applicationId "com.yeungeek.monkeyandroid"
         minSdkVersion rootProject.ext.minSdk
         targetSdkVersion rootProject.ext.targetSdk
+
+        // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
 
@@ -135,6 +139,7 @@ dependencies {
     // Test
     testCompile injectDependencies.dagger
     testCompile injectDependencies.javaxAnnotation
+    testCompile domainTestDependencies.junit
 
     testApt injectDependencies.daggerCompiler
 }

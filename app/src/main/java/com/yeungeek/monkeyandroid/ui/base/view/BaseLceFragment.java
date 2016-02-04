@@ -16,8 +16,8 @@ import butterknife.ButterKnife;
 /**
  * Created by yeungeek on 2016/1/10.
  */
-public abstract class BaseLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
-        extends MvpLceFragment<CV, M, V, P> {
+public abstract class BaseLceFragment<C extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
+        extends MvpLceFragment<C, M, V, P> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

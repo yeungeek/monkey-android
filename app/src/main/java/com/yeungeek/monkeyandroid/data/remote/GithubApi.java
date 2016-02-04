@@ -2,7 +2,6 @@ package com.yeungeek.monkeyandroid.data.remote;
 
 import android.content.Context;
 
-import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.yeungeek.monkeyandroid.BuildConfig;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 
@@ -10,7 +9,6 @@ import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.RxJavaCallAdapterFactory;
