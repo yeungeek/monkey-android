@@ -1,8 +1,11 @@
 package com.yeungeek.monkeyandroid.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
     long id;
     String login;
+    @SerializedName(value = "avatar_url")
     String avatarUrl;
 
     public long getId() {

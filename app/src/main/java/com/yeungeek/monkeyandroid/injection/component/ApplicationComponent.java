@@ -21,6 +21,7 @@ public interface ApplicationComponent {
 
     @ApplicationContext
     Context context();
+
     Application application();
     GithubApi githubApi();
     DatabaseHelper databaseHelper();
