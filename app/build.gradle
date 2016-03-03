@@ -129,7 +129,7 @@ dependencies {
     compile httpDependencies.loggingInterceptor
 
     compile utilDependencies.sqlbrite
-
+    compile utilDependencies.stetho
     // log
     compile utilDependencies.timber
 

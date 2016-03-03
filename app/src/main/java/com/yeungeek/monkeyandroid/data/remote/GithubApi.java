@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.data.remote;
 
 import android.content.Context;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.yeungeek.monkeyandroid.BuildConfig;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 
@@ -37,6 +38,7 @@ public interface GithubApi {
 
             //@see https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor
             final OkHttpClient okHttpClient = builder.addInterceptor(logging)
+                    .addNetworkInterceptor(new StethoInterceptor())
                     .build();
 
             Retrofit retrofit = new Retrofit.Builder()
