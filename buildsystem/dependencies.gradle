@@ -29,6 +29,7 @@ ext {
     retrofitVersion = '2.0.0-beta3'
     javaxAnnotationVersion = '1.2'
     okhttpVersion = '3.2.0'
+    glideVersion = '3.7.0'
     sqlbriteVersion = '0.5.0'
 
     //tools
@@ -52,6 +53,8 @@ ext {
             retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             converterGson     : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             adapterRxjava     : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+
+            glide             : "com.github.bumptech.glide:glide:${glideVersion}",
 
             okhttp            : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",

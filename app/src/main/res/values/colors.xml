@@ -10,4 +10,5 @@
     <color name="blue">#FF2A91BD</color>
     <color name="orange">#FFFF9D2F</color>
     <color name="red">#FFFF432F</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

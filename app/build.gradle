@@ -125,6 +125,8 @@ dependencies {
     compile httpDependencies.converterGson
     compile httpDependencies.adapterRxjava
 
+    compile httpDependencies.glide
+
     compile httpDependencies.okhttp
     compile httpDependencies.loggingInterceptor
 

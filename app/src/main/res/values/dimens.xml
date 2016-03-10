@@ -7,7 +7,7 @@
     <!-- font sizes -->
     <dimen name="font_larger">22sp</dimen>
     <dimen name="font_large">18sp</dimen>
-    <dimen name="font_normal">16sp</dimen>
+    <dimen name="font_normal">14sp</dimen>
     <dimen name="font_small">12sp</dimen>
 
     <!-- typical spacing between two views -->
@@ -18,7 +18,24 @@
     <dimen name="spacing_tiny">4dp</dimen>
 
     <!-- typical sizes of views -->
-    <dimen name="button_height_tall">60dp</dimen>
-    <dimen name="button_height_normal">40dp</dimen>
-    <dimen name="button_height_short">32dp</dimen>
+    <dimen name="height_huge">72dp</dimen>
+    <dimen name="height_large">60dp</dimen>
+    <dimen name="height_normal">40dp</dimen>
+    <dimen name="height_small">32dp</dimen>
+
+    <!-- padding -->
+    <dimen name="padding_huge">20dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_normal">10dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_tiny">2dp</dimen>
+
+    <!-- margin -->
+    <dimen name="margin_huge">30dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_normal">10dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_tiny">2dp</dimen>
+
+    <dimen name="drawer_height_normal">168dp</dimen>
 </resources>

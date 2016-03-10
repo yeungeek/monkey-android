@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MonkeyAndroid</string>
-    <string name="action_settings">Settings</string>
+
 
     <!-- error -->
     <string name="error_message_network">Network error</string>
@@ -10,7 +10,21 @@
 
     <!-- title -->
     <string name="title_home">Home</string>
+    <string name="title_user">Famous users</string>
+    <string name="title_repo">Hot repos</string>
+    <string name="title_daily">Today</string>
+    <string name="title_weekly">This Week</string>
+    <string name="title_monthly">This Month</string>
 
     <!-- action -->
     <string name="action_enter">Enter</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- dialogs -->
+
+    <!-- menu -->
+    <string name="menu_title_user">@string/title_user</string>
+    <string name="menu_title_repo">@string/title_repo</string>
+    <string name="menu_title_trending">Trending</string>
+    <string name="menu_title_about">About</string>
 </resources>
