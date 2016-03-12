@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
+import com.yeungeek.monkeyandroid.rxbus.RxBus;
 
 import javax.inject.Singleton;
 
@@ -39,5 +40,9 @@ public class ApplicationModule {
         return GithubApi.Factory.createGithubApi(mApplication);
     }
 
-
+    @Provides
+    @Singleton
+    RxBus provideRxBus(){
+        return new RxBus();
+    }
 }

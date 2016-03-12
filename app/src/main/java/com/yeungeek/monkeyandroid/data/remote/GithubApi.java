@@ -25,8 +25,16 @@ public interface GithubApi {
     String ENDPOINT = "https://api.github.com/";
     String AUTH_HEADER = "Authorization";
 
+    String CLIENT_ID = "d3cf434537678c39e406";
+    String CLIENT_SECRET = "60426efe8d81483492a111fb6fb421e615465b73";
+
+    String initialScope = "user,public_repo,repo";
+    String AUTH_URL = "https://www.github.com/login/oauth/authorize?client_id=" +
+            CLIENT_ID + "&" + "scope=" + initialScope;
+
     @GET("users/{user}/repos")
     Observable<List<Repo>> listRepos(@Path("user") String user);
+
 
     /********** Factory class that sets up a new github services *******/
     class Factory {

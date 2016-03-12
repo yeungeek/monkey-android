@@ -3,6 +3,7 @@ package com.yeungeek.monkeyandroid.ui.base.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.yeungeek.monkeyandroid.MonkeyApplication;
 import com.yeungeek.monkeyandroid.injection.component.ActivityComponent;
@@ -15,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * Created by yeungeek on 2016/1/8.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         injectDependencies();
@@ -51,6 +52,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private ActivityComponent mActivityComponent;
+
+    @Override
+    public void onClick(View v) {
+
+    }
 
     @Override
     protected void onDestroy() {
