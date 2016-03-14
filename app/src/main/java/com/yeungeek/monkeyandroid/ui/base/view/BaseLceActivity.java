@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * Created by yeungeek on 2016/1/10.
  */
 public abstract class BaseLceActivity<C extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
-        extends MvpLceActivity<C, M, V, P> {
+        extends MvpLceActivity<C, M, V, P> implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         injectDependencies();
@@ -35,6 +35,19 @@ public abstract class BaseLceActivity<C extends View, M, V extends MvpLceView<M>
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    /**
+     * mvp
+     */
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
     }
 
     protected void injectDependencies() {

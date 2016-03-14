@@ -14,7 +14,7 @@ import android.webkit.WebViewClient;
 
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
 import com.yeungeek.monkeyandroid.rxbus.event.SignInEvent;
-import com.yeungeek.monkeyandroid.ui.base.view.BaseActivity;
+import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 
 import javax.inject.Inject;
 
@@ -39,7 +39,7 @@ public class SignInDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((BaseActivity) getActivity()).activityComponent().inject(this);
+        ((BaseLceActivity) getActivity()).activityComponent().inject(this);
         url = getArguments().getString(EXTRA_URL);
     }
 

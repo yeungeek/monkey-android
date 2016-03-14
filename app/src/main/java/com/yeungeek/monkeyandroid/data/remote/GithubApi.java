@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.yeungeek.monkeyandroid.BuildConfig;
+import com.yeungeek.monkeyandroid.data.model.AccessTokenResp;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.data.model.User;
 
 import java.util.List;
 
@@ -13,8 +15,13 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.RxJavaCallAdapterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -35,8 +42,27 @@ public interface GithubApi {
     @GET("users/{user}/repos")
     Observable<List<Repo>> listRepos(@Path("user") String user);
 
+    /*******
+     * oauth
+     ******/
+    @Headers({
+            "Accept: application/json"
+    })
+    @FormUrlEncoded
+    @POST("https://github.com/login/oauth/access_token")
+    Observable<AccessTokenResp> getOAuthToken(@Field("client_id") String client,
+                                              @Field("client_secret") String clientSecret, @Field("code") String code);
 
-    /********** Factory class that sets up a new github services *******/
+    /**
+     * sent in a header "Authorization: token OAUTH-TOKEN" https://api.github.com
+     * sent as a parameter https://api.github.com/?access_token=OAUTH-TOKEN
+     */
+    @GET("user")
+    Observable<User> getUserInfo(@Query(value = "access_token", encoded = true) String accessToken);
+
+    /**********
+     * Factory class that sets up a new github services
+     *******/
     class Factory {
         public static GithubApi createGithubApi(final Context context) {
             final OkHttpClient.Builder builder = new OkHttpClient.Builder();
