@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
@@ -132,6 +134,8 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
             return;
         }
 
+        Glide.with(this).load(data.getAvatar_url()).into(mAvatarView);
+
         mNameView.setText(data.getLogin());
         mEmailView.setText(data.getEmail());
     }
@@ -201,7 +205,6 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
         return mainPresenter;
     }
 
-
     @Override
     public void showLoading(boolean pullToRefresh) {
         Timber.d("### login start");
@@ -214,7 +217,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        Timber.e("### login error", e);
+        Timber.e(e,"### login error");
     }
 
     @Override

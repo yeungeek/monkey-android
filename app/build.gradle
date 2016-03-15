@@ -126,6 +126,7 @@ dependencies {
     compile httpDependencies.adapterRxjava
 
     compile httpDependencies.glide
+    compile httpDependencies.glideOkHttp
 
     compile httpDependencies.okhttp
     compile httpDependencies.loggingInterceptor

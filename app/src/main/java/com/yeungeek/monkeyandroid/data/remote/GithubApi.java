@@ -43,7 +43,7 @@ public interface GithubApi {
     Observable<List<Repo>> listRepos(@Path("user") String user);
 
     /*******
-     * oauth
+     * oauth. different endPoint, user override url
      ******/
     @Headers({
             "Accept: application/json"
