@@ -50,6 +50,11 @@ public abstract class BaseLceActivity<C extends View, M, V extends MvpLceView<M>
         return null;
     }
 
+    @Override
+    public void loadData(boolean pullToRefresh) {
+
+    }
+
     protected void injectDependencies() {
 
     }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.yeungeek.monkeyandroid.MonkeyApplication;
+import com.yeungeek.monkeyandroid.data.DataManager;
 import com.yeungeek.monkeyandroid.data.local.DatabaseHelper;
 import com.yeungeek.monkeyandroid.data.local.PreferencesHelper;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
@@ -29,6 +30,7 @@ public interface ApplicationComponent {
     GithubApi githubApi();
     DatabaseHelper databaseHelper();
     PreferencesHelper preferencesHelper();
+    DataManager dataManager();
 
     RxBus rxBus();
 }
