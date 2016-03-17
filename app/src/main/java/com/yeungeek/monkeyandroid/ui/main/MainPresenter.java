@@ -53,4 +53,17 @@ public class MainPresenter extends MvpLceRxPresenter<MainMvpView, User> implemen
     public void getAccessToken(String code) {
         subscribe(dataManager.getAccessToken(code), false);
     }
+
+    public void checkUserStatus() {
+        User user = null;
+        if (null != dataManager.getPreferencesHelper().getAccessToken()) {
+            //if token is exist, user is exist
+            user = new User();
+            user.setLogin(dataManager.getPreferencesHelper().getUserLogin());
+            user.setEmail(dataManager.getPreferencesHelper().getUserEmail());
+            user.setAvatar_url(dataManager.getPreferencesHelper().getUserAvatar());
+        }
+
+        getView().setData(user);
+    }
 }

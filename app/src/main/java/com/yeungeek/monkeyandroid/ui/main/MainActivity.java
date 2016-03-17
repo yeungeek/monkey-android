@@ -49,6 +49,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     RxBus rxBus;
     @Inject
     MainPresenter mainPresenter;
+
     private ActionBar actionBar;
 
     @Override
@@ -76,6 +77,9 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
             mNameView.setOnClickListener(this);
 
         }
+
+        mainPresenter.checkUserStatus();
+
         selectFragment(R.id.menu_users);
     }
 
@@ -96,6 +100,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
         if (null == data) {
             return;
         }
+        Timber.d("### login success user info: %s", data.getLogin());
 
         Glide.with(this).load(data.getAvatar_url()).into(mAvatarView);
 
@@ -185,7 +190,6 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
     @Override
     public void setData(User data) {
-        Timber.d("### login success user info: %s", data.getLogin());
         updateUser(data);
     }
 }

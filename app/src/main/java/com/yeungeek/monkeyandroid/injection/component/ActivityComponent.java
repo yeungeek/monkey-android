@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.injection.component;
 
 import com.yeungeek.monkeyandroid.injection.PerActivity;
 import com.yeungeek.monkeyandroid.injection.module.ActivityModule;
+import com.yeungeek.monkeyandroid.ui.LauncherActivity;
 import com.yeungeek.monkeyandroid.ui.main.MainActivity;
 import com.yeungeek.monkeyandroid.ui.sample.SampleActivity;
 import com.yeungeek.monkeyandroid.ui.signin.SignInDialogFragment;
@@ -18,7 +19,7 @@ public interface ActivityComponent {
     void inject(SampleActivity sampleActivity);
 
     void inject(MainActivity mainActivity);
-
+    void inject(LauncherActivity launcherActivity);
 
     void inject(SignInDialogFragment signInDialogFragment);
 }

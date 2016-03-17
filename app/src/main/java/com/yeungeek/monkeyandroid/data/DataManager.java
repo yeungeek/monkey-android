@@ -55,9 +55,14 @@ public class DataManager {
     private void handleSaveUser(final User user) {
         preferencesHelper.putUserLogin(user.getLogin());
         preferencesHelper.putUserEmail(user.getEmail());
+        preferencesHelper.putUserAvatar(user.getAvatar_url());
     }
 
     public RxBus getRxBus() {
         return rxBus;
+    }
+
+    public PreferencesHelper getPreferencesHelper(){
+        return preferencesHelper;
     }
 }

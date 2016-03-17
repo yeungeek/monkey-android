@@ -17,6 +17,7 @@ public class PreferencesHelper {
     private static final String PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN";
     private static final String PREF_KEY_USER_LOGIN = "PREF_KEY_USER_LOGIN";
     private static final String PREF_KEY_USER_EMAIL = "PREF_KEY_USER_EMAIL";
+    private static final String PREF_KEY_USER_AVATAR = "PREF_KEY_USER_AVATAR";
 
     private final SharedPreferences mPref;
 
@@ -37,12 +38,29 @@ public class PreferencesHelper {
         mPref.edit().putString(PREF_KEY_USER_EMAIL, email).apply();
     }
 
+    public void putUserAvatar(String avatar) {
+        mPref.edit().putString(PREF_KEY_USER_AVATAR, avatar).apply();
+    }
+
     @Nullable
     public String getAccessToken() {
         return mPref.getString(PREF_KEY_ACCESS_TOKEN, null);
     }
 
+    @Nullable
+    public String getUserLogin() {
+        return mPref.getString(PREF_KEY_USER_LOGIN, null);
+    }
 
+    @Nullable
+    public String getUserEmail() {
+        return mPref.getString(PREF_KEY_USER_EMAIL, null);
+    }
+
+    @Nullable
+    public String getUserAvatar() {
+        return mPref.getString(PREF_KEY_USER_EMAIL, null);
+    }
 
     public void clear() {
         mPref.edit().clear().apply();
