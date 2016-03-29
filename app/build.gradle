@@ -136,6 +136,8 @@ dependencies {
     // log
     compile utilDependencies.timber
 
+    //widget
+    compile uiWidgetDependencies.circleImageView
     //analysis
     compile analysisDependencies.bugly
 

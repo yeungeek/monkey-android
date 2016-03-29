@@ -59,7 +59,7 @@ public class PreferencesHelper {
 
     @Nullable
     public String getUserAvatar() {
-        return mPref.getString(PREF_KEY_USER_EMAIL, null);
+        return mPref.getString(PREF_KEY_USER_AVATAR, null);
     }
 
     public void clear() {

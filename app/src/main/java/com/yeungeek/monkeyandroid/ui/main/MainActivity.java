@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
     private ActionBar actionBar;
 
+    private boolean mIsSignin;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,9 +100,13 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
     private void updateUser(User data) {
         if (null == data) {
+            mIsSignin = false;
             return;
         }
+
         Timber.d("### login success user info: %s", data.getLogin());
+
+        mIsSignin = true;
 
         Glide.with(this).load(data.getAvatar_url()).into(mAvatarView);
 
@@ -123,6 +129,14 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
     }
 
+    private void checkSignin() {
+        if (!mIsSignin) {
+            openSignInBrowser();
+        } else {
+            Toast.makeText(this, "is logined", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void openSignInBrowser() {
         SignInDialogFragment fragment = SignInDialogFragment.newInstance(GithubApi.AUTH_URL);
         fragment.show(getSupportFragmentManager(), "SignIn");
@@ -134,7 +148,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
         switch (v.getId()) {
             case R.id.id_drawer_header_avatar:
             case R.id.id_drawer_header_name:
-                openSignInBrowser();
+                checkSignin();
                 break;
         }
     }
@@ -185,7 +199,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        Timber.e(e,"### login error");
+        Timber.e(e, "### login error");
     }
 
     @Override

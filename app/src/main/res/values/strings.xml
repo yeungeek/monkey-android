@@ -9,6 +9,8 @@
     <string name="msg_win">win</string>
 
     <!-- title -->
+    <string name="title_username">username</string>
+    <string name="title_email">email</string>
     <string name="title_home">Home</string>
     <string name="title_user">Famous users</string>
     <string name="title_repo">Hot repos</string>

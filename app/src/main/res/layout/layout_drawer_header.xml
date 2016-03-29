@@ -12,27 +12,27 @@
         android:orientation="vertical"
         android:paddingLeft="@dimen/padding_large">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/id_drawer_header_avatar"
             android:layout_width="@dimen/height_huge"
             android:layout_height="@dimen/height_huge"
             android:layout_marginBottom="@dimen/margin_large"
-            android:src="@drawable/ic_avatar"
-            />
+            android:src="@drawable/ic_avatar"/>
 
         <TextView
             android:id="@+id/id_drawer_header_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="username"
+            android:text="@string/title_username"
             android:textAppearance="@style/TextStyleNormal"/>
 
         <TextView
             android:id="@+id/id_drawer_header_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:text="email"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:text="@string/title_email"
             android:textAppearance="@style/TextStyleNormal"/>
 
     </LinearLayout>
