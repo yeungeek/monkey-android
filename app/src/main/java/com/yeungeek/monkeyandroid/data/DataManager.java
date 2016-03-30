@@ -1,6 +1,7 @@
 package com.yeungeek.monkeyandroid.data;
 
 import com.yeungeek.monkeyandroid.data.local.DatabaseHelper;
+import com.yeungeek.monkeyandroid.data.local.LanguageHelper;
 import com.yeungeek.monkeyandroid.data.local.PreferencesHelper;
 import com.yeungeek.monkeyandroid.data.model.AccessTokenResp;
 import com.yeungeek.monkeyandroid.data.model.User;
@@ -24,14 +25,16 @@ public class DataManager {
     final RxBus rxBus;
     final PreferencesHelper preferencesHelper;
     final DatabaseHelper databaseHelper;
+    final LanguageHelper languageHelper;
 
     @Inject
     public DataManager(final GithubApi githubApi, final RxBus rxBus,
-                       final PreferencesHelper preferencesHelper, final DatabaseHelper databaseHelper) {
+                       final PreferencesHelper preferencesHelper, final DatabaseHelper databaseHelper,final LanguageHelper languageHelper) {
         this.githubApi = githubApi;
         this.rxBus = rxBus;
         this.preferencesHelper = preferencesHelper;
         this.databaseHelper = databaseHelper;
+        this.languageHelper = languageHelper;
     }
 
     public Observable<User> getAccessToken(String code) {
@@ -64,5 +67,9 @@ public class DataManager {
 
     public PreferencesHelper getPreferencesHelper(){
         return preferencesHelper;
+    }
+
+    public LanguageHelper getLanguageHelper(){
+        return languageHelper;
     }
 }

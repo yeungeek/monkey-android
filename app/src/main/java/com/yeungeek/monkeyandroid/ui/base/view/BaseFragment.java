@@ -17,6 +17,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
     @Nullable
@@ -29,7 +30,8 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         injectDependencies();
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
+        initViews();
     }
 
     @Override
@@ -46,5 +48,11 @@ public abstract class BaseFragment extends Fragment {
      */
     protected void injectDependencies() {
 
+    }
+
+    protected void init() {
+    }
+
+    protected void initViews() {
     }
 }

@@ -7,10 +7,12 @@ import android.support.annotation.Nullable;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Created by yeungeek on 2016/3/13.
  */
+@Singleton
 public class PreferencesHelper {
     public static final String PREF_FILE_NAME = "monkey_app_pref_file";
 
