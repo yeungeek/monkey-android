@@ -14,8 +14,6 @@ import com.yeungeek.monkeyandroid.ui.base.view.BaseToolbarFragment;
 public class HotReposFragment extends BaseToolbarFragment {
     private LanguagesPagerAdapter mPagerAdapter;
 
-
-
     @Override
     protected void initToolbar() {
         getActionBar().setTitle(R.string.menu_title_user);
@@ -31,12 +29,7 @@ public class HotReposFragment extends BaseToolbarFragment {
     }
 
     public class LanguagesPagerAdapter extends FragmentPagerAdapter {
-        //"JavaScript", "Java", "Go", "CSS", "Objective-C", "Python", "Swift", "HTML"
-        Language[] languagesArray = new Language[]{
-                new Language("JavaScript", ""),
-                new Language("Java", ""),
-                new Language("Swift", "")
-        };
+        Language[] languagesArray;
 
         public LanguagesPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -45,7 +38,7 @@ public class HotReposFragment extends BaseToolbarFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return RepoListFragment.newInstance(getContext(), languagesArray[position], null);
+            return RepoListFragment.newInstance(getContext(), languagesArray[position]);
         }
 
         @Override

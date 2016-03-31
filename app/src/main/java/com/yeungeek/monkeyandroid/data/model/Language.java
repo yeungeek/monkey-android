@@ -1,11 +1,14 @@
 package com.yeungeek.monkeyandroid.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 
 public class Language implements Serializable {
     public String name;
     public String path;
+    @SerializedName("short_name")
     private String shortName;
 
     public String getShortName() {

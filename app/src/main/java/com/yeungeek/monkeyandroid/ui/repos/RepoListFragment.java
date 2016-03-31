@@ -20,10 +20,9 @@ public class RepoListFragment extends Fragment {
 
     private TextView mName;
 
-    public static Fragment newInstance(Context context, Language language, String timeSpan) {
+    public static Fragment newInstance(Context context, Language language) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("extra_language", language);
-        bundle.putSerializable("extra_time_span", timeSpan);
         return Fragment.instantiate(context, RepoListFragment.class.getName(), bundle);
     }
 

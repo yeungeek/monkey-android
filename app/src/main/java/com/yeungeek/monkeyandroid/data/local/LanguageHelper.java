@@ -39,7 +39,7 @@ public class LanguageHelper {
     }
 
     private List<Language> getDefaultLanguage() {
-        String[] defaultLanguagesName = new String[]{"All Language", "JavaScript", "Java", "Go", "CSS", "Objective-C", "Python", "Swift", "HTML"};
+        String[] defaultLanguagesName = new String[]{"Java", "JavaScript", "Go", "CSS", "Objective-C", "Python", "Swift", "HTML"};
 
         List<Language> defaultLanguages = new ArrayList<>();
         for (String langNAme : defaultLanguagesName) {
