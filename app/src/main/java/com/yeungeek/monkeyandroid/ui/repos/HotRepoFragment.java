@@ -11,12 +11,12 @@ import com.yeungeek.monkeyandroid.ui.base.view.BaseToolbarFragment;
 /**
  * Created by yeungeek on 2016/3/29.
  */
-public class HotReposFragment extends BaseToolbarFragment {
+public class HotRepoFragment extends BaseToolbarFragment {
     private LanguagesPagerAdapter mPagerAdapter;
 
     @Override
     protected void initToolbar() {
-        getActionBar().setTitle(R.string.menu_title_user);
+        getActionBar().setTitle(R.string.menu_title_repo);
     }
 
     @Override

@@ -60,29 +60,4 @@ public interface GithubApi {
     @GET("user")
     Observable<User> getUserInfo(@Query(value = "access_token", encoded = true) String accessToken);
 
-    /**********
-     * Factory class that sets up a new github services
-     *******/
-    class Factory {
-        public static GithubApi createGithubApi(final Context context) {
-            final OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//            okHttpClient.interceptors().add()
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-
-            //@see https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor
-            final OkHttpClient okHttpClient = builder.addInterceptor(logging)
-                    .addNetworkInterceptor(new StethoInterceptor())
-                    .build();
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(GithubApi.ENDPOINT)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .build();
-
-            return retrofit.create(GithubApi.class);
-        }
-    }
 }

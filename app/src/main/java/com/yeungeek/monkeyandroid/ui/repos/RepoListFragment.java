@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.yeungeek.monkeyandroid.data.model.Language;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceFragment;
-import com.yeungeek.monkeyandroid.ui.sample.ReposAdapter;
 
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Lis
     RepoPresenter repoPresenter;
 
     Language language;
-    private ReposAdapter adapter;
+    private RepoAdapter adapter;
 
     public static Fragment newInstance(Context context, Language language) {
         Bundle bundle = new Bundle();
@@ -61,7 +59,7 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Lis
         super.initView();
         initRefresh();
 
-        adapter = new ReposAdapter();
+        adapter = new RepoAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

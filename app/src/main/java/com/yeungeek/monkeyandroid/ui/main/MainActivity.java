@@ -21,7 +21,7 @@ import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
-import com.yeungeek.monkeyandroid.ui.repos.HotReposFragment;
+import com.yeungeek.monkeyandroid.ui.repos.HotRepoFragment;
 import com.yeungeek.monkeyandroid.ui.signin.SignInDialogFragment;
 
 import javax.inject.Inject;
@@ -52,7 +52,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     @Inject
     MainPresenter mainPresenter;
 
-    private HotReposFragment hotReposFragment;
+    private HotRepoFragment hotRepoFragment;
 //    private ActionBar actionBar;
 
     private boolean mIsSignin;
@@ -127,12 +127,12 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
         hideAllFragment(transaction);
         switch (fragmentId) {
             case R.id.menu_repo:
-                if (hotReposFragment == null) {
-                    hotReposFragment = new HotReposFragment();
+                if (hotRepoFragment == null) {
+                    hotRepoFragment = new HotRepoFragment();
                     // todo diff with transaction.replace() ?
-                    transaction.add(R.id.id_main_frame_container, hotReposFragment, "hotRepos");
+                    transaction.add(R.id.id_main_frame_container, hotRepoFragment, "hotRepos");
                 } else {
-                    transaction.show(hotReposFragment);
+                    transaction.show(hotRepoFragment);
                 }
                 break;
         }
@@ -165,8 +165,8 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     }
 
     private void hideAllFragment(final FragmentTransaction transaction) {
-        if (null != hotReposFragment) {
-            transaction.hide(hotReposFragment);
+        if (null != hotRepoFragment) {
+            transaction.hide(hotRepoFragment);
         }
     }
 
