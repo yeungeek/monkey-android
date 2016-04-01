@@ -4,9 +4,12 @@ import com.yeungeek.monkeyandroid.data.local.DatabaseHelper;
 import com.yeungeek.monkeyandroid.data.local.LanguageHelper;
 import com.yeungeek.monkeyandroid.data.local.PreferencesHelper;
 import com.yeungeek.monkeyandroid.data.model.AccessTokenResp;
+import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -53,6 +56,10 @@ public class DataManager {
             }
         });
         return userObservable;
+    }
+
+    public Observable<List<Repo>> listRepos(final String user){
+        return githubApi.listRepos(user);
     }
 
     private void handleSaveUser(final User user) {

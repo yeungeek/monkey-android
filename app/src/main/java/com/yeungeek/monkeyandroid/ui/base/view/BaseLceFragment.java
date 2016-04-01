@@ -34,6 +34,7 @@ public abstract class BaseLceFragment<C extends View, M, V extends MvpLceView<M>
         injectDependencies();
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        initView();
     }
 
     @Override
@@ -51,4 +52,6 @@ public abstract class BaseLceFragment<C extends View, M, V extends MvpLceView<M>
     protected void injectDependencies() {
 
     }
+
+    protected void initView(){}
 }

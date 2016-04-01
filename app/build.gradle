@@ -138,6 +138,7 @@ dependencies {
 
     //widget
     compile uiWidgetDependencies.circleImageView
+    compile uiWidgetDependencies.ultraPtr
     //analysis
     compile analysisDependencies.bugly
 

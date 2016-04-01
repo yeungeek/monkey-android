@@ -85,7 +85,7 @@ public abstract class MvpLceFragment<C extends View, M, V extends MvpLceView<M>,
 
     @Override
     public void showContent() {
-        animateLoadingViewIn();
+        animateContentViewIn();
     }
 
     @Override
@@ -105,6 +105,13 @@ public abstract class MvpLceFragment<C extends View, M, V extends MvpLceView<M>,
         loadingView = null;
         contentView = null;
         errorView = null;
+    }
+
+    /**
+     * Called to animate from loading view to content view
+     */
+    protected void animateContentViewIn() {
+        LceAnimator.showContent(loadingView, contentView, errorView);
     }
 
     /**
