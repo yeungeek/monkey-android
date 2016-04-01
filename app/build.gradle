@@ -108,6 +108,7 @@ dependencies {
     compile supportDependencies.appcompat
     compile supportDependencies.design
     compile supportDependencies.recyclerview
+    compile supportDependencies.cardView
 
     // rx
     compile rxDependencies.rxjava
