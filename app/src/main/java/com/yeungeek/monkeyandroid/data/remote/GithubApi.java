@@ -1,23 +1,16 @@
 package com.yeungeek.monkeyandroid.data.remote;
 
-import android.content.Context;
-
-import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.yeungeek.monkeyandroid.BuildConfig;
 import com.yeungeek.monkeyandroid.data.model.AccessTokenResp;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.model.User;
+import com.yeungeek.monkeyandroid.data.model.WrapList;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.GsonConverterFactory;
-import retrofit2.Retrofit;
-import retrofit2.RxJavaCallAdapterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -60,4 +53,9 @@ public interface GithubApi {
     @GET("user")
     Observable<User> getUserInfo(@Query(value = "access_token", encoded = true) String accessToken);
 
+    @GET("/search/repositories")
+    Observable<WrapList<Repo>> getRepos(@Query("q") String query, @Query("page") int pageId);
+
+    @GET("/search/repositories")
+    Observable<WrapList<Repo>> getRepos(@Header("Authorization") String authorization, @Query("q") String query, @Query("page") int pageId);
 }

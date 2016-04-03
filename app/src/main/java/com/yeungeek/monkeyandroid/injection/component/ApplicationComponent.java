@@ -33,11 +33,11 @@ public interface ApplicationComponent {
 
     DatabaseHelper databaseHelper();
 
-//    PreferencesHelper preferencesHelper();
+    PreferencesHelper preferencesHelper();
 
     DataManager dataManager();
 
     RxBus rxBus();
 
-//    Gson gson();
+    Gson gson();
 }

@@ -1,5 +1,7 @@
 package com.yeungeek.monkeyandroid.data.model;
 
+import com.yeungeek.monkeyandroid.util.ImageSize;
+
 public class User {
     private String login;
     private int id;
@@ -44,6 +46,10 @@ public class User {
 
     public String getAvatar_url() {
         return avatar_url;
+    }
+
+    public String getAvatarUrl() {
+        return avatar_url + ImageSize.AVATAR_120;
     }
 
     public User setAvatar_url(String avatar_url) {

@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.ui.repos;
 
 import com.yeungeek.monkeyandroid.data.DataManager;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.ui.base.presenter.MvpLceRxPresenter;
 import com.yeungeek.mvp.common.MvpPresenter;
 
@@ -14,7 +15,7 @@ import timber.log.Timber;
 /**
  * Created by yeungeek on 2016/3/31.
  */
-public class RepoPresenter extends MvpLceRxPresenter<RepoMvpView, List<Repo>> implements MvpPresenter<RepoMvpView> {
+public class RepoPresenter extends MvpLceRxPresenter<RepoMvpView, WrapList<Repo>> implements MvpPresenter<RepoMvpView> {
     private final DataManager dataManager;
 
     @Inject
@@ -22,8 +23,8 @@ public class RepoPresenter extends MvpLceRxPresenter<RepoMvpView, List<Repo>> im
         this.dataManager = dataManager;
     }
 
-    public void listRepos(final String user, final boolean pullToRefresh) {
-        Timber.d("get list %s repos", user);
-        subscribe(dataManager.listRepos(user), pullToRefresh);
+    public void listRepos(final String query, final int page, final boolean pullToRefresh) {
+        Timber.d("get list repos");
+        subscribe(dataManager.getRepos(query, page), pullToRefresh);
     }
 }

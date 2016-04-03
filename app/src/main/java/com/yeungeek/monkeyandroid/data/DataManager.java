@@ -6,6 +6,7 @@ import com.yeungeek.monkeyandroid.data.local.PreferencesHelper;
 import com.yeungeek.monkeyandroid.data.model.AccessTokenResp;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.model.User;
+import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
 
@@ -58,14 +59,15 @@ public class DataManager {
         return userObservable;
     }
 
-    public Observable<List<Repo>> listRepos(final String user){
-        return githubApi.listRepos(user);
+    public Observable<WrapList<Repo>> getRepos(final String query, final int page){
+        //auth
+        return githubApi.getRepos(query,page);
     }
 
     private void handleSaveUser(final User user) {
         preferencesHelper.putUserLogin(user.getLogin());
         preferencesHelper.putUserEmail(user.getEmail());
-        preferencesHelper.putUserAvatar(user.getAvatar_url());
+        preferencesHelper.putUserAvatar(user.getAvatarUrl());
     }
 
     public RxBus getRxBus() {

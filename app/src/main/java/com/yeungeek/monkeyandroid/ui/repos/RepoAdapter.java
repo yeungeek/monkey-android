@@ -1,11 +1,14 @@
 package com.yeungeek.monkeyandroid.ui.repos;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 
@@ -20,10 +23,15 @@ import butterknife.ButterKnife;
  */
 public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Repo> repos = new ArrayList<>();
+    private Context mContext;
+
+    public RepoAdapter(final Context context) {
+        mContext = context;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_repo, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_repo, parent, false);
         return new RepoViewHolder(view);
     }
 
@@ -33,6 +41,10 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         RepoViewHolder repoViewHolder = (RepoViewHolder) holder;
         repoViewHolder.repoName.setText(repo.getName());
         repoViewHolder.repoDesc.setText(repo.getDescription());
+        repoViewHolder.repoStars.setText(String.valueOf(repo.getStargazers_count()));
+        if (null != repo.getOwner()) {
+            Glide.with(mContext).load(repo.getOwner().getAvatarUrl()).into(repoViewHolder.ownerAvatar);
+        }
     }
 
     @Override
@@ -40,16 +52,20 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return repos.size();
     }
 
-    public void setDatas(final List<Repo> data){
+    public void setDatas(final List<Repo> data) {
         this.repos = data;
         notifyDataSetChanged();
     }
 
     static class RepoViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.repo_name)
+        @Bind(R.id.id_repo_name)
         TextView repoName;
-        @Bind(R.id.repo_desc)
+        @Bind(R.id.id_repo_desc)
         TextView repoDesc;
+        @Bind(R.id.id_repo_owner_avatar)
+        ImageView ownerAvatar;
+        @Bind(R.id.id_repo_stars)
+        TextView repoStars;
 
         public RepoViewHolder(View itemView) {
             super(itemView);

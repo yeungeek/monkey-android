@@ -104,7 +104,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
         mIsSignin = true;
 
-        Glide.with(this).load(data.getAvatar_url()).into(mAvatarView);
+        Glide.with(this).load(data.getAvatarUrl()).into(mAvatarView);
 
         mNameView.setText(data.getLogin());
         mEmailView.setText(data.getEmail());

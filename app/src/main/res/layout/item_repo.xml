@@ -10,13 +10,43 @@
                                     app:cardBackgroundColor="@android:color/white"
                                     app:cardCornerRadius="@dimen/padding_tiny">
 
-    <TextView
-        android:id="@+id/repo_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal">
 
-    <TextView
-        android:id="@+id/repo_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/id_repo_owner_avatar"
+            android:layout_width="@dimen/height_large"
+            android:layout_height="@dimen/height_large"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_avatar"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_toRightOf="@id/id_repo_owner_avatar"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_repo_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello"/>
+
+            <TextView
+                android:id="@+id/id_repo_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="java"/>
+
+            <TextView
+                android:id="@+id/id_repo_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="starts"/>
+        </LinearLayout>
+    </RelativeLayout>
+
 </android.support.v7.widget.CardView>

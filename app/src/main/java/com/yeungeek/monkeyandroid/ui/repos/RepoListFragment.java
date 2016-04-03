@@ -11,10 +11,9 @@ import android.view.View;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Language;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceFragment;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,7 +26,7 @@ import in.srain.cube.views.ptr.PtrHandler;
 /**
  * Created by yeungeek on 2016/3/30.
  */
-public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, List<Repo>, RepoMvpView, RepoPresenter> implements RepoMvpView {
+public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, WrapList<Repo>, RepoMvpView, RepoPresenter> implements RepoMvpView {
     @Bind(R.id.id_recycler_view)
     RecyclerView recyclerView;
 
@@ -59,7 +58,7 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Lis
         super.initView();
         initRefresh();
 
-        adapter = new RepoAdapter();
+        adapter = new RepoAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -89,24 +88,24 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Lis
     }
 
     @Override
-    public void setData(List<Repo> data) {
-        adapter.setDatas(data);
+    public void setData(WrapList<Repo> data) {
+        adapter.setDatas(data.getItems());
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        getPresenter().listRepos("yeungeek",pullToRefresh);
+        getPresenter().listRepos("language:"+language.name, 1, pullToRefresh);
     }
 
     @Override
     protected void injectDependencies() {
         super.injectDependencies();
-        if(getActivity() instanceof BaseLceActivity){
-            ((BaseLceActivity)getActivity()).activityComponent().inject(this);
+        if (getActivity() instanceof BaseLceActivity) {
+            ((BaseLceActivity) getActivity()).activityComponent().inject(this);
         }
     }
 
-    private void initRefresh(){
+    private void initRefresh() {
         contentView.setLastUpdateTimeRelateObject(this);
         contentView.setPtrHandler(new PtrHandler() {
             @Override
