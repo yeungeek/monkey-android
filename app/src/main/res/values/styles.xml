@@ -34,4 +34,14 @@
         <item name="android:textSize">@dimen/font_normal</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="TextStylePrimary">
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="TextStyleSmall">
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:textColor">@color/textColorSmall</item>
+    </style>
 </resources>

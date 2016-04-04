@@ -25,7 +25,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/margin_normal"
             android:layout_toRightOf="@id/id_repo_owner_avatar"
             android:orientation="vertical">
 
@@ -33,19 +33,21 @@
                 android:id="@+id/id_repo_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hello"/>
+                android:textAppearance="@style/TextStylePrimary"/>
 
             <TextView
                 android:id="@+id/id_repo_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="java"/>
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:textAppearance="@style/TextStyleSmall"/>
 
             <TextView
                 android:id="@+id/id_repo_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="starts"/>
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:textAppearance="@style/TextStyleSmall"/>
         </LinearLayout>
     </RelativeLayout>
 

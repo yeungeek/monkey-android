@@ -26,14 +26,14 @@
     <!-- padding -->
     <dimen name="padding_huge">20dp</dimen>
     <dimen name="padding_large">16dp</dimen>
-    <dimen name="padding_normal">10dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
     <dimen name="padding_small">4dp</dimen>
     <dimen name="padding_tiny">2dp</dimen>
 
     <!-- margin -->
     <dimen name="margin_huge">30dp</dimen>
     <dimen name="margin_large">20dp</dimen>
-    <dimen name="margin_normal">10dp</dimen>
+    <dimen name="margin_normal">8dp</dimen>
     <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_tiny">2dp</dimen>
 
