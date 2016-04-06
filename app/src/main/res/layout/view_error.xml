@@ -8,13 +8,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:drawablePadding="16dp"
+        android:drawablePadding="@dimen/padding_large"
         android:drawableTop="@mipmap/ic_cloud_off"
         android:gravity="center"
-        android:padding="16dp"
+        android:padding="@dimen/padding_large"
         android:text="An error has occurred! click here to retry"
-        android:textColor="#656565"
-        android:textSize="20sp"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/font_large"
         />
 
 </merge>

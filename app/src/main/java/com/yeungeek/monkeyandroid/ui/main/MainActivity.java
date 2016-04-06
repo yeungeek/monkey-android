@@ -135,6 +135,9 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
                     transaction.show(hotRepoFragment);
                 }
                 break;
+            case R.id.menu_about:
+                //https://github.com/mikepenz/AboutLibraries
+                break;
         }
 
         transaction.commit();

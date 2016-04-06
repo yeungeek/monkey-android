@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.yeungeek.monkeyandroid.R;
@@ -13,6 +14,9 @@ import com.yeungeek.monkeyandroid.data.model.Language;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.ui.base.adapter.EndlessRecyclerOnScrollListener;
+import com.yeungeek.monkeyandroid.ui.base.adapter.HeaderAndFooterRecyclerViewAdapter;
+import com.yeungeek.monkeyandroid.ui.base.adapter.LoadingFooter;
+import com.yeungeek.monkeyandroid.ui.base.adapter.RecyclerViewStateUtils;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceFragment;
 
@@ -36,11 +40,12 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
     RepoPresenter repoPresenter;
 
     Language language;
-    private int mPage;
+    private int mPage = 1;
     private int mCount;
+    private int mCurrentSize = 0;
     private boolean mLoadMore = false;
     private RepoAdapter adapter;
-    private LinearLayoutManager linearLayoutManager;
+    private HeaderAndFooterRecyclerViewAdapter mHeaderAdapter;
 
     public static Fragment newInstance(Context context, Language language) {
         Bundle bundle = new Bundle();
@@ -65,11 +70,10 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
         initRefresh();
 
         adapter = new RepoAdapter(getActivity());
-        adapter.setHasMoreData(true);
-        recyclerView.setAdapter(adapter);
 
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
+        mHeaderAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter);
+        recyclerView.setAdapter(mHeaderAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         initLoadMoreListener();
 
@@ -77,17 +81,15 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
     }
 
     private void initLoadMoreListener() {
-        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+        recyclerView.addOnScrollListener(mOnScrollListener);
+        //RecyclerView clear
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onLoadMore(int current_page) {
-                adapter.setHasFooter(true);
-                int position = adapter.getItemCount();
-                Timber.d("### onLoadMore page:%d, position: %d, count: %d", current_page, position, mCount);
-                if (position > mCount) {
-                    adapter.setHasMoreDataAndFooter(false, true);
+            public boolean onTouch(View v, MotionEvent event) {
+                if (contentView.isRefreshing()) {
+                    return true;
                 } else {
-                    Timber.d("### onLoadMore: %s", this);
-                    loadData(current_page, true, true);
+                    return false;
                 }
             }
         });
@@ -100,15 +102,14 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return null;
+        return getString(R.string.error_repositories);
     }
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
         super.showError(e, pullToRefresh);
         contentView.refreshComplete();
-        // error
-        adapter.setHasMoreDataAndFooter(false, true);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.NetWorkError, mFooterClick);
     }
 
     @Override
@@ -120,16 +121,15 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
     @Override
     public void setData(WrapList<Repo> data) {
         mCount = data.getTotal_count();
-
         if (!mLoadMore) {
-            adapter.clear();
+            adapter.addTopAll(data.getItems());
+            mCurrentSize = data.getItems().size();
+        } else {
+            adapter.addAll(data.getItems());
+            mCurrentSize += data.getItems().size();
         }
 
-        adapter.addAll(data.getItems());
-        adapter.notifyDataSetChanged();
-        if (mLoadMore) {
-//            recyclerView.smoothScrollToPosition(adapter.getItemCount());
-        }
+        RecyclerViewStateUtils.setFooterViewState(recyclerView, LoadingFooter.State.Normal);
     }
 
     @Override
@@ -144,6 +144,7 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
             ((BaseLceActivity) getActivity()).activityComponent().inject(this);
         }
     }
+
 
     private void loadData(final int page, final boolean loadMore, final boolean pullToRefresh) {
         mPage = page;
@@ -162,9 +163,6 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 //update page
-//                loadMore = false;
-//                page = 1;
-//                loadData(true);
                 loadData(1, false, true);
             }
         });
@@ -179,4 +177,37 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
         // default is true
         contentView.setKeepHeaderWhenRefresh(true);
     }
+
+
+    private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+            LoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(recyclerView);
+            if (state == LoadingFooter.State.Loading) {
+                Timber.d("### is loading now");
+                return;
+            }
+
+            if (mCurrentSize < mCount) {
+                // loading more
+                mPage++;
+                Timber.d("### onLoadNextPage: %d", mPage);
+                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.Loading, null);
+                loadData(mPage, true, true);
+            } else {
+                //the end
+                mLoadMore = false;
+                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.TheEnd, null);
+            }
+        }
+    };
+
+    private View.OnClickListener mFooterClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.Loading, null);
+            loadData(mPage, true, true);
+        }
+    };
 }

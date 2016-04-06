@@ -4,10 +4,14 @@
 
     <!-- error -->
     <string name="error_message_network">Network error</string>
+    <string name="error_repositories">Error while loading repositories</string>
 
     <!-- msg -->
     <string name="msg_win">win</string>
 
+    <string name="msg_retry">点击重新加载</string>
+    <string name="msg_loading_end">已经加载到底了</string>
+    <string name="msg_loading">正在加载中...</string>
     <!-- title -->
     <string name="title_username">username</string>
     <string name="title_email">email</string>

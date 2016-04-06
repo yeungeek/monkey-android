@@ -1,89 +1,111 @@
 package com.yeungeek.monkeyandroid.ui.base.adapter;
 
-/*
- * Copyright (C) 2015 Jorge Castillo Pérez
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * modify from https://github.com/JorgeCastilloPrz/Mirage
- */
-
-
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 
 /**
- * @author Jorge Castillo Pérez
- *         <p/>
- *         modify at 2015/08/23
+ * Created by cundong on 2015/10/9.
+ * <p/>
+ * 继承自RecyclerView.OnScrollListener，可以监听到是否滑动到页面最低部
  */
-public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
-    public static String TAG = EndlessRecyclerOnScrollListener.class.getSimpleName();
+public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener implements OnListLoadNextPageListener {
 
-    private int previousTotal = 0; // The total number of items in the dataset after the last load
-    private boolean loading = false;
-    private int visibleThreshold = 1;
-    // The minimum amount of items to have below your current scroll position before loading more.
-    int firstVisibleItem, visibleItemCount, totalItemCount;
-    private int current_page = 1;
+    /**
+     * 当前RecyclerView类型
+     */
+    protected LayoutManagerType layoutManagerType;
 
-    private LinearLayoutManager mLinearLayoutManager;
+    /**
+     * 最后一个的位置
+     */
+    private int[] lastPositions;
 
-    public EndlessRecyclerOnScrollListener(LinearLayoutManager linearLayoutManager) {
-        this.mLinearLayoutManager = linearLayoutManager;
-    }
+    /**
+     * 最后一个可见的item的位置
+     */
+    private int lastVisibleItemPosition;
+
+    /**
+     * 当前滑动的状态
+     */
+    private int currentScrollState = 0;
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
-        visibleItemCount = recyclerView.getChildCount();
-        totalItemCount = mLinearLayoutManager.getItemCount();
-        firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
 
-        if (loading) {
-            if (totalItemCount > previousTotal) {
-                loading = false;
-                previousTotal = totalItemCount;
+        if (layoutManagerType == null) {
+            if (layoutManager instanceof LinearLayoutManager) {
+                layoutManagerType = LayoutManagerType.LinearLayout;
+            } else if (layoutManager instanceof GridLayoutManager) {
+                layoutManagerType = LayoutManagerType.GridLayout;
+            } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                layoutManagerType = LayoutManagerType.StaggeredGridLayout;
+            } else {
+                throw new RuntimeException(
+                        "Unsupported LayoutManager used. Valid ones are LinearLayoutManager, GridLayoutManager and StaggeredGridLayoutManager");
             }
         }
-        // // TODO: 15/10/7 可能把 Toolbar 的高度也算上了
-        //totalItemCount > visibleItemCount 超过一个页面才有加载更多
-        if (!loading && totalItemCount > visibleItemCount && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
-            // End has been reached
 
-            // Do something
-            current_page++;
-            onLoadMore(current_page);
-            loading = true;
+        switch (layoutManagerType) {
+            case LinearLayout:
+                lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                break;
+            case GridLayout:
+                lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
+                break;
+            case StaggeredGridLayout:
+                StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+                if (lastPositions == null) {
+                    lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
+                }
+                staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
+                lastVisibleItemPosition = findMax(lastPositions);
+                break;
         }
     }
 
-    public int getVisibleThreshold() {
-        return visibleThreshold;
+    @Override
+    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+        currentScrollState = newState;
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        int visibleItemCount = layoutManager.getChildCount();
+        int totalItemCount = layoutManager.getItemCount();
+        if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE && (lastVisibleItemPosition) >= totalItemCount - 1)) {
+            onLoadNextPage(recyclerView);
+        }
     }
 
-    public void setVisibleThreshold(int visibleThreshold) {
-        this.visibleThreshold = visibleThreshold;
+    /**
+     * 取数组中最大值
+     *
+     * @param lastPositions
+     * @return
+     */
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+
+        return max;
     }
 
-    public int getCurrent_page() {
-        return current_page;
+    @Override
+    public void onLoadNextPage(final View view) {
     }
 
-    public void setCurrent_page(int current_page) {
-        this.current_page = current_page;
+    public static enum LayoutManagerType {
+        LinearLayout,
+        StaggeredGridLayout,
+        GridLayout
     }
-
-    public abstract void onLoadMore(int current_page);
 }

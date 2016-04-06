@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Repo;
-import com.yeungeek.monkeyandroid.ui.base.adapter.BaseLoadMoreAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -23,30 +23,47 @@ import butterknife.OnClick;
 /**
  * Created by yeungeek on 2016/1/10.
  */
-public class RepoAdapter extends BaseLoadMoreAdapter<Repo, RepoAdapter.RepoViewHolder> {
+public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
+    private List<Repo> repos = new ArrayList<>();
 
     public RepoAdapter(final Context context) {
         mContext = context;
     }
 
     @Override
-    public RepoViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_repo, parent, false);
         return new RepoViewHolder(view);
     }
 
     @Override
-    public void onBindItemViewHolder(RepoViewHolder holder, int position) {
-        final Repo repo = getItem(position);
-        holder.repo = repo;
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final Repo repo = repos.get(position);
+        RepoViewHolder repoViewHolder = (RepoViewHolder) holder;
+        repoViewHolder.repo = repo;
 
-        holder.repoName.setText(repo.getName());
-        holder.repoDesc.setText(repo.getDescription());
-        holder.repoStars.setText(String.valueOf(repo.getStargazers_count()));
+        repoViewHolder.repoName.setText(repo.getName());
+        repoViewHolder.repoDesc.setText(repo.getDescription());
+        repoViewHolder.repoStars.setText(String.valueOf(repo.getStargazers_count()));
         if (null != repo.getOwner()) {
-            Glide.with(mContext).load(repo.getOwner().getAvatarUrl()).into(holder.ownerAvatar);
+            Glide.with(mContext).load(repo.getOwner().getAvatarUrl()).into(repoViewHolder.ownerAvatar);
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return repos.size();
+    }
+
+    public void addAll(final List<Repo> list) {
+        repos.addAll(list);
+    }
+
+    public void addTopAll(final List<Repo> list) {
+        repos.clear();
+        repos.addAll(list);
+        notifyDataSetChanged();
     }
 
     public class RepoViewHolder extends RecyclerView.ViewHolder {

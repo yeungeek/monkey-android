@@ -22,6 +22,7 @@
     <dimen name="height_large">60dp</dimen>
     <dimen name="height_normal">40dp</dimen>
     <dimen name="height_small">32dp</dimen>
+    <dimen name="height_tiny">20dp</dimen>
 
     <!-- padding -->
     <dimen name="padding_huge">20dp</dimen>
