@@ -19,6 +19,7 @@ import com.yeungeek.monkeyandroid.ui.base.adapter.LoadingFooter;
 import com.yeungeek.monkeyandroid.ui.base.adapter.RecyclerViewStateUtils;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceFragment;
+import com.yeungeek.monkeyandroid.util.AppCst;
 
 import javax.inject.Inject;
 
@@ -44,6 +45,7 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
     private int mCount;
     private int mCurrentSize = 0;
     private boolean mLoadMore = false;
+
     private RepoAdapter adapter;
     private HeaderAndFooterRecyclerViewAdapter mHeaderAdapter;
 
@@ -109,7 +111,7 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
     public void showError(Throwable e, boolean pullToRefresh) {
         super.showError(e, pullToRefresh);
         contentView.refreshComplete();
-        RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.NetWorkError, mFooterClick);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.NetWorkError, mFooterClick);
     }
 
     @Override
@@ -193,12 +195,12 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
                 // loading more
                 mPage++;
                 Timber.d("### onLoadNextPage: %d", mPage);
-                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.Loading, null);
+                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.Loading, null);
                 loadData(mPage, true, true);
             } else {
                 //the end
                 mLoadMore = false;
-                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.TheEnd, null);
+                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.TheEnd, null);
             }
         }
     };
@@ -206,7 +208,7 @@ public class RepoListFragment extends BaseLceFragment<PtrClassicFrameLayout, Wra
     private View.OnClickListener mFooterClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, 30, LoadingFooter.State.Loading, null);
+            RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.Loading, null);
             loadData(mPage, true, true);
         }
     };

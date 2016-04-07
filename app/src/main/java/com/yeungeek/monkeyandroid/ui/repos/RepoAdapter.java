@@ -43,7 +43,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         RepoViewHolder repoViewHolder = (RepoViewHolder) holder;
         repoViewHolder.repo = repo;
 
-        repoViewHolder.repoName.setText(repo.getName());
+        repoViewHolder.repoName.setText(repo.getFull_name());
         repoViewHolder.repoDesc.setText(repo.getDescription());
         repoViewHolder.repoStars.setText(String.valueOf(repo.getStargazers_count()));
         if (null != repo.getOwner()) {
