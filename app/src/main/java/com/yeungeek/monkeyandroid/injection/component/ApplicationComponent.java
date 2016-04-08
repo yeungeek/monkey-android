@@ -9,6 +9,7 @@ import com.yeungeek.monkeyandroid.data.DataManager;
 import com.yeungeek.monkeyandroid.data.local.DatabaseHelper;
 import com.yeungeek.monkeyandroid.data.local.PreferencesHelper;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
+import com.yeungeek.monkeyandroid.data.remote.UnauthorisedInterceptor;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 import com.yeungeek.monkeyandroid.injection.module.ApplicationModule;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
@@ -22,6 +23,7 @@ import dagger.Component;
 public interface ApplicationComponent {
 
     void inject(MonkeyApplication monkeyApplication);
+    void inject(UnauthorisedInterceptor unauthorisedInterceptor);
 
     //Exposed to sub-graphs.
     @ApplicationContext

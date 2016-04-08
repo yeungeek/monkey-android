@@ -34,8 +34,12 @@ public class LanguageHelper {
         selectedLanguages.addAll(getDefaultLanguage());
     }
 
-    public Language[] getLanguage() {
-        return selectedLanguages.toArray(new Language[0]);
+    public Language getAllLanguage() {
+        return getLanguageByName("All Language");
+    }
+
+    public List<Language> getLanguage() {
+        return selectedLanguages;
     }
 
     private List<Language> getDefaultLanguage() {

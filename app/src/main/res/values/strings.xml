@@ -5,6 +5,7 @@
     <!-- error -->
     <string name="error_message_network">Network error</string>
     <string name="error_repositories">Error while loading repositories</string>
+    <string name="error_users">Error while loading users</string>
 
     <!-- msg -->
     <string name="msg_win">win</string>

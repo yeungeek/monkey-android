@@ -1,14 +1,13 @@
-package com.yeungeek.monkeyandroid.ui.repos;
+package com.yeungeek.monkeyandroid.ui.users;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Language;
-import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.ui.base.adapter.HeaderAndFooterRecyclerViewAdapter;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
@@ -18,37 +17,31 @@ import com.yeungeek.monkeyandroid.util.AppCst;
 import javax.inject.Inject;
 
 /**
- * Created by yeungeek on 2016/3/30.
+ * Created by yeungeek on 2016/4/8.
  */
-public class RepoListFragment extends BasePageFragment<WrapList<Repo>, RepoMvpView, RepoPresenter> implements RepoMvpView {
+public class UserListFragment extends BasePageFragment<WrapList<User>, UserMvpView, UserPresenter> implements UserMvpView {
     @Inject
-    RepoPresenter repoPresenter;
-
+    UserPresenter userPresenter;
     Language language;
-    private RepoAdapter adapter;
+
+    private UserAdapter adapter;
     private HeaderAndFooterRecyclerViewAdapter mHeaderAdapter;
 
     public static Fragment newInstance(Context context, Language language) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(AppCst.EXTRA_LANGUAGE, language);
-        return Fragment.instantiate(context, RepoListFragment.class.getName(), bundle);
+        return Fragment.instantiate(context, UserListFragment.class.getName(), bundle);
     }
 
     @Override
-    public RepoPresenter createPresenter() {
-        return repoPresenter;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         language = (Language) getArguments().getSerializable(AppCst.EXTRA_LANGUAGE);
     }
 
     @Override
     protected void initAdapter() {
-        adapter = new RepoAdapter(getActivity());
-
+        adapter = new UserAdapter(getActivity());
         mHeaderAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mHeaderAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -56,11 +49,16 @@ public class RepoListFragment extends BasePageFragment<WrapList<Repo>, RepoMvpVi
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return getString(R.string.error_repositories) + "/n" + e.getMessage();
+        return getString(R.string.error_users) + e.getMessage();
     }
 
     @Override
-    public void setData(WrapList<Repo> data) {
+    public UserPresenter createPresenter() {
+        return userPresenter;
+    }
+
+    @Override
+    public void setData(WrapList<User> data) {
         mCount = data.getTotal_count();
         if (!mLoadMore) {
             adapter.addTopAll(data.getItems());
@@ -75,7 +73,14 @@ public class RepoListFragment extends BasePageFragment<WrapList<Repo>, RepoMvpVi
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        getPresenter().listRepos(AppCst.LANGUAGE_PREFIX + language.path, mPage, pullToRefresh);
+        String query = "";
+        if (language.name.equals(AppCst.USER_CHINA_ALL)) {
+            query = language.path;
+        } else {
+            query += AppCst.LANGUAGE_PREFIX + language.path;
+        }
+
+        getPresenter().listUsers(query, mPage, pullToRefresh);
     }
 
     @Override

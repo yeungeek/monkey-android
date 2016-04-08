@@ -19,10 +19,10 @@ import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
-import com.yeungeek.monkeyandroid.rxbus.RxBus;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.repos.HotRepoFragment;
 import com.yeungeek.monkeyandroid.ui.signin.SignInDialogFragment;
+import com.yeungeek.monkeyandroid.ui.users.FamousUserFragment;
 
 import javax.inject.Inject;
 
@@ -31,8 +31,6 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainPresenter> implements MainMvpView {
-    //    @Bind(R.id.toolbar)
-//    Toolbar toolbar;
     @Bind(R.id.draw_layout)
     DrawerLayout drawerLayout;
     @Bind(R.id.navigation_view)
@@ -48,12 +46,11 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     TextView mEmailView;
 
     @Inject
-    RxBus rxBus;
-    @Inject
     MainPresenter mainPresenter;
 
     private HotRepoFragment hotRepoFragment;
-//    private ActionBar actionBar;
+    private FamousUserFragment famousUserFragment;
+    private SignInDialogFragment signInDialogFragment;
 
     private boolean mIsSignin;
 
@@ -73,11 +70,9 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
             mAvatarView.setOnClickListener(this);
             mNameView.setOnClickListener(this);
-
         }
 
         mainPresenter.checkUserStatus();
-
         selectFragment(R.id.menu_users);
     }
 
@@ -97,6 +92,9 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     private void updateUser(User data) {
         if (null == data) {
             mIsSignin = false;
+            mNameView.setText(null);
+            mEmailView.setText(null);
+            Glide.with(this).load(R.drawable.ic_avatar).into(mAvatarView);
             return;
         }
 
@@ -135,6 +133,14 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
                     transaction.show(hotRepoFragment);
                 }
                 break;
+            case R.id.menu_users:
+                if (null == famousUserFragment) {
+                    famousUserFragment = new FamousUserFragment();
+                    transaction.add(R.id.id_main_frame_container, famousUserFragment, "famousUser");
+                } else {
+                    transaction.show(famousUserFragment);
+                }
+                break;
             case R.id.menu_about:
                 //https://github.com/mikepenz/AboutLibraries
                 break;
@@ -152,8 +158,12 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     }
 
     private void openSignInBrowser() {
-        SignInDialogFragment fragment = SignInDialogFragment.newInstance(GithubApi.AUTH_URL);
-        fragment.show(getSupportFragmentManager(), "SignIn");
+        if (null != signInDialogFragment) {
+            signInDialogFragment.dismiss();
+        }
+
+        signInDialogFragment = SignInDialogFragment.newInstance(GithubApi.AUTH_URL);
+        signInDialogFragment.show(getSupportFragmentManager(), "SignIn");
     }
 
     @Override
@@ -170,6 +180,10 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     private void hideAllFragment(final FragmentTransaction transaction) {
         if (null != hotRepoFragment) {
             transaction.hide(hotRepoFragment);
+        }
+
+        if (null != famousUserFragment) {
+            transaction.hide(famousUserFragment);
         }
     }
 
@@ -225,5 +239,11 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     @Override
     public void setData(User data) {
         updateUser(data);
+    }
+
+    @Override
+    public void unauthorized() {
+        updateUser(null);
+        openSignInBrowser();
     }
 }

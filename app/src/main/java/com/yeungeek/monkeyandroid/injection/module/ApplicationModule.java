@@ -7,6 +7,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.yeungeek.monkeyandroid.BuildConfig;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
+import com.yeungeek.monkeyandroid.data.remote.UnauthorisedInterceptor;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
 
@@ -50,14 +51,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(){
+    OkHttpClient provideOkHttpClient() {
         final OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//            okHttpClient.interceptors().add()
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
 
         //@see https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor
-        final OkHttpClient okHttpClient = builder.addInterceptor(logging)
+        final OkHttpClient okHttpClient = builder.addInterceptor(logging).addInterceptor(new UnauthorisedInterceptor(mApplication))
                 .addNetworkInterceptor(new StethoInterceptor())
                 .build();
         return okHttpClient;
@@ -65,7 +65,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(OkHttpClient okHttpClient){
+    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(GithubApi.ENDPOINT)
                 .client(okHttpClient)
@@ -77,7 +77,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    RxBus provideRxBus(){
+    RxBus provideRxBus() {
         return new RxBus();
     }
 

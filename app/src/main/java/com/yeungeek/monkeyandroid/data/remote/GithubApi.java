@@ -53,9 +53,15 @@ public interface GithubApi {
     @GET("user")
     Observable<User> getUserInfo(@Query(value = "access_token", encoded = true) String accessToken);
 
-    @GET("/search/repositories")
+    @GET("search/repositories")
     Observable<WrapList<Repo>> getRepos(@Query("q") String query, @Query("page") int pageId);
 
-    @GET("/search/repositories")
-    Observable<WrapList<Repo>> getRepos(@Header("Authorization") String authorization, @Query("q") String query, @Query("page") int pageId);
+    @GET("search/repositories")
+    Observable<WrapList<Repo>> getRepos(@Query(value = "access_token", encoded = true) String authorization, @Query("q") String query, @Query("page") int pageId);
+
+    @GET("search/users")
+    Observable<WrapList<User>> getUsers(@Query("q") String query, @Query("page") int pageId);
+
+    @GET("search/users")
+    Observable<WrapList<User>> getUsers(@Query(value = "access_token", encoded = true) String authorization, @Query("q") String query, @Query("page") int pageId);
 }

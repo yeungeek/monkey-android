@@ -5,4 +5,5 @@ package com.yeungeek.monkeyandroid.rxbus.event;
  */
 public class BusEvent {
     public static class SignedOut{}
+    public static class AuthenticationError {}
 }
