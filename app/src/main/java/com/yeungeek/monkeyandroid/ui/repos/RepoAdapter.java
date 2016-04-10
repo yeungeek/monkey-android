@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.ui.repos;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
+import com.yeungeek.monkeyandroid.data.model.Language;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.ui.widget.TriangleLabelView;
+import com.yeungeek.monkeyandroid.util.AppCst;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +30,11 @@ import butterknife.OnClick;
 public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<Repo> repos = new ArrayList<>();
+    private Language mLanguage;
 
-    public RepoAdapter(final Context context) {
+    public RepoAdapter(final Context context, final Language language) {
         mContext = context;
+        mLanguage = language;
     }
 
     @Override
@@ -42,6 +48,17 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final Repo repo = repos.get(position);
         RepoViewHolder repoViewHolder = (RepoViewHolder) holder;
         repoViewHolder.repo = repo;
+
+        if (null == mLanguage || TextUtils.isEmpty(mLanguage.path)) {
+            repoViewHolder.repoLanuage.setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(repo.getLanguage())) {
+                repoViewHolder.repoLanuage.setPrimaryText(repo.getLanguage());
+            } else {
+                repoViewHolder.repoLanuage.setPrimaryText(AppCst.LANGUAGE_N_A);
+            }
+        } else {
+            repoViewHolder.repoLanuage.setVisibility(View.GONE);
+        }
 
         repoViewHolder.repoName.setText(repo.getFull_name());
         repoViewHolder.repoDesc.setText(repo.getDescription());
@@ -77,6 +94,8 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageView ownerAvatar;
         @Bind(R.id.id_repo_stars)
         TextView repoStars;
+        @Bind(R.id.id_repo_language)
+        TriangleLabelView repoLanuage;
 
         @OnClick(R.id.id_repo_card)
         public void onItemClick() {

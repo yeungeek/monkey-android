@@ -22,6 +22,7 @@ import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.repos.HotRepoFragment;
 import com.yeungeek.monkeyandroid.ui.signin.SignInDialogFragment;
+import com.yeungeek.monkeyandroid.ui.trending.TrendingFragment;
 import com.yeungeek.monkeyandroid.ui.users.FamousUserFragment;
 
 import javax.inject.Inject;
@@ -50,6 +51,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
     private HotRepoFragment hotRepoFragment;
     private FamousUserFragment famousUserFragment;
+    private TrendingFragment trendingFragment;
     private SignInDialogFragment signInDialogFragment;
 
     private boolean mIsSignin;
@@ -141,6 +143,14 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
                     transaction.show(famousUserFragment);
                 }
                 break;
+            case R.id.menu_trending:
+                if (null == trendingFragment) {
+                    trendingFragment = new TrendingFragment();
+                    transaction.add(R.id.id_main_frame_container, trendingFragment, "trending");
+                } else {
+                    transaction.show(trendingFragment);
+                }
+                break;
             case R.id.menu_about:
                 //https://github.com/mikepenz/AboutLibraries
                 break;
@@ -184,6 +194,10 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
         if (null != famousUserFragment) {
             transaction.hide(famousUserFragment);
+        }
+
+        if (null != trendingFragment) {
+            transaction.hide(trendingFragment);
         }
     }
 

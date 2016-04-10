@@ -15,6 +15,7 @@ import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -65,8 +66,11 @@ public class DataManager {
         return userObservable;
     }
 
+    public Observable<List<Repo>> getTrending(final String language, final String since) {
+        return githubApi.getTrendingRepo(language, since);
+    }
+
     public Observable<WrapList<Repo>> getRepos(final String query, final int page) {
-        //auth
         if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
             return githubApi.getRepos(query, page);
         } else {

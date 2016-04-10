@@ -47,7 +47,7 @@ public class RepoListFragment extends BasePageFragment<WrapList<Repo>, RepoMvpVi
 
     @Override
     protected void initAdapter() {
-        adapter = new RepoAdapter(getActivity());
+        adapter = new RepoAdapter(getActivity(), language);
 
         mHeaderAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mHeaderAdapter);

@@ -49,7 +49,7 @@ public class UserListFragment extends BasePageFragment<WrapList<User>, UserMvpVi
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return getString(R.string.error_users) + e.getMessage();
+        return getString(R.string.error_users) + "/n" + e.getMessage();
     }
 
     @Override

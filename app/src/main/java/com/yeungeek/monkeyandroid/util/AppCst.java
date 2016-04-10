@@ -10,6 +10,10 @@ public interface AppCst {
     String USER_CHINA_ALL = "China All";
     String USER_LOCATION_CHINA = "location:china";
     String LANGUAGE_PREFIX = "language:";
+    String LANGUAGE_ALL = "All Language";
+    String LANGUAGE_N_A = "N/A";
+
     //extra
     String EXTRA_LANGUAGE = "extra_language";
+    String EXTRA_TIME_SPAN = "extra_time_span";
 }

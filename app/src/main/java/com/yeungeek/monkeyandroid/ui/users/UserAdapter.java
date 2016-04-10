@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by yeungeek on 2016/4/8.
@@ -67,6 +69,11 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView login;
         @Bind(R.id.id_user_avatar)
         ImageView userAvatar;
+
+        @OnClick(R.id.id_user_card)
+        public void onItemClick() {
+            Toast.makeText(mContext, "点击了: " + user.getLogin(), Toast.LENGTH_SHORT).show();
+        }
 
         public UserViewHolder(View itemView) {
             super(itemView);

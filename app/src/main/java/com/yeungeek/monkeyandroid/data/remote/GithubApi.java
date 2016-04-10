@@ -10,7 +10,6 @@ import java.util.List;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -64,4 +63,8 @@ public interface GithubApi {
 
     @GET("search/users")
     Observable<WrapList<User>> getUsers(@Query(value = "access_token", encoded = true) String authorization, @Query("q") String query, @Query("page") int pageId);
+
+    //trending
+    @GET("http://trending.codehub-app.com/v2/trending")
+    Observable<List<Repo>> getTrendingRepo(@Query("language") String language, @Query("since") String since);
 }

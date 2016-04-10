@@ -85,6 +85,12 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
         contentView.refreshComplete();
     }
 
+    protected void resetState() {
+        mPage = 1;
+        mLoadMore = false;
+        mCurrentSize = 0;
+    }
+
     private void initRefresh() {
         contentView.setLastUpdateTimeRelateObject(this);
         contentView.setPtrHandler(new PtrHandler() {

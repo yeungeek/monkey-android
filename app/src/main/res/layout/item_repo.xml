@@ -3,7 +3,7 @@
                                     xmlns:android="http://schemas.android.com/apk/res/android"
                                     xmlns:app="http://schemas.android.com/apk/res-auto"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:layout_margin="@dimen/margin_small"
                                     android:background="@android:color/white"
                                     android:foreground="?android:attr/selectableItemBackground"
@@ -12,22 +12,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_normal">
+        android:layout_height="match_parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/id_repo_owner_avatar"
             android:layout_width="@dimen/height_large"
             android:layout_height="@dimen/height_large"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"
             android:src="@drawable/ic_avatar"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@id/id_repo_owner_avatar"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/padding_normal">
 
             <TextView
                 android:id="@+id/id_repo_name"
@@ -48,7 +48,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_tiny"
                 android:textAppearance="@style/TextStyleSmall"/>
-        </LinearLayout>
-    </RelativeLayout>
 
+
+        </LinearLayout>
+
+        <com.yeungeek.monkeyandroid.ui.widget.TriangleLabelView
+            android:id="@+id/id_repo_language"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:visibility="gone"
+            app:backgroundColor="@color/blue_900"
+            app:corner="rightTop"
+            app:labelBottomPadding="@dimen/padding_10"
+            app:labelCenterPadding="0dp"
+            app:labelTopPadding="@dimen/padding_16"
+            app:primaryText="Objective-C"
+            app:primaryTextColor="@color/blue_100"
+            app:primaryTextSize="@dimen/font_tiny"/>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>
