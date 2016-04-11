@@ -24,8 +24,6 @@ public interface ActivityComponent {
 
     void inject(AboutActivity aboutActivity);
 
-    void inject(LauncherActivity launcherActivity);
-
     void inject(SignInDialogFragment signInDialogFragment);
 
     void inject(BaseToolbarFragment baseToolbarFragment);

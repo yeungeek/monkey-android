@@ -1,5 +1,7 @@
 package com.yeungeek.monkeyandroid.ui.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,6 +59,11 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     private SignInDialogFragment signInDialogFragment;
 
     private boolean mIsSignin;
+
+    public static Intent getStartIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,7 +159,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
                     trendingFragment = new TrendingFragment();
                     transaction.add(R.id.id_main_frame_container, trendingFragment, "trending");
                 } else {
-                    transaction.show(famousUserFragment);
+                    transaction.show(trendingFragment);
                 }
                 break;
             case R.id.menu_about:

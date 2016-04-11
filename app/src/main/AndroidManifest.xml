@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.LauncherActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,6 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:launchMode="singleTop"/>
 
         <activity
             android:name=".ui.detail.DetailActivity"/>

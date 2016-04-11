@@ -142,6 +142,7 @@ dependencies {
     compile uiWidgetDependencies.ultraPtr
     compile uiWidgetDependencies.aboutit
     compile uiWidgetDependencies.aboutitMeta
+    compile uiWidgetDependencies.awesomeSplash
 
     //analysis
     compile analysisDependencies.bugly
