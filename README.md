@@ -1,24 +1,25 @@
 # Monkey for GitHub, Android Version
-基于Material Design设计的Github第三方客户端，可以查看最新的repo，user，trending。
-Ios版本的在这里[Monkey](https://github.com/coderyi/Monkey)
+Is a GitHub third party client, show the rank of users and repositories,trending.
+Base on Material Design,use MVP pattern
+iOS version:[Monkey](https://github.com/coderyi/Monkey)
 
 ## Function
-* 登陆 ~~删除~~
-* user列表
-* repo列表
+* sign in
+* user list
+* repo list
 * trending(daily,weekly,monthly)
-* user详情
-* repo详情
+* user detail
+* repo detail
 * follow user
 * star repo
 
 ## API
-主要使用到的API列表
+GitHub interface: https://developer.github.com/v3/
 
-## Screenshots
+## App Preview
 
 ## TODO
-* 搜索
+* search
 
 ## Open source projects
 * [RxJava](https://github.com/ReactiveX/RxJava/)
@@ -32,3 +33,6 @@ Ios版本的在这里[Monkey](https://github.com/coderyi/Monkey)
 * [Sqlbrite](https://github.com/square/sqlbrite)
 * [Timber](https://github.com/JakeWharton/timber/)
 * [android-Ultra-Pull-To-Refresh](https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh)
+
+## References
+* [Monkey](https://github.com/coderyi/Monkey)
