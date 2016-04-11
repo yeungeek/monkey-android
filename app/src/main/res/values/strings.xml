@@ -10,15 +10,15 @@
     <!-- msg -->
     <string name="msg_win">win</string>
 
-    <string name="msg_retry">点击重新加载</string>
-    <string name="msg_loading_end">已经加载到底了</string>
-    <string name="msg_loading">正在加载中...</string>
+    <string name="msg_retry">Click to reload</string>
+    <string name="msg_loading_end">Already ended</string>
+    <string name="msg_loading">Loading...</string>
     <!-- title -->
     <string name="title_username">username</string>
     <string name="title_email">email</string>
     <string name="title_home">Home</string>
-    <string name="title_user">Famous users</string>
-    <string name="title_repo">Hot repos</string>
+    <string name="title_user">Famous user</string>
+    <string name="title_repo">Hot repo</string>
     <string name="title_daily">Today</string>
     <string name="title_weekly">This Week</string>
     <string name="title_monthly">This Month</string>

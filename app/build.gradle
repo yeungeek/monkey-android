@@ -113,7 +113,7 @@ dependencies {
     // rx
     compile rxDependencies.rxjava
     compile rxDependencies.rxandroid
-    compile rxDependencies.rxPreferences
+//    compile rxDependencies.rxPreferences
 
     // inject
     compile injectDependencies.butterknife

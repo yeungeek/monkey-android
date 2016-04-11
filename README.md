@@ -1,5 +1,6 @@
 # Monkey for GitHub, Android Version
-是一个Github第三方客户端，可以查看最新的repo，user，trending。Ios版本的在这里[Monkey](https://github.com/coderyi/Monkey)
+基于Material Design设计的Github第三方客户端，可以查看最新的repo，user，trending。
+Ios版本的在这里[Monkey](https://github.com/coderyi/Monkey)
 
 ## Function
 * 登陆 ~~删除~~
@@ -10,10 +11,14 @@
 * repo详情
 * follow user
 * star repo
-* 搜索
+
 ## API
 主要使用到的API列表
+
 ## Screenshots
+
+## TODO
+* 搜索
 
 ## Open source projects
 * [RxJava](https://github.com/ReactiveX/RxJava/)
@@ -26,3 +31,4 @@
 * [Stetho](https://github.com/facebook/stetho)
 * [Sqlbrite](https://github.com/square/sqlbrite)
 * [Timber](https://github.com/JakeWharton/timber/)
+* [android-Ultra-Pull-To-Refresh](https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh)
