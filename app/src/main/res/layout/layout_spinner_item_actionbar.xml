@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="8dp"
-        android:drawableRight="@drawable/ic_spinner_triangle"
+        android:drawableRight="@drawable/ic_arrow_drop"
         android:fontFamily="sans-serif"
         android:maxLines="1"
         android:paddingLeft="16dp"

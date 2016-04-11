@@ -34,4 +34,6 @@
     <string name="menu_title_repo">@string/title_repo</string>
     <string name="menu_title_trending">Trending</string>
     <string name="menu_title_about">About</string>
+
+    <string name="title_about_desc">Monkey android is a GitHub third party client, show the rank of users and repositories,trending. Base on Material Design,use MVP pattern</string>
 </resources>

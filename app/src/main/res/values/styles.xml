@@ -1,16 +1,15 @@
 <resources>
-
+    <!-- https://design.google.com/icons/ -->
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
-    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
@@ -29,11 +28,10 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="TrendingReposStyle" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+    <style name="TrendingRepoStyle" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
         <item name="android:background">?android:selectableItemBackground</item>
         <item name="android:dropDownSelector">?android:selectableItemBackground</item>
         <item name="android:divider">@null</item>
-
     </style>
 
     <!-- text style -->
@@ -55,5 +53,13 @@
     <style name="TextStyleSmall">
         <item name="android:textSize">@dimen/font_small</item>
         <item name="android:textColor">@color/textColorSmall</item>
+    </style>
+
+    <style name="CollapsedStyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ExpandedStyle">
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

@@ -42,4 +42,9 @@
     <dimen name="margin_tiny">2dp</dimen>
 
     <dimen name="drawer_height_normal">168dp</dimen>
+
+    <!-- md -->
+    <dimen name="height_md_appbar">230dp</dimen>
+    <dimen name="margin_md_normal">64dp</dimen>
+    <dimen name="margin_md_small">48dp</dimen>
 </resources>

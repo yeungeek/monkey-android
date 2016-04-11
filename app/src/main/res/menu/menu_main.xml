@@ -4,6 +4,7 @@
       tools:context=".ui.main.MainActivity">
     <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/ic_more_vert"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never"/>

@@ -19,11 +19,13 @@ import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
+import com.yeungeek.monkeyandroid.ui.AboutActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.repos.HotRepoFragment;
 import com.yeungeek.monkeyandroid.ui.signin.SignInDialogFragment;
 import com.yeungeek.monkeyandroid.ui.trending.TrendingFragment;
 import com.yeungeek.monkeyandroid.ui.users.FamousUserFragment;
+import com.yeungeek.monkeyandroid.util.ImageSize;
 
 import javax.inject.Inject;
 
@@ -104,7 +106,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
 
         mIsSignin = true;
 
-        Glide.with(this).load(data.getAvatarUrl()).into(mAvatarView);
+        Glide.with(this).load(data.getAvatar_url() + ImageSize.AVATAR_120).into(mAvatarView);
 
         mNameView.setText(data.getLogin());
         mEmailView.setText(data.getEmail());
@@ -124,7 +126,9 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     private void selectFragment(final int fragmentId) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        hideAllFragment(transaction);
+        if (fragmentId != R.id.menu_about) {
+            hideAllFragment(transaction);
+        }
         switch (fragmentId) {
             case R.id.menu_repo:
                 if (hotRepoFragment == null) {
@@ -152,7 +156,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
                 }
                 break;
             case R.id.menu_about:
-                //https://github.com/mikepenz/AboutLibraries
+                startActivity(AboutActivity.getStartIntent(this));
                 break;
         }
 
