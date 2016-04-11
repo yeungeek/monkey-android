@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Language;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.ui.detail.DetailActivity;
 import com.yeungeek.monkeyandroid.ui.widget.TriangleLabelView;
 import com.yeungeek.monkeyandroid.util.AppCst;
 
@@ -99,7 +99,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @OnClick(R.id.id_repo_card)
         public void onItemClick() {
-            Toast.makeText(mContext, "点击了: " + repo.getName(), Toast.LENGTH_SHORT).show();
+            mContext.startActivity(DetailActivity.getStartIntent(mContext, repo));
         }
 
         public RepoViewHolder(View itemView) {

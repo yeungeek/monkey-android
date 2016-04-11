@@ -148,7 +148,7 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
                     trendingFragment = new TrendingFragment();
                     transaction.add(R.id.id_main_frame_container, trendingFragment, "trending");
                 } else {
-                    transaction.show(trendingFragment);
+                    transaction.show(famousUserFragment);
                 }
                 break;
             case R.id.menu_about:

@@ -2,7 +2,9 @@ package com.yeungeek.monkeyandroid.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Repo {
+import java.io.Serializable;
+
+public class Repo implements Serializable {
     private long id;
     private String name;
     private String full_name;

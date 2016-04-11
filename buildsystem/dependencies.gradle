@@ -43,6 +43,8 @@ ext {
     // ui
     circleImageViewVersion = '2.0.0'
     ptrVersion = '1.0.11'
+    aboutitVersion = '1.2.1'
+    aboutitMetaVersion = '1.0.0'
 
     // Test Libs
     junitVersion = '4.12'
@@ -93,7 +95,9 @@ ext {
 
     uiWidgetDependencies = [
             circleImageView: "de.hdodenhof:circleimageview:${circleImageViewVersion}",
-            ultraPtr       : "in.srain.cube:ultra-ptr:${ptrVersion}"
+            ultraPtr       : "in.srain.cube:ultra-ptr:${ptrVersion}",
+            aboutit        : "com.snilius.aboutit:aboutit:${aboutitVersion}@aar",
+            aboutitMeta    : "com.snilius.aboutit:aboutit-meta:${aboutitMetaVersion}@aar",
     ]
 
     domainTestDependencies = [

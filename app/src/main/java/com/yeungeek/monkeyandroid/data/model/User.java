@@ -2,7 +2,9 @@ package com.yeungeek.monkeyandroid.data.model;
 
 import com.yeungeek.monkeyandroid.util.ImageSize;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String login;
     private int id;
     private String avatar_url;

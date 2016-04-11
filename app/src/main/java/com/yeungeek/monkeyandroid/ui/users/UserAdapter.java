@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.User;
+import com.yeungeek.monkeyandroid.ui.detail.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @OnClick(R.id.id_user_card)
         public void onItemClick() {
-            Toast.makeText(mContext, "点击了: " + user.getLogin(), Toast.LENGTH_SHORT).show();
+            mContext.startActivity(DetailActivity.getStartIntent(mContext, user));
         }
 
         public UserViewHolder(View itemView) {
