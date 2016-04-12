@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_tiny"
-                android:textAppearance="@style/TextStyleSmall"/>
+                android:textAppearance="@style/TextGrayStyleSmall"/>
 
             <TextView
                 android:id="@+id/id_repo_stars"

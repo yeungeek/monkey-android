@@ -19,9 +19,9 @@ public class LauncherActivity extends AwesomeSplash {
 
         //path
         //Customize Path
-        configSplash.setPathSplash(AppCst.DROID_LOGO); //set path String
-        configSplash.setOriginalHeight(400); //in relation to your svg (path) resource
-        configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
+        configSplash.setPathSplash(AppCst.GITHUB); //set path String
+        configSplash.setOriginalHeight(512); //in relation to your svg (path) resource
+        configSplash.setOriginalWidth(512); //in relation to your svg (path) resource
         configSplash.setAnimPathStrokeDrawingDuration(3000);
         configSplash.setPathSplashStrokeSize(3); //I advise value be <5
         configSplash.setPathSplashStrokeColor(R.color.colorAccent); //any color you want form colors.xml
