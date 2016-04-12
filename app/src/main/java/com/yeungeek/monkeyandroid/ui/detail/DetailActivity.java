@@ -43,7 +43,7 @@ public class DetailActivity extends BaseActivity {
 
         if (null != serializable) {
             if (serializable instanceof Repo) {
-                transaction.replace(R.id.id_detail, RepoDetailFragment.newInstance());
+                transaction.replace(R.id.id_detail, RepoDetailFragment.newInstance(this, (Repo) serializable));
             } else if (serializable instanceof User) {
                 transaction.replace(R.id.id_detail, UserDetailFragment.newInstance());
             }

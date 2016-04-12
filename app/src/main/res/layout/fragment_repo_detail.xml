@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="repo"/>
-</LinearLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/id_repo_owner_avatar"
+            android:layout_width="@dimen/height_large"
+            android:layout_height="@dimen/height_large"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:src="@drawable/ic_avatar"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/id_repo_owner_avatar"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_normal">
+
+            <TextView
+                android:id="@+id/id_repo_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextStylePrimary"/>
+
+
+            <TextView
+                android:id="@+id/id_repo_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:textAppearance="@style/TextStyleSmall"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/id_repo_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:textAppearance="@style/TextStyleSmall"/>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

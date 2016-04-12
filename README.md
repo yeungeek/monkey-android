@@ -3,6 +3,11 @@ Is a GitHub third party client, show the rank of users and repositories,trending
 Base on Material Design,use MVP pattern
 iOS version:[Monkey](https://github.com/coderyi/Monkey)
 
+## API
+GitHub interface: https://developer.github.com/v3/
+
+## App Preview
+
 ## Function (~~Done~~)
 * ~~sign in~~
 * ~~user list~~
@@ -12,11 +17,6 @@ iOS version:[Monkey](https://github.com/coderyi/Monkey)
 * repo detail
 * follow user
 * star repo
-
-## API
-GitHub interface: https://developer.github.com/v3/
-
-## App Preview
 
 ## TODO
 * search

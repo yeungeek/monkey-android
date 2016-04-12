@@ -31,10 +31,12 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<Repo> repos = new ArrayList<>();
     private Language mLanguage;
+    private String mTitleStar;
 
     public RepoAdapter(final Context context, final Language language) {
         mContext = context;
         mLanguage = language;
+        mTitleStar = context.getString(R.string.title_star);
     }
 
     @Override
@@ -50,19 +52,19 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         repoViewHolder.repo = repo;
 
         if (null == mLanguage || TextUtils.isEmpty(mLanguage.path)) {
-            repoViewHolder.repoLanuage.setVisibility(View.VISIBLE);
+            repoViewHolder.repoLanguage.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(repo.getLanguage())) {
-                repoViewHolder.repoLanuage.setPrimaryText(repo.getLanguage());
+                repoViewHolder.repoLanguage.setPrimaryText(repo.getLanguage());
             } else {
-                repoViewHolder.repoLanuage.setPrimaryText(AppCst.LANGUAGE_N_A);
+                repoViewHolder.repoLanguage.setPrimaryText(AppCst.LANGUAGE_N_A);
             }
         } else {
-            repoViewHolder.repoLanuage.setVisibility(View.GONE);
+            repoViewHolder.repoLanguage.setVisibility(View.GONE);
         }
 
         repoViewHolder.repoName.setText(repo.getFull_name());
         repoViewHolder.repoDesc.setText(repo.getDescription());
-        repoViewHolder.repoStars.setText(String.valueOf(repo.getStargazers_count()));
+        repoViewHolder.repoStars.setText(String.format(mTitleStar, repo.getStargazers_count()));
         if (null != repo.getOwner()) {
             Glide.with(mContext).load(repo.getOwner().getAvatarUrl()).into(repoViewHolder.ownerAvatar);
         }
@@ -95,7 +97,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Bind(R.id.id_repo_stars)
         TextView repoStars;
         @Bind(R.id.id_repo_language)
-        TriangleLabelView repoLanuage;
+        TriangleLabelView repoLanguage;
 
         @OnClick(R.id.id_repo_card)
         public void onItemClick() {

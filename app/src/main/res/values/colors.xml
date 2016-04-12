@@ -15,7 +15,7 @@
 
     <!-- text color -->
     <color name="textColorPrimary">@color/black</color>
-    <color name="textColorSmall">#FF919191</color>
+    <color name="textColorSmall">@color/blue_300</color>
 
     <color name="textColorLoading">#8A000000</color>
 </resources>

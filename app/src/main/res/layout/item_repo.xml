@@ -48,8 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_tiny"
                 android:textAppearance="@style/TextStyleSmall"/>
-
-
         </LinearLayout>
 
         <com.yeungeek.monkeyandroid.ui.widget.TriangleLabelView

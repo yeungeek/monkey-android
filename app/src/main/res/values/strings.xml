@@ -23,6 +23,7 @@
     <string name="title_weekly">This Week</string>
     <string name="title_monthly">This Month</string>
 
+    <string name="title_star">star: %1$d</string>
     <!-- action -->
     <string name="action_enter">Enter</string>
     <string name="action_settings">Settings</string>

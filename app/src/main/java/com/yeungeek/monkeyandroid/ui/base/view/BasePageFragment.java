@@ -76,7 +76,7 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
     public void showError(Throwable e, boolean pullToRefresh) {
         super.showError(e, pullToRefresh);
         contentView.refreshComplete();
-        RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.NetWorkError, mFooterClick);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFAULT_PAGESIZE, LoadingFooter.State.NetWorkError, mFooterClick);
     }
 
     @Override
@@ -131,12 +131,12 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
                 // loading more
                 mPage++;
                 Timber.d("### onLoadNextPage: %d", mPage);
-                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.Loading, null);
+                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFAULT_PAGESIZE, LoadingFooter.State.Loading, null);
                 loadData(mPage, true, true);
             } else {
                 //the end
                 mLoadMore = false;
-                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.TheEnd, null);
+                RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFAULT_PAGESIZE, LoadingFooter.State.TheEnd, null);
             }
         }
     };
@@ -144,7 +144,7 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
     private View.OnClickListener mFooterClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFALUT_PAGESIZE, LoadingFooter.State.Loading, null);
+            RecyclerViewStateUtils.setFooterViewState(getActivity(), recyclerView, AppCst.DEFAULT_PAGESIZE, LoadingFooter.State.Loading, null);
             loadData(mPage, true, true);
         }
     };
