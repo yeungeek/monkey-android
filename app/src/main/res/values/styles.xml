@@ -41,22 +41,22 @@
     </style>
 
     <style name="TextStyleLarge">
-        <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:textSize">@dimen/font_larger</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
     <style name="TextStylePrimary">
-        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textSize">@dimen/font_large</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
     <style name="TextStyleSmall">
-        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:textSize">@dimen/font_normal</item>
         <item name="android:textColor">@color/textColorSmall</item>
     </style>
 
     <style name="TextGrayStyleSmall">
-        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:textSize">@dimen/font_normal</item>
         <item name="android:textColor">@color/gray</item>
     </style>
 

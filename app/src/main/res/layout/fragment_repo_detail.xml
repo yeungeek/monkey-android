@@ -19,46 +19,73 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_10"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/id_repo_owner_avatar"
-            android:layout_width="@dimen/height_large"
-            android:layout_height="@dimen/height_large"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_normal"
-            android:src="@drawable/ic_avatar"/>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/id_repo_owner_avatar"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_normal">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/id_repo_name"
-                android:layout_width="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/id_repo_owner_avatar"
+                android:layout_width="@dimen/height_large"
+                android:layout_height="@dimen/height_large"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_avatar"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextStylePrimary"/>
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_toRightOf="@id/id_repo_owner_avatar"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_normal">
 
+                <TextView
+                    android:id="@+id/id_repo_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextStylePrimary"/>
 
-            <TextView
-                android:id="@+id/id_repo_stars"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_tiny"
-                android:textAppearance="@style/TextStyleSmall"/>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_tiny"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/id_repo_stars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextStyleSmall"/>
+
+                    <TextView
+                        android:id="@+id/id_repo_fork"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:textAppearance="@style/TextStyleSmall"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/id_repo_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:textAppearance="@style/TextStyleSmall"/>
-    </RelativeLayout>
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textAppearance="@style/TextGrayStyleSmall"/>
+
+        <!-- ptr -->
+        <WebView
+            android:id="@+id/id_repo_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
