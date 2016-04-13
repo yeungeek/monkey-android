@@ -85,6 +85,4 @@ public class RepoDetailFragment extends BaseFragment {
     protected int getLayoutRes() {
         return R.layout.fragment_repo_detail;
     }
-
-
 }

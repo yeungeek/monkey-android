@@ -43,7 +43,8 @@ public class DetailActivity extends BaseActivity {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
-                finish();
+//                finish();
+//                supportFinishAfterTransition();
                 return true;
         }
         return super.onOptionsItemSelected(item);

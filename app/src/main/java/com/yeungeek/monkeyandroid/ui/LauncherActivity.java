@@ -14,11 +14,11 @@ public class LauncherActivity extends AwesomeSplash {
     @Override
     public void initSplash(ConfigSplash configSplash) {
         //Title
-        configSplash.setTitleSplash(getString(R.string.app_name));
+        configSplash.setTitleSplash(getString(R.string.title_app));
         configSplash.setBackgroundColor(R.color.colorPrimary);
+        configSplash.setTitleTextSize(30f);
 
         //path
-        //Customize Path
         configSplash.setPathSplash(AppCst.GITHUB); //set path String
         configSplash.setOriginalHeight(512); //in relation to your svg (path) resource
         configSplash.setOriginalWidth(512); //in relation to your svg (path) resource
