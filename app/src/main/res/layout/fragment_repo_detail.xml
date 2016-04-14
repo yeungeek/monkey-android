@@ -28,12 +28,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/padding_10"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/id_repo_owner_avatar"
@@ -83,8 +83,7 @@
                 android:id="@+id/id_repo_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_margin="@dimen/margin_normal"
                 android:textAppearance="@style/TextGrayStyleSmall"/>
 
             <FrameLayout

@@ -7,7 +7,9 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.yeungeek.monkeyandroid.BuildConfig;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
+import com.yeungeek.monkeyandroid.data.remote.SimpleApi;
 import com.yeungeek.monkeyandroid.data.remote.UnauthorisedInterceptor;
+import com.yeungeek.monkeyandroid.data.remote.retrofit2.StringConverterFactory;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
 
@@ -17,9 +19,9 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
-import retrofit2.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by yeungeek on 2016/1/14.
@@ -47,6 +49,19 @@ public class ApplicationModule {
     @Singleton
     GithubApi provideGithubApi(Retrofit retrofit) {
         return retrofit.create(GithubApi.class);
+    }
+
+    @Provides
+    @Singleton
+    SimpleApi provideSimpleApi(OkHttpClient okHttpClient) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(GithubApi.ENDPOINT)
+                .client(okHttpClient)
+                .addConverterFactory(new StringConverterFactory())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        return retrofit.create(SimpleApi.class);
     }
 
     @Provides

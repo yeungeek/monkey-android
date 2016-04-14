@@ -11,12 +11,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Repo;
-import com.yeungeek.monkeyandroid.data.model.RepoContent;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceFragment;
 import com.yeungeek.monkeyandroid.util.AppCst;
@@ -98,7 +96,6 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
     }
 
     private void initWebView() {
-        mRepoDetail.loadUrl("http://www.baidu.com");
         mRepoDetail.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -125,7 +122,7 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
 
     @Override
     public void setData(String data) {
-        Toast.makeText(getActivity(), "" + data, Toast.LENGTH_SHORT).show();
+        mRepoDetail.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null);
     }
 
     @Override

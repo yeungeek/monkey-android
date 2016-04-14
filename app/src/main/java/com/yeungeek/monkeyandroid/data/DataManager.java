@@ -12,8 +12,10 @@ import com.yeungeek.monkeyandroid.data.model.RepoContent;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
+import com.yeungeek.monkeyandroid.data.remote.SimpleApi;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
+import com.yeungeek.monkeyandroid.util.EncodingUtil;
 
 import java.io.File;
 import java.util.List;
@@ -32,6 +34,7 @@ import timber.log.Timber;
 @Singleton
 public class DataManager {
     final GithubApi githubApi;
+    final SimpleApi simpleApi;
     final RxBus rxBus;
     final PreferencesHelper preferencesHelper;
     final DatabaseHelper databaseHelper;
@@ -39,9 +42,10 @@ public class DataManager {
     final Context context;
 
     @Inject
-    public DataManager(@ApplicationContext Context context, final GithubApi githubApi, final RxBus rxBus,
+    public DataManager(@ApplicationContext Context context, final GithubApi githubApi,final SimpleApi simpleApi, final RxBus rxBus,
                        final PreferencesHelper preferencesHelper, final DatabaseHelper databaseHelper, final LanguageHelper languageHelper) {
         this.githubApi = githubApi;
+        this.simpleApi = simpleApi;
         this.rxBus = rxBus;
         this.preferencesHelper = preferencesHelper;
         this.databaseHelper = databaseHelper;
@@ -87,9 +91,20 @@ public class DataManager {
         }
     }
 
-    public Observable<String> getReadme(final String owner, final String repo) {
-        githubApi.getReadme(owner, repo);
-        return null;
+    public Observable<String> getReadme(final String owner, final String repo, final String cssFile) {
+        Observable<String> readme = githubApi.getReadme(owner, repo).flatMap(new Func1<RepoContent, Observable<String>>() {
+            @Override
+            public Observable<String> call(RepoContent repoContent) {
+                String markdown = new String(EncodingUtil.fromBase64(repoContent.getContent()));
+                return simpleApi.markdown(markdown);
+            }
+        }).flatMap(new Func1<String, Observable<String>>() {
+            @Override
+            public Observable<String> call(String s) {
+                return Observable.just(loadMarkdownToHtml(s, cssFile));
+            }
+        });
+        return readme;
     }
 
     private void handleSaveUser(final User user) {
@@ -147,5 +162,15 @@ public class DataManager {
         }
         // The directory is now empty so delete it
         return dir != null && dir.delete();
+    }
+
+    private String loadMarkdownToHtml(final String txt, final String cssFile) {
+        String html;
+        if (null != cssFile) {
+            html = "<link rel='stylesheet' type='text/css' href='" + cssFile + "' />" + txt;
+            return html;
+        }
+
+        return null;
     }
 }

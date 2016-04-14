@@ -1,7 +1,6 @@
 package com.yeungeek.monkeyandroid.ui.detail;
 
 import com.yeungeek.monkeyandroid.data.DataManager;
-import com.yeungeek.monkeyandroid.data.model.RepoContent;
 import com.yeungeek.monkeyandroid.ui.base.presenter.MvpLceRxPresenter;
 import com.yeungeek.mvp.common.MvpPresenter;
 
@@ -14,6 +13,7 @@ import timber.log.Timber;
  */
 public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, String> implements MvpPresenter<RepoDetailMvpView> {
     private final DataManager dataManager;
+    private String cssFile = "file:///android_asset/markdown_css_themes/classic.css";
 
     @Inject
     public RepoDetailPresenter(final DataManager dataManager) {
@@ -22,6 +22,6 @@ public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, St
 
     public void getReadme(final String owner, final String repo, final boolean pullToRefresh) {
         Timber.d("### getReadme owner:%s, repo: %s", owner, repo);
-        subscribe(dataManager.getReadme(owner, repo), pullToRefresh);
+        subscribe(dataManager.getReadme(owner, repo, cssFile), pullToRefresh);
     }
 }
