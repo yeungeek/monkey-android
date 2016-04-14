@@ -143,6 +143,7 @@ dependencies {
     compile uiWidgetDependencies.aboutit
     compile uiWidgetDependencies.aboutitMeta
     compile uiWidgetDependencies.awesomeSplash
+    compile uiWidgetDependencies.markdownj
 
     //analysis
     compile analysisDependencies.bugly

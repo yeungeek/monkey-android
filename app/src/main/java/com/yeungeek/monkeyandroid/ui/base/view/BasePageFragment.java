@@ -42,8 +42,8 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
     }
 
     @Override
-    protected void initView() {
-        super.initView();
+    protected void initViews() {
+        super.initViews();
         initRefresh();
 
         initAdapter();

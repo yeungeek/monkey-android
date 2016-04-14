@@ -14,7 +14,7 @@ import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Language;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.ui.detail.DetailActivity;
-import com.yeungeek.monkeyandroid.ui.widget.TriangleLabelView;
+import com.yeungeek.monkeyandroid.views.widget.TriangleLabelView;
 import com.yeungeek.monkeyandroid.util.AppCst;
 
 import java.util.ArrayList;

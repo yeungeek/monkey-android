@@ -1,4 +1,4 @@
-package com.yeungeek.monkeyandroid.ui.widget;
+package com.yeungeek.monkeyandroid.views.widget;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

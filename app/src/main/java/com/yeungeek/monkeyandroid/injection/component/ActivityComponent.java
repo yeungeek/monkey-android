@@ -3,8 +3,8 @@ package com.yeungeek.monkeyandroid.injection.component;
 import com.yeungeek.monkeyandroid.injection.PerActivity;
 import com.yeungeek.monkeyandroid.injection.module.ActivityModule;
 import com.yeungeek.monkeyandroid.ui.AboutActivity;
-import com.yeungeek.monkeyandroid.ui.LauncherActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseToolbarFragment;
+import com.yeungeek.monkeyandroid.ui.detail.RepoDetailFragment;
 import com.yeungeek.monkeyandroid.ui.main.MainActivity;
 import com.yeungeek.monkeyandroid.ui.repos.RepoListFragment;
 import com.yeungeek.monkeyandroid.ui.signin.SignInDialogFragment;
@@ -29,6 +29,8 @@ public interface ActivityComponent {
     void inject(BaseToolbarFragment baseToolbarFragment);
 
     void inject(RepoListFragment repoListFragment);
+
+    void inject(RepoDetailFragment repoDetailFragment);
 
     void inject(UserListFragment userListFragment);
 

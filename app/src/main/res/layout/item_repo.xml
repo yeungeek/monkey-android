@@ -50,7 +50,7 @@
                 android:textAppearance="@style/TextStyleSmall"/>
         </LinearLayout>
 
-        <com.yeungeek.monkeyandroid.ui.widget.TriangleLabelView
+        <com.yeungeek.monkeyandroid.views.widget.TriangleLabelView
             android:id="@+id/id_repo_language"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

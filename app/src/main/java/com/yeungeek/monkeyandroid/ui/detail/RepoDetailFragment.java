@@ -6,21 +6,29 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Repo;
-import com.yeungeek.monkeyandroid.ui.base.view.BaseFragment;
+import com.yeungeek.monkeyandroid.data.model.RepoContent;
+import com.yeungeek.monkeyandroid.ui.base.view.BaseActivity;
+import com.yeungeek.monkeyandroid.ui.base.view.BaseLceFragment;
 import com.yeungeek.monkeyandroid.util.AppCst;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
 /**
  * Created by yeungeek on 2016/4/10.
  */
-public class RepoDetailFragment extends BaseFragment {
+public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetailMvpView, RepoDetailPresenter> implements RepoDetailMvpView {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.id_repo_owner_avatar)
@@ -33,6 +41,11 @@ public class RepoDetailFragment extends BaseFragment {
     TextView mFork;
     @Bind(R.id.id_repo_desc)
     TextView mRepoDesc;
+    @Bind(R.id.id_repo_detail)
+    WebView mRepoDetail;
+
+    @Inject
+    RepoDetailPresenter repoDetailPresenter;
 
     private ActionBar actionBar;
 
@@ -79,10 +92,56 @@ public class RepoDetailFragment extends BaseFragment {
         if (null != mRepo.getOwner()) {
             Glide.with(this).load(mRepo.getOwner().getAvatarUrl()).into(mAvatar);
         }
+
+        initWebView();
+        loadData(false);
+    }
+
+    private void initWebView() {
+        mRepoDetail.loadUrl("http://www.baidu.com");
+        mRepoDetail.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_repo_detail;
+    }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
+    }
+
+    @Override
+    public RepoDetailPresenter createPresenter() {
+        return repoDetailPresenter;
+    }
+
+    @Override
+    public void setData(String data) {
+        Toast.makeText(getActivity(), "" + data, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        if (null == mRepo) {
+            return;
+        }
+
+        repoDetailPresenter.getReadme(mRepo.getOwner().getLogin(), mRepo.getName(), false);
+    }
+
+    @Override
+    protected void injectDependencies() {
+        super.injectDependencies();
+        if (getActivity() instanceof BaseActivity) {
+            ((BaseActivity) getActivity()).activityComponent().inject(this);
+        }
     }
 }

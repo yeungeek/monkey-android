@@ -61,8 +61,8 @@ public class TrendingListFragment extends BaseLceFragment<PtrClassicFrameLayout,
     }
 
     @Override
-    protected void initView() {
-        super.initView();
+    protected void initViews() {
+        super.initViews();
         initRefresh();
 
         adapter = new RepoAdapter(getActivity(), language);

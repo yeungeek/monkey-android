@@ -36,4 +36,5 @@ GitHub interface: https://developer.github.com/v3/
 * [PreLollipopTransition](https://github.com/takahirom/PreLollipopTransition)
 
 ## References
+* [ribot-app-android](https://github.com/ribot/ribot-app-android)
 * [Monkey](https://github.com/coderyi/Monkey)

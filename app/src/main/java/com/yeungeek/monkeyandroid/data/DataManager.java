@@ -8,6 +8,7 @@ import com.yeungeek.monkeyandroid.data.local.LanguageHelper;
 import com.yeungeek.monkeyandroid.data.local.PreferencesHelper;
 import com.yeungeek.monkeyandroid.data.model.AccessTokenResp;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.data.model.RepoContent;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
@@ -86,6 +87,11 @@ public class DataManager {
         }
     }
 
+    public Observable<String> getReadme(final String owner, final String repo) {
+        githubApi.getReadme(owner, repo);
+        return null;
+    }
+
     private void handleSaveUser(final User user) {
         preferencesHelper.putUserLogin(user.getLogin());
         preferencesHelper.putUserEmail(user.getEmail());
@@ -123,6 +129,12 @@ public class DataManager {
         }
     }
 
+    /**
+     * may use helper
+     *
+     * @param dir
+     * @return
+     */
     private boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();

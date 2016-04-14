@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.data.remote;
 
 import com.yeungeek.monkeyandroid.data.model.AccessTokenResp;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.data.model.RepoContent;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.model.WrapList;
 
@@ -63,6 +64,9 @@ public interface GithubApi {
 
     @GET("search/users")
     Observable<WrapList<User>> getUsers(@Query(value = "access_token", encoded = true) String authorization, @Query("q") String query, @Query("page") int pageId);
+
+    @GET("repos/{owner}/{repo}/readme")
+    Observable<RepoContent> getReadme(@Path("owner") String owner, @Path("repo") String repo);
 
     //trending
     @GET("http://trending.codehub-app.com/v2/trending")

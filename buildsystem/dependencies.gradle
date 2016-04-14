@@ -48,6 +48,7 @@ ext {
     aboutitVersion = '1.2.1'
     aboutitMetaVersion = '1.0.0'
     awesomeSplashVersion = "v1.0.0"
+    markdownjVersion = "0.4"
 
     // Test Libs
     junitVersion = '4.12'
@@ -102,6 +103,7 @@ ext {
             aboutit        : "com.snilius.aboutit:aboutit:${aboutitVersion}@aar",
             aboutitMeta    : "com.snilius.aboutit:aboutit-meta:${aboutitMetaVersion}@aar",
             awesomeSplash  : "com.github.ViksaaSkool:AwesomeSplash:${awesomeSplashVersion}",
+            markdownj      : "org.markdownj:markdownj-core:${markdownjVersion}",
     ]
 
     domainTestDependencies = [
