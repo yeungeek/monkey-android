@@ -17,6 +17,7 @@ public interface AppCst {
     String EXTRA_LANGUAGE = "extra_language";
     String EXTRA_TIME_SPAN = "extra_time_span";
     String EXTRA_REPO = "EXTRA_REPO";
+    String EXTRA_USER = "EXTRA_USER";
 
     String AUTHOR = "yeungeek";
 
