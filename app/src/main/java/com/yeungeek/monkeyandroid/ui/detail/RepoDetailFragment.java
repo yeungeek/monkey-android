@@ -23,6 +23,7 @@ import com.yeungeek.monkeyandroid.util.AppCst;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by yeungeek on 2016/4/10.
@@ -53,6 +54,7 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
     private Repo mRepo;
     private String mStarString;
     private String mForkString;
+    private boolean mCurrentStaring;
 
     public static Fragment newInstance(final Context context, final Repo repo) {
         Bundle bundle = new Bundle();
@@ -157,11 +159,21 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
     }
 
     @Override
-    public void checkIfStaring(boolean isStaring) {
+    public void starStatus(boolean isStaring) {
+        mCurrentStaring = isStaring;
         if (isStaring) {
             mRepoStar.setImageResource(R.drawable.ic_favorite);
         } else {
             mRepoStar.setImageResource(R.drawable.ic_favorite_border);
+        }
+    }
+
+    @OnClick(R.id.id_repo_star)
+    public void onFabClick() {
+        if (mCurrentStaring) {
+            repoDetailPresenter.unstarRepo(mRepo);
+        } else {
+            repoDetailPresenter.starRepo(mRepo);
         }
     }
 }

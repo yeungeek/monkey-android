@@ -92,6 +92,22 @@ public class DataManager {
         return null;
     }
 
+    public Observable<Response<Void>> starRepo(final String owner, final String repo) {
+        if (!TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
+            return githubApi.starRepo(owner, repo, preferencesHelper.getAccessToken());
+        }
+
+        return null;
+    }
+
+    public Observable<Response<Void>> unstarRepo(final String owner, final String repo) {
+        if (!TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
+            return githubApi.unstarRepo(owner, repo, preferencesHelper.getAccessToken());
+        }
+
+        return null;
+    }
+
     public Observable<WrapList<User>> getUsers(final String query, final int page) {
         if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
             return githubApi.getUsers(query, page);

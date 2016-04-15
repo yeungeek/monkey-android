@@ -16,7 +16,7 @@ GitHub interface: https://developer.github.com/v3/
 * user detail
 * ~~repo detail~~
 * follow user
-* star repo
+* ~~star repo~~
 
 ## TODO
 * search

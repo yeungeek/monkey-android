@@ -75,7 +75,7 @@ public interface GithubApi {
             "Content-Length: 0"
     })
     @PUT("user/starred/{owner}/{repo}")
-    Observable<Response> starRepo(@Path("owner") String owner, @Path("repo") String repo,
+    Observable<Response<Void>> starRepo(@Path("owner") String owner, @Path("repo") String repo,
                                   @Query(value = "access_token", encoded = true) String accessToken);
 
     @GET("user/starred/{owner}/{repo}")
@@ -86,7 +86,7 @@ public interface GithubApi {
             "Content-Length: 0"
     })
     @DELETE("user/starred/{owner}/{repo}")
-    Observable<Response> unstarRepo(@Path("owner") String owner, @Path("repo") String repo,
+    Observable<Response<Void>> unstarRepo(@Path("owner") String owner, @Path("repo") String repo,
                                     @Query(value = "access_token", encoded = true) String accessToken);
 
     //trending

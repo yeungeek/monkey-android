@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.ui.detail;
 
 import android.text.TextUtils;
 
+import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 import com.yeungeek.monkeyandroid.data.DataManager;
 import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.ui.base.presenter.MvpLceRxPresenter;
@@ -24,6 +25,7 @@ public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, St
     private String cssFile = "file:///android_asset/markdown_css_themes/classic.css";
 
     private Subscriber<Response<Void>> mCheckStar;
+    private StarSubscriber mStar;
 
     @Inject
     public RepoDetailPresenter(final DataManager dataManager) {
@@ -36,7 +38,7 @@ public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, St
     }
 
     public void checkIfStaring(final Repo repo) {
-        Timber.d("### getReadme owner:%s, repo: %s", repo.getOwner().getLogin(), repo.getName());
+        Timber.d("### checkIfStaring owner:%s, repo: %s", repo.getOwner().getLogin(), repo.getName());
         dataManager.checkIfStaring(repo.getOwner().getLogin(), repo.getName())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -60,13 +62,32 @@ public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, St
                     @Override
                     public void onNext(Response<Void> response) {
                         if (null != response && response.code() == HttpStatus.HTTP_NO_CONTENT) {
-                            getView().checkIfStaring(true);
+                            getView().starStatus(true);
                         } else {
-                            getView().checkIfStaring(false);
+                            getView().starStatus(false);
                         }
                     }
                 });
     }
+
+    public void starRepo(final Repo repo) {
+        Timber.d("### starRepo owner:%s, repo: %s", repo.getOwner().getLogin(), repo.getName());
+        mStar = new StarSubscriber(true);
+        dataManager.starRepo(repo.getOwner().getLogin(), repo.getName())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mStar);
+    }
+
+    public void unstarRepo(final Repo repo) {
+        Timber.d("### unstarRepo owner:%s, repo: %s", repo.getOwner().getLogin(), repo.getName());
+        mStar = new StarSubscriber(false);
+        dataManager.unstarRepo(repo.getOwner().getLogin(), repo.getName())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mStar);
+    }
+
 
     public boolean isLogined() {
         return !TextUtils.isEmpty(dataManager.getPreferencesHelper().getAccessToken());
@@ -79,6 +100,11 @@ public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, St
             mCheckStar.unsubscribe();
         }
 
+        if (null != mStar && mStar.isUnsubscribed()) {
+            mStar.unsubscribe();
+        }
+
+        mStar = null;
         mCheckStar = null;
     }
 
@@ -86,5 +112,47 @@ public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, St
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
         unsubscribe();
+    }
+
+    @RxLogSubscriber
+    private class StarSubscriber extends Subscriber<Response<Void>> {
+        private boolean isStar;
+
+        public StarSubscriber(final boolean isStar) {
+            this.isStar = isStar;
+        }
+
+        @Override
+        public void onCompleted() {
+            if (isViewAttached()) {
+                getView().showContent();
+            }
+            unsubscribe();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            if (isViewAttached()) {
+                getView().showError(e, true);
+            }
+            unsubscribe();
+        }
+
+        @Override
+        public void onNext(Response<Void> response) {
+            if (null != response && response.code() == HttpStatus.HTTP_NO_CONTENT) {
+                if (isStar) {
+                    getView().starStatus(true);
+                } else {
+                    getView().starStatus(false);
+                }
+            } else {
+                if (isStar) {
+                    getView().starStatus(false);
+                } else {
+                    getView().starStatus(true);
+                }
+            }
+        }
     }
 }
