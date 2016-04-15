@@ -29,7 +29,6 @@ import timber.log.Timber;
 public class TrendingFragment extends BaseToolbarFragment {
     private LanguagesPagerAdapter mPagerAdapter;
     String mTimeSpan = "daily";
-    int mCurrentPosition = 0;
 
     @Override
     protected void initToolbar() {
@@ -76,6 +75,10 @@ public class TrendingFragment extends BaseToolbarFragment {
         getViewPager().setAdapter(mPagerAdapter);
         getTabLayout().setupWithViewPager(getViewPager());
 
+        if (null != onPageChangeListener) {
+            getViewPager().removeOnPageChangeListener(onPageChangeListener);
+        }
+
         getViewPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -92,6 +95,16 @@ public class TrendingFragment extends BaseToolbarFragment {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        getFloatingActionButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = getChildFragmentManager().findFragmentByTag(mPagerAdapter.getFragmentTag(R.id.pager, mCurrentPosition));
+                if (null != fragment && fragment instanceof TrendingListFragment) {
+                    ((TrendingListFragment) fragment).scrollToTop();
+                }
             }
         });
     }

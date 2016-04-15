@@ -8,12 +8,13 @@ import com.yeungeek.monkeyandroid.data.model.WrapList;
 
 import java.util.List;
 
-import retrofit2.http.Body;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -68,6 +69,17 @@ public interface GithubApi {
 
     @GET("repos/{owner}/{repo}/readme")
     Observable<RepoContent> getReadme(@Path("owner") String owner, @Path("repo") String repo);
+
+    @Headers({
+            "Content-Length: 0"
+    })
+    @PUT("user/starred/{owner}/{repo}")
+    Observable<Response> starRepo(@Path("owner") String owner, @Path("repo") String repo,
+                                  @Query(value = "access_token", encoded = true) String accessToken);
+
+    @GET("user/starred/{owner}/{repo}")
+    Observable<Response> checkIfStaring(@Path("owner") String owner, @Path("repo") String repo,
+                                        @Query(value = "access_token", encoded = true) String accessToken);
 
     //trending
     @GET("http://trending.codehub-app.com/v2/trending")

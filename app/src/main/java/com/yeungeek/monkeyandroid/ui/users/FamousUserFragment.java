@@ -3,9 +3,11 @@ package com.yeungeek.monkeyandroid.ui.users;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Language;
+import com.yeungeek.monkeyandroid.ui.base.view.BasePageFragment;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseToolbarFragment;
 import com.yeungeek.monkeyandroid.util.AppCst;
 
@@ -30,6 +32,16 @@ public class FamousUserFragment extends BaseToolbarFragment {
         mPagerAdapter = new LanguagesPagerAdapter(getChildFragmentManager());
         getViewPager().setAdapter(mPagerAdapter);
         getTabLayout().setupWithViewPager(getViewPager());
+
+        getFloatingActionButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = getChildFragmentManager().findFragmentByTag(mPagerAdapter.getFragmentTag(R.id.pager, mCurrentPosition));
+                if (null != fragment && fragment instanceof BasePageFragment) {
+                    ((BasePageFragment) fragment).scrollToTop();
+                }
+            }
+        });
     }
 
     public class LanguagesPagerAdapter extends FragmentPagerAdapter {
@@ -55,6 +67,10 @@ public class FamousUserFragment extends BaseToolbarFragment {
         @Override
         public CharSequence getPageTitle(int position) {
             return languagesArray.get(position).name;
+        }
+
+        public String getFragmentTag(int viewPagerId, int fragmentPosition) {
+            return "android:switcher:" + viewPagerId + ":" + fragmentPosition;
         }
     }
 }

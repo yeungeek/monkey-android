@@ -85,6 +85,10 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
         contentView.refreshComplete();
     }
 
+    public void scrollToTop() {
+        recyclerView.smoothScrollToPosition(0);
+    }
+
     protected void resetState() {
         mPage = 1;
         mLoadMore = false;

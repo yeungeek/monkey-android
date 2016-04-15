@@ -35,6 +35,9 @@
     <dimen name="padding_tiny">2dp</dimen>
 
     <!-- margin -->
+    <dimen name="margin_128">128dp</dimen>
+    <dimen name="margin_huger">64dp</dimen>
+    <dimen name="margin_48">48dp</dimen>
     <dimen name="margin_huge">30dp</dimen>
     <dimen name="margin_large">15dp</dimen>
     <dimen name="margin_10">10dp</dimen>

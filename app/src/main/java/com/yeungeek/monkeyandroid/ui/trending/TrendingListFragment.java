@@ -120,6 +120,10 @@ public class TrendingListFragment extends BaseLceFragment<PtrClassicFrameLayout,
         loadData(false);
     }
 
+    public void scrollToTop() {
+        recyclerView.smoothScrollToPosition(0);
+    }
+
     private void initRefresh() {
         contentView.setLastUpdateTimeRelateObject(this);
         contentView.setPtrHandler(new PtrHandler() {

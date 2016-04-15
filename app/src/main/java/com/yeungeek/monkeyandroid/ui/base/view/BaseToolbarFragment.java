@@ -1,5 +1,6 @@
 package com.yeungeek.monkeyandroid.ui.base.view;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -12,6 +13,7 @@ import com.yeungeek.monkeyandroid.data.DataManager;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import timber.log.Timber;
 
 /**
  * Created by yeungeek on 2016/3/29.
@@ -23,10 +25,13 @@ public abstract class BaseToolbarFragment extends BaseFragment {
     TabLayout tabLayout;
     @Bind(R.id.pager)
     ViewPager viewPager;
+    @Bind(R.id.fab)
+    FloatingActionButton floatingActionButton;
 
     @Inject
     protected DataManager dataManager;
-
+    protected ViewPager.OnPageChangeListener onPageChangeListener;
+    protected int mCurrentPosition = 0;
     private ActionBar actionBar;
 
     @Override
@@ -47,6 +52,24 @@ public abstract class BaseToolbarFragment extends BaseFragment {
                 initToolbar();
             }
         }
+
+        getViewPager().addOnPageChangeListener(onPageChangeListener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Timber.d("### onItemSelected onPageSelected position: %d", position);
+                mCurrentPosition = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -73,5 +96,9 @@ public abstract class BaseToolbarFragment extends BaseFragment {
 
     public ViewPager getViewPager() {
         return viewPager;
+    }
+
+    public FloatingActionButton getFloatingActionButton() {
+        return floatingActionButton;
     }
 }

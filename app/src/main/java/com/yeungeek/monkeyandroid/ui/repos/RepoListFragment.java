@@ -56,7 +56,7 @@ public class RepoListFragment extends BasePageFragment<WrapList<Repo>, RepoMvpVi
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return getString(R.string.error_repositories) + "/n" + e.getMessage();
+        return getString(R.string.error_repositories) + "\n" + e.getMessage();
     }
 
     @Override
