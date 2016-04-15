@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.ui.detail;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,8 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
     TextView mRepoDesc;
     @Bind(R.id.id_repo_detail)
     WebView mRepoDetail;
+    @Bind(R.id.id_repo_star)
+    FloatingActionButton mRepoStar;
 
     @Inject
     RepoDetailPresenter repoDetailPresenter;
@@ -91,8 +94,15 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
             Glide.with(this).load(mRepo.getOwner().getAvatarUrl()).into(mAvatar);
         }
 
+        if (repoDetailPresenter.isLogined()) {
+            mRepoStar.setVisibility(View.VISIBLE);
+        } else {
+            mRepoStar.setVisibility(View.GONE);
+        }
+
         initWebView();
         loadData(false);
+        checkStarStatus();
     }
 
     private void initWebView() {
@@ -112,7 +122,7 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return null;
+        return e.getMessage();
     }
 
     @Override
@@ -134,11 +144,24 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
         repoDetailPresenter.getReadme(mRepo.getOwner().getLogin(), mRepo.getName(), false);
     }
 
+    private void checkStarStatus() {
+        repoDetailPresenter.checkIfStaring(mRepo);
+    }
+
     @Override
     protected void injectDependencies() {
         super.injectDependencies();
         if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).activityComponent().inject(this);
+        }
+    }
+
+    @Override
+    public void checkIfStaring(boolean isStaring) {
+        if (isStaring) {
+            mRepoStar.setImageResource(R.drawable.ic_favorite);
+        } else {
+            mRepoStar.setImageResource(R.drawable.ic_favorite_border);
         }
     }
 }

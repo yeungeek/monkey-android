@@ -9,6 +9,7 @@ import com.yeungeek.monkeyandroid.data.model.WrapList;
 import java.util.List;
 
 import retrofit2.Response;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -78,8 +79,15 @@ public interface GithubApi {
                                   @Query(value = "access_token", encoded = true) String accessToken);
 
     @GET("user/starred/{owner}/{repo}")
-    Observable<Response> checkIfStaring(@Path("owner") String owner, @Path("repo") String repo,
+    Observable<Response<Void>> checkIfStaring(@Path("owner") String owner, @Path("repo") String repo,
                                         @Query(value = "access_token", encoded = true) String accessToken);
+
+    @Headers({
+            "Content-Length: 0"
+    })
+    @DELETE("user/starred/{owner}/{repo}")
+    Observable<Response> unstarRepo(@Path("owner") String owner, @Path("repo") String repo,
+                                    @Query(value = "access_token", encoded = true) String accessToken);
 
     //trending
     @GET("http://trending.codehub-app.com/v2/trending")

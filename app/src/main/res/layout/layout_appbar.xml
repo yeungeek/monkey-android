@@ -39,8 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/margin_48"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@drawable/ic_arrow_upward"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_arrow_upward"/>
 </android.support.design.widget.CoordinatorLayout>

@@ -23,6 +23,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import retrofit2.Response;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -42,7 +43,7 @@ public class DataManager {
     final Context context;
 
     @Inject
-    public DataManager(@ApplicationContext Context context, final GithubApi githubApi,final SimpleApi simpleApi, final RxBus rxBus,
+    public DataManager(@ApplicationContext Context context, final GithubApi githubApi, final SimpleApi simpleApi, final RxBus rxBus,
                        final PreferencesHelper preferencesHelper, final DatabaseHelper databaseHelper, final LanguageHelper languageHelper) {
         this.githubApi = githubApi;
         this.simpleApi = simpleApi;
@@ -81,6 +82,14 @@ public class DataManager {
         } else {
             return githubApi.getRepos(preferencesHelper.getAccessToken(), query, page);
         }
+    }
+
+    public Observable<Response<Void>> checkIfStaring(final String owner, final String repo) {
+        if (!TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
+            return githubApi.checkIfStaring(owner, repo, preferencesHelper.getAccessToken());
+        }
+
+        return null;
     }
 
     public Observable<WrapList<User>> getUsers(final String query, final int page) {
