@@ -9,6 +9,7 @@ GitHub interface: https://developer.github.com/v3/
 ## App Preview
 ![](images/monkey.gif)
 ![](images/preview1.png) ![](images/preview2.png)
+![](images/preview3.png)
 
 ## Function (~~Done~~)
 * ~~sign in~~
