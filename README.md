@@ -7,6 +7,8 @@ iOS version:[Monkey](https://github.com/coderyi/Monkey)
 GitHub interface: https://developer.github.com/v3/
 
 ## App Preview
+![](images/monkey.gif)
+![](images/preview1.png) ![](images/preview2.png)
 
 ## Function (~~Done~~)
 * ~~sign in~~
@@ -21,6 +23,7 @@ GitHub interface: https://developer.github.com/v3/
 ## TODO
 * search
 * open url(scheme)
+
 
 ## Open source projects
 * [RxJava](https://github.com/ReactiveX/RxJava/)
