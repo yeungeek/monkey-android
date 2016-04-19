@@ -28,6 +28,7 @@ import rx.Observable;
 public interface GithubApi {
     String ENDPOINT = "https://api.github.com/";
     String AUTH_HEADER = "Authorization";
+    String AUTH_TOKEN = " token ";
 
     String CLIENT_ID = "d3cf434537678c39e406";
     String CLIENT_SECRET = "60426efe8d81483492a111fb6fb421e615465b73";
@@ -57,17 +58,15 @@ public interface GithubApi {
     @GET("search/repositories")
     Observable<WrapList<Repo>> getRepos(@Query("q") String query, @Query("page") int pageId);
 
-    @GET("search/repositories")
-    Observable<WrapList<Repo>> getRepos(@Query(value = "access_token", encoded = true) String authorization, @Query("q") String query, @Query("page") int pageId);
-
     @GET("search/users")
     Observable<WrapList<User>> getUsers(@Query("q") String query, @Query("page") int pageId);
 
-    @GET("search/users")
-    Observable<WrapList<User>> getUsers(@Query(value = "access_token", encoded = true) String authorization, @Query("q") String query, @Query("page") int pageId);
-
     @GET("repos/{owner}/{repo}/readme")
     Observable<RepoContent> getReadme(@Path("owner") String owner, @Path("repo") String repo);
+
+    @GET("repos/{owner}/{repo}/readme")
+    Observable<RepoContent> getReadme(@Path("owner") String owner, @Path("repo") String repo,
+                                      @Query(value = "access_token", encoded = true) String accessToken);
 
     @Headers({
             "Content-Length: 0"
@@ -94,11 +93,22 @@ public interface GithubApi {
     @GET("users/{username}")
     Observable<WrapUser> getSingleUser(@Path("username") String username);
 
+    @GET("users/{username}")
+    Observable<WrapUser> getSingleUser(@Path("username") String username, @Query(value = "access_token", encoded = true) String accessToken);
+
     @GET("users/{username}/followers")
     Observable<List<User>> getFollowers(@Path("username") String username, @Query("page") int pageId);  //authenticated
 
+    @GET("users/{username}/followers")
+    Observable<List<User>> getFollowers(@Path("username") String username, @Query("page") int pageId,
+                                        @Query(value = "access_token", encoded = true) String accessToken);  //authenticated
+
     @GET("users/{username}/following")
-    Observable<List<User>> getFollowing(@Path("username") String username, @Query("page") int pageId);  //authenticated
+    Observable<List<User>> getFollowing(@Path("username") String username, @Query("page") int pageId);
+
+    @GET("users/{username}/following")
+    Observable<List<User>> getFollowing(@Path("username") String username, @Query("page") int pageId,
+                                        @Query(value = "access_token", encoded = true) String accessToken);
 
     @GET("user/following/{username}")
     Observable<Response<Void>> checkIfFollowing(@Path("username") String username,

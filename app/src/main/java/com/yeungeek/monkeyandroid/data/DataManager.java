@@ -79,11 +79,7 @@ public class DataManager {
     }
 
     public Observable<WrapList<Repo>> getRepos(final String query, final int page) {
-        if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
-            return githubApi.getRepos(query, page);
-        } else {
-            return githubApi.getRepos(preferencesHelper.getAccessToken(), query, page);
-        }
+        return githubApi.getRepos(query, page);
     }
 
     public Observable<Response<Void>> checkIfStaring(final String owner, final String repo) {
@@ -111,19 +107,19 @@ public class DataManager {
     }
 
     public Observable<WrapList<User>> getUsers(final String query, final int page) {
-        if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
-            return githubApi.getUsers(query, page);
-        } else {
-            return githubApi.getUsers(preferencesHelper.getAccessToken(), query, page);
-        }
+        return githubApi.getUsers(query, page);
     }
 
     public Observable<String> getReadme(final String owner, final String repo, final String cssFile) {
-        Observable<String> readme = githubApi.getReadme(owner, repo).flatMap(new Func1<RepoContent, Observable<String>>() {
+        Observable<RepoContent> readme = TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getReadme(owner, repo) :
+                githubApi.getReadme(owner, repo, preferencesHelper.getAccessToken());
+
+        return readme.flatMap(new Func1<RepoContent, Observable<String>>() {
             @Override
             public Observable<String> call(RepoContent repoContent) {
                 String markdown = new String(EncodingUtil.fromBase64(repoContent.getContent()));
-                return simpleApi.markdown(markdown);
+                return TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? simpleApi.markdown(markdown) :
+                        simpleApi.markdown(GithubApi.AUTH_TOKEN + preferencesHelper.getAccessToken(), markdown);
             }
         }).flatMap(new Func1<String, Observable<String>>() {
             @Override
@@ -131,7 +127,6 @@ public class DataManager {
                 return Observable.just(loadMarkdownToHtml(s, cssFile));
             }
         });
-        return readme;
     }
 
     /**
@@ -139,7 +134,10 @@ public class DataManager {
      * get single user info,and check if following. perfect.
      */
     public Observable<WrapUser> getSingleUser(final String username) {
-        return githubApi.getSingleUser(username).flatMap(new Func1<WrapUser, Observable<WrapUser>>() {
+        Observable<WrapUser> single = TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getSingleUser(username) :
+                githubApi.getSingleUser(username, preferencesHelper.getAccessToken());
+
+        return single.flatMap(new Func1<WrapUser, Observable<WrapUser>>() {
             @Override
             public Observable<WrapUser> call(final WrapUser wrapUser) {
                 if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
@@ -162,11 +160,13 @@ public class DataManager {
     }
 
     public Observable<List<User>> getFollowing(final String username, final int page) {
-        return githubApi.getFollowing(username, page);
+        return TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getFollowing(username, page) :
+                githubApi.getFollowing(username, page, preferencesHelper.getAccessToken());
     }
 
     public Observable<List<User>> getFollowers(final String username, final int page) {
-        return githubApi.getFollowers(username, page);
+        return TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getFollowers(username, page) :
+                githubApi.getFollowers(username, page, preferencesHelper.getAccessToken());
     }
 
     private void handleSaveUser(final User user) {

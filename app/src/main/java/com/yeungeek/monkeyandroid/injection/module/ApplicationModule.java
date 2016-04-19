@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.yeungeek.monkeyandroid.BuildConfig;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.data.remote.SimpleApi;
+import com.yeungeek.monkeyandroid.data.remote.TokenInterceptor;
 import com.yeungeek.monkeyandroid.data.remote.UnauthorisedInterceptor;
 import com.yeungeek.monkeyandroid.data.remote.retrofit2.StringConverterFactory;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
@@ -72,7 +73,9 @@ public class ApplicationModule {
         logging.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
 
         //@see https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor
-        final OkHttpClient okHttpClient = builder.addInterceptor(logging).addInterceptor(new UnauthorisedInterceptor(mApplication))
+        final OkHttpClient okHttpClient = builder.addInterceptor(logging)
+                .addInterceptor(new UnauthorisedInterceptor(mApplication))
+                .addInterceptor(new TokenInterceptor(mApplication))
                 .addNetworkInterceptor(new StethoInterceptor())
                 .build();
         return okHttpClient;
