@@ -15,6 +15,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
@@ -133,8 +134,17 @@ public class UserDetailFragment extends BaseLceFragment<View, WrapUser, UserDeta
         checkFollowing(isFollowing);
     }
 
+    @Override
+    public void notLogined() {
+        Toast.makeText(getContext(), getString(R.string.error_not_login), Toast.LENGTH_SHORT).show();
+    }
+
     @OnClick(R.id.fab)
     public void onFabClick() {
+        if (!getPresenter().checkLogin()) {
+            return;
+        }
+
         if (mCurrentFollowing) {
             getPresenter().unfollowUser(mUser.getLogin());
         } else {

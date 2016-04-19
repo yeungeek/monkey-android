@@ -1,5 +1,7 @@
 package com.yeungeek.monkeyandroid.ui.detail;
 
+import android.text.TextUtils;
+
 import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 import com.yeungeek.monkeyandroid.data.DataManager;
 import com.yeungeek.monkeyandroid.data.model.WrapUser;
@@ -55,6 +57,16 @@ public class UserDetailPresenter extends MvpLceRxPresenter<UserDetailMvpView, Wr
         }
 
         mFollow = null;
+    }
+
+    public boolean checkLogin() {
+        if(TextUtils.isEmpty(dataManager.getPreferencesHelper().getAccessToken())){
+//            dataManager.getRxBus().send(new BusEvent.AuthenticationError());
+            getView().notLogined();
+            return false;
+        }
+
+        return true;
     }
 
     @RxLogSubscriber

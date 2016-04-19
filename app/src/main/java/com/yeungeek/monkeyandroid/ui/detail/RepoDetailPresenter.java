@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 import com.yeungeek.monkeyandroid.data.DataManager;
 import com.yeungeek.monkeyandroid.data.model.Repo;
+import com.yeungeek.monkeyandroid.rxbus.event.BusEvent;
 import com.yeungeek.monkeyandroid.ui.base.presenter.MvpLceRxPresenter;
 import com.yeungeek.monkeyandroid.util.HttpStatus;
 import com.yeungeek.mvp.common.MvpPresenter;
@@ -88,9 +89,18 @@ public class RepoDetailPresenter extends MvpLceRxPresenter<RepoDetailMvpView, St
                 .subscribe(mStar);
     }
 
-
     public boolean isLogined() {
         return !TextUtils.isEmpty(dataManager.getPreferencesHelper().getAccessToken());
+    }
+
+    public boolean checkLogin() {
+        if (TextUtils.isEmpty(dataManager.getPreferencesHelper().getAccessToken())) {
+//            dataManager.getRxBus().send(new BusEvent.AuthenticationError());
+            getView().notLogined();
+            return false;
+        }
+
+        return true;
     }
 
     @Override

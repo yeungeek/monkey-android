@@ -7,4 +7,5 @@ import com.yeungeek.mvp.common.lce.MvpLceView;
  */
 public interface RepoDetailMvpView extends MvpLceView<String> {
     void starStatus(boolean isStaring);
+    void notLogined();
 }

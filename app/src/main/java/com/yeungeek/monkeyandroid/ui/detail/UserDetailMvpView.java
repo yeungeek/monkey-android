@@ -8,4 +8,5 @@ import com.yeungeek.mvp.common.lce.MvpLceView;
  */
 public interface UserDetailMvpView extends MvpLceView<WrapUser> {
     void followStatus(boolean isFollowing);
+    void notLogined();
 }

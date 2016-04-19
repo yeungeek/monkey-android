@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
@@ -31,6 +32,7 @@ public class MainPresenter extends MvpLceRxPresenter<MainMvpView, User> implemen
         super.attachView(view);
         mSubscriptions = new CompositeSubscription();
         mSubscriptions.add(dataManager.getRxBus().toObservable()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<Object>() {
                     @Override

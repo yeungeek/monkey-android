@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yeungeek.monkeyandroid.R;
@@ -96,12 +97,6 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
             Glide.with(this).load(mRepo.getOwner().getAvatarUrl()).into(mAvatar);
         }
 
-        if (getPresenter().isLogined()) {
-            mRepoStar.setVisibility(View.VISIBLE);
-        } else {
-            mRepoStar.setVisibility(View.GONE);
-        }
-
         initWebView();
         loadData(false);
         checkStarStatus();
@@ -146,6 +141,11 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
         getPresenter().getReadme(mRepo.getOwner().getLogin(), mRepo.getName(), false);
     }
 
+    @Override
+    public void notLogined() {
+        Toast.makeText(getContext(), getString(R.string.error_not_login), Toast.LENGTH_SHORT).show();
+    }
+
     private void checkStarStatus() {
         if (getPresenter().isLogined()) {
             getPresenter().checkIfStaring(mRepo);
@@ -172,6 +172,10 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
 
     @OnClick(R.id.id_repo_star)
     public void onFabClick() {
+        if (!getPresenter().checkLogin()) {
+            return;
+        }
+
         if (mCurrentStaring) {
             getPresenter().unstarRepo(mRepo);
         } else {
