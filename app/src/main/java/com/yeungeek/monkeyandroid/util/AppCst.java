@@ -15,9 +15,15 @@ public interface AppCst {
 
     //extra
     String EXTRA_LANGUAGE = "extra_language";
+    String EXTRA_USER_TYPE = "extra_user_type";
+    String EXTRA_USER_COUNT = "extra_user_count";
     String EXTRA_TIME_SPAN = "extra_time_span";
     String EXTRA_REPO = "EXTRA_REPO";
     String EXTRA_USER = "EXTRA_USER";
+
+    //title
+    String TITLE_FOLLOWING = "Following";
+    String TITLE_FOLLOWERS = "Followers";
 
     String AUTHOR = "yeungeek";
 

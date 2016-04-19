@@ -61,6 +61,11 @@
         <item name="android:textColor">@color/gray</item>
     </style>
 
+    <style name="TextGray600StyleSmall">
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
     <style name="CollapsedStyle">
         <item name="android:textColor">@color/white</item>
     </style>

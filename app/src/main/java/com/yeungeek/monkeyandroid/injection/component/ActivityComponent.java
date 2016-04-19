@@ -4,7 +4,9 @@ import com.yeungeek.monkeyandroid.injection.PerActivity;
 import com.yeungeek.monkeyandroid.injection.module.ActivityModule;
 import com.yeungeek.monkeyandroid.ui.AboutActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseToolbarFragment;
+import com.yeungeek.monkeyandroid.ui.detail.FollowUserFragment;
 import com.yeungeek.monkeyandroid.ui.detail.RepoDetailFragment;
+import com.yeungeek.monkeyandroid.ui.detail.UserDetailFragment;
 import com.yeungeek.monkeyandroid.ui.main.MainActivity;
 import com.yeungeek.monkeyandroid.ui.repos.RepoListFragment;
 import com.yeungeek.monkeyandroid.ui.signin.SignInDialogFragment;
@@ -30,7 +32,11 @@ public interface ActivityComponent {
 
     void inject(RepoListFragment repoListFragment);
 
+    void inject(FollowUserFragment followUserFragment);
+
     void inject(RepoDetailFragment repoDetailFragment);
+
+    void inject(UserDetailFragment userDetailFragment);
 
     void inject(UserListFragment userListFragment);
 

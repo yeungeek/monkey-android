@@ -25,6 +25,11 @@ public class User implements Serializable {
     private int score;
     private String email;
     private String name;
+    private String company;
+    private String blog;
+    private String location;
+    private String created_at;
+    private String updated_at;
     private int followers;
     private int following;
 
@@ -227,6 +232,51 @@ public class User implements Serializable {
 
     public User setFollowing(int following) {
         this.following = following;
+        return this;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public User setCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public String getBlog() {
+        return blog;
+    }
+
+    public User setBlog(String blog) {
+        this.blog = blog;
+        return this;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public User setLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public User setCreated_at(String created_at) {
+        this.created_at = created_at;
+        return this;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public User setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
         return this;
     }
 

@@ -25,6 +25,9 @@
 
     <string name="title_star">star: %1$d</string>
     <string name="title_fork">fork: %1$d</string>
+
+    <string name="title_following">Following(%1$d)</string>
+    <string name="title_followers">Followers(%1$d)</string>
     <!-- action -->
     <string name="action_enter">Enter</string>
     <string name="action_settings">Settings</string>

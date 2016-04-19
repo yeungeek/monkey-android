@@ -5,6 +5,7 @@ import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.model.RepoContent;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.model.WrapList;
+import com.yeungeek.monkeyandroid.data.model.WrapUser;
 
 import java.util.List;
 
@@ -34,9 +35,6 @@ public interface GithubApi {
     String initialScope = "user,public_repo,repo";
     String AUTH_URL = "https://www.github.com/login/oauth/authorize?client_id=" +
             CLIENT_ID + "&" + "scope=" + initialScope;
-
-    @GET("users/{user}/repos")
-    Observable<List<Repo>> listRepos(@Path("user") String user);
 
     /*******
      * oauth. different endPoint, user override url
@@ -76,18 +74,49 @@ public interface GithubApi {
     })
     @PUT("user/starred/{owner}/{repo}")
     Observable<Response<Void>> starRepo(@Path("owner") String owner, @Path("repo") String repo,
-                                  @Query(value = "access_token", encoded = true) String accessToken);
+                                        @Query(value = "access_token", encoded = true) String accessToken);
 
     @GET("user/starred/{owner}/{repo}")
     Observable<Response<Void>> checkIfStaring(@Path("owner") String owner, @Path("repo") String repo,
-                                        @Query(value = "access_token", encoded = true) String accessToken);
+                                              @Query(value = "access_token", encoded = true) String accessToken);
 
     @Headers({
             "Content-Length: 0"
     })
     @DELETE("user/starred/{owner}/{repo}")
     Observable<Response<Void>> unstarRepo(@Path("owner") String owner, @Path("repo") String repo,
-                                    @Query(value = "access_token", encoded = true) String accessToken);
+                                          @Query(value = "access_token", encoded = true) String accessToken);
+
+    @GET("users/{username}/starred")
+    Observable<List<Repo>> listStarredRepo(@Path("username") String username);
+
+    //user
+    @GET("users/{username}")
+    Observable<WrapUser> getSingleUser(@Path("username") String username);
+
+    @GET("users/{username}/followers")
+    Observable<List<User>> getFollowers(@Path("username") String username, @Query("page") int pageId);  //authenticated
+
+    @GET("users/{username}/following")
+    Observable<List<User>> getFollowing(@Path("username") String username, @Query("page") int pageId);  //authenticated
+
+    @GET("user/following/{username}")
+    Observable<Response<Void>> checkIfFollowing(@Path("username") String username,
+                                                @Query(value = "access_token", encoded = true) String accessToken);
+
+    @Headers({
+            "Content-Length: 0"
+    })
+    @PUT("user/following/{username}")
+    Observable<Response<Void>> followUser(@Path("username") String username,
+                                          @Query(value = "access_token", encoded = true) String accessToken);
+
+    @Headers({
+            "Content-Length: 0"
+    })
+    @DELETE("user/following/{username}")
+    Observable<Response<Void>> unfollowUser(@Path("username") String username,
+                                            @Query(value = "access_token", encoded = true) String accessToken);
 
     //trending
     @GET("http://trending.codehub-app.com/v2/trending")

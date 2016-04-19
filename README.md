@@ -20,6 +20,7 @@ GitHub interface: https://developer.github.com/v3/
 
 ## TODO
 * search
+* open url(scheme)
 
 ## Open source projects
 * [RxJava](https://github.com/ReactiveX/RxJava/)

@@ -11,11 +11,13 @@ import com.yeungeek.monkeyandroid.data.model.Repo;
 import com.yeungeek.monkeyandroid.data.model.RepoContent;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.model.WrapList;
+import com.yeungeek.monkeyandroid.data.model.WrapUser;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
 import com.yeungeek.monkeyandroid.data.remote.SimpleApi;
 import com.yeungeek.monkeyandroid.injection.ApplicationContext;
 import com.yeungeek.monkeyandroid.rxbus.RxBus;
 import com.yeungeek.monkeyandroid.util.EncodingUtil;
+import com.yeungeek.monkeyandroid.util.HttpStatus;
 
 import java.io.File;
 import java.util.List;
@@ -130,6 +132,41 @@ public class DataManager {
             }
         });
         return readme;
+    }
+
+    /**
+     * expose to user
+     * get single user info,and check if following. perfect.
+     */
+    public Observable<WrapUser> getSingleUser(final String username) {
+        return githubApi.getSingleUser(username).flatMap(new Func1<WrapUser, Observable<WrapUser>>() {
+            @Override
+            public Observable<WrapUser> call(final WrapUser wrapUser) {
+                if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
+                    return Observable.just(wrapUser);
+                } else {
+                    return githubApi.checkIfFollowing(username, preferencesHelper.getAccessToken())
+                            .flatMap(new Func1<Response<Void>, Observable<WrapUser>>() {
+                                @Override
+                                public Observable<WrapUser> call(Response<Void> voidResponse) {
+                                    if (voidResponse.code() == HttpStatus.HTTP_NO_CONTENT) {
+                                        wrapUser.setFollowed(true);
+                                        return Observable.just(wrapUser);
+                                    }
+                                    return Observable.just(wrapUser);
+                                }
+                            });
+                }
+            }
+        });
+    }
+
+    public Observable<List<User>> getFollowing(final String username, final int page) {
+        return githubApi.getFollowing(username, page);
+    }
+
+    public Observable<List<User>> getFollowers(final String username, final int page) {
+        return githubApi.getFollowers(username, page);
     }
 
     private void handleSaveUser(final User user) {
