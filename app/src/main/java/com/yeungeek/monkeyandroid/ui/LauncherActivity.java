@@ -22,10 +22,10 @@ public class LauncherActivity extends AwesomeSplash {
         configSplash.setPathSplash(AppCst.GITHUB); //set path String
         configSplash.setOriginalHeight(512); //in relation to your svg (path) resource
         configSplash.setOriginalWidth(512); //in relation to your svg (path) resource
-        configSplash.setAnimPathStrokeDrawingDuration(3000);
+        configSplash.setAnimPathStrokeDrawingDuration(2000);
         configSplash.setPathSplashStrokeSize(3); //I advise value be <5
         configSplash.setPathSplashStrokeColor(R.color.colorAccent); //any color you want form colors.xml
-        configSplash.setAnimPathFillingDuration(3000);
+        configSplash.setAnimPathFillingDuration(2500);
         configSplash.setPathSplashFillColor(R.color.blue_200); //path object filling color
     }
 

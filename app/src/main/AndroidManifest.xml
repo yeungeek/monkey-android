@@ -34,8 +34,7 @@
             android:launchMode="singleTop"/>
 
         <activity
-            android:name=".ui.detail.DetailActivity"
-            android:launchMode="singleTop"/>
+            android:name=".ui.detail.DetailActivity"/>
 
         <activity
             android:name=".ui.AboutActivity"/>
