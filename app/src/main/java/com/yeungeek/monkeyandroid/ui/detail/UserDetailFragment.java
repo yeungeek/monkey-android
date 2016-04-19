@@ -28,6 +28,7 @@ import com.yeungeek.monkeyandroid.util.AppCst;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by yeungeek on 2016/4/10.
@@ -124,6 +125,21 @@ public class UserDetailFragment extends BaseLceFragment<View, WrapUser, UserDeta
     @Override
     public void loadData(boolean pullToRefresh) {
         getPresenter().getSingleUser(mUser.getLogin(), pullToRefresh);
+    }
+
+    @Override
+    public void followStatus(boolean isFollowing) {
+        mCurrentFollowing = isFollowing;
+        checkFollowing(isFollowing);
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClick() {
+        if (mCurrentFollowing) {
+            getPresenter().unfollowUser(mUser.getLogin());
+        } else {
+            getPresenter().followUser(mUser.getLogin());
+        }
     }
 
     @Override

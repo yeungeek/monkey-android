@@ -29,8 +29,10 @@ public class TokenInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
         Request.Builder requestBuilder = original.newBuilder()
-                .header(GithubApi.AUTH_HEADER, TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? "" : GithubApi.AUTH_TOKEN + preferencesHelper.getAccessToken())
                 .method(original.method(), original.body());
+        if (null != preferencesHelper && !TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
+            requestBuilder.header(GithubApi.AUTH_HEADER, GithubApi.AUTH_TOKEN + preferencesHelper.getAccessToken());
+        }
 
         Request request = requestBuilder.build();
         return chain.proceed(request);

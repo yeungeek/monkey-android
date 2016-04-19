@@ -96,7 +96,7 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
             Glide.with(this).load(mRepo.getOwner().getAvatarUrl()).into(mAvatar);
         }
 
-        if (repoDetailPresenter.isLogined()) {
+        if (getPresenter().isLogined()) {
             mRepoStar.setVisibility(View.VISIBLE);
         } else {
             mRepoStar.setVisibility(View.GONE);
@@ -143,11 +143,13 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
             return;
         }
 
-        repoDetailPresenter.getReadme(mRepo.getOwner().getLogin(), mRepo.getName(), false);
+        getPresenter().getReadme(mRepo.getOwner().getLogin(), mRepo.getName(), false);
     }
 
     private void checkStarStatus() {
-        repoDetailPresenter.checkIfStaring(mRepo);
+        if (getPresenter().isLogined()) {
+            getPresenter().checkIfStaring(mRepo);
+        }
     }
 
     @Override
@@ -171,9 +173,9 @@ public class RepoDetailFragment extends BaseLceFragment<View, String, RepoDetail
     @OnClick(R.id.id_repo_star)
     public void onFabClick() {
         if (mCurrentStaring) {
-            repoDetailPresenter.unstarRepo(mRepo);
+            getPresenter().unstarRepo(mRepo);
         } else {
-            repoDetailPresenter.starRepo(mRepo);
+            getPresenter().starRepo(mRepo);
         }
     }
 }

@@ -15,10 +15,4 @@ public interface SimpleApi {
     })
     @POST("markdown/raw")
     Observable<String> markdown(@Body String readme);
-
-    @Headers({
-            "Content-Type: text/plain"
-    })
-    @POST("markdown/raw")
-    Observable<String> markdown(@Header(GithubApi.AUTH_HEADER) String accessToken, @Body String readme);
 }

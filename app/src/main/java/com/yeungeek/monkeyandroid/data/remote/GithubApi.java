@@ -53,7 +53,7 @@ public interface GithubApi {
      * sent as a parameter https://api.github.com/?access_token=OAUTH-TOKEN
      */
     @GET("user")
-    Observable<User> getUserInfo(@Query(value = "access_token", encoded = true) String accessToken);
+    Observable<User> getUserInfo();
 
     @GET("search/repositories")
     Observable<WrapList<Repo>> getRepos(@Query("q") String query, @Query("page") int pageId);
@@ -64,27 +64,20 @@ public interface GithubApi {
     @GET("repos/{owner}/{repo}/readme")
     Observable<RepoContent> getReadme(@Path("owner") String owner, @Path("repo") String repo);
 
-    @GET("repos/{owner}/{repo}/readme")
-    Observable<RepoContent> getReadme(@Path("owner") String owner, @Path("repo") String repo,
-                                      @Query(value = "access_token", encoded = true) String accessToken);
-
     @Headers({
             "Content-Length: 0"
     })
     @PUT("user/starred/{owner}/{repo}")
-    Observable<Response<Void>> starRepo(@Path("owner") String owner, @Path("repo") String repo,
-                                        @Query(value = "access_token", encoded = true) String accessToken);
+    Observable<Response<Void>> starRepo(@Path("owner") String owner, @Path("repo") String repo);
 
     @GET("user/starred/{owner}/{repo}")
-    Observable<Response<Void>> checkIfStaring(@Path("owner") String owner, @Path("repo") String repo,
-                                              @Query(value = "access_token", encoded = true) String accessToken);
+    Observable<Response<Void>> checkIfStaring(@Path("owner") String owner, @Path("repo") String repo);
 
     @Headers({
             "Content-Length: 0"
     })
     @DELETE("user/starred/{owner}/{repo}")
-    Observable<Response<Void>> unstarRepo(@Path("owner") String owner, @Path("repo") String repo,
-                                          @Query(value = "access_token", encoded = true) String accessToken);
+    Observable<Response<Void>> unstarRepo(@Path("owner") String owner, @Path("repo") String repo);
 
     @GET("users/{username}/starred")
     Observable<List<Repo>> listStarredRepo(@Path("username") String username);
@@ -93,40 +86,26 @@ public interface GithubApi {
     @GET("users/{username}")
     Observable<WrapUser> getSingleUser(@Path("username") String username);
 
-    @GET("users/{username}")
-    Observable<WrapUser> getSingleUser(@Path("username") String username, @Query(value = "access_token", encoded = true) String accessToken);
-
     @GET("users/{username}/followers")
     Observable<List<User>> getFollowers(@Path("username") String username, @Query("page") int pageId);  //authenticated
-
-    @GET("users/{username}/followers")
-    Observable<List<User>> getFollowers(@Path("username") String username, @Query("page") int pageId,
-                                        @Query(value = "access_token", encoded = true) String accessToken);  //authenticated
 
     @GET("users/{username}/following")
     Observable<List<User>> getFollowing(@Path("username") String username, @Query("page") int pageId);
 
-    @GET("users/{username}/following")
-    Observable<List<User>> getFollowing(@Path("username") String username, @Query("page") int pageId,
-                                        @Query(value = "access_token", encoded = true) String accessToken);
-
     @GET("user/following/{username}")
-    Observable<Response<Void>> checkIfFollowing(@Path("username") String username,
-                                                @Query(value = "access_token", encoded = true) String accessToken);
+    Observable<Response<Void>> checkIfFollowing(@Path("username") String username);
 
     @Headers({
             "Content-Length: 0"
     })
     @PUT("user/following/{username}")
-    Observable<Response<Void>> followUser(@Path("username") String username,
-                                          @Query(value = "access_token", encoded = true) String accessToken);
+    Observable<Response<Void>> followUser(@Path("username") String username);
 
     @Headers({
             "Content-Length: 0"
     })
     @DELETE("user/following/{username}")
-    Observable<Response<Void>> unfollowUser(@Path("username") String username,
-                                            @Query(value = "access_token", encoded = true) String accessToken);
+    Observable<Response<Void>> unfollowUser(@Path("username") String username);
 
     //trending
     @GET("http://trending.codehub-app.com/v2/trending")

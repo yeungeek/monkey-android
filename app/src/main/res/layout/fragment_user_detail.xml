@@ -26,13 +26,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:windowBackground"
-                android:padding="@dimen/margin_10">
+                android:background="@color/indigo_50"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingRight="@dimen/margin_10">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/id_user_avatar"
-                    android:layout_width="@dimen/height_large"
-                    android:layout_height="@dimen/height_large"
+                    android:layout_width="@dimen/height_huge"
+                    android:layout_height="@dimen/height_huge"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_avatar"/>
 

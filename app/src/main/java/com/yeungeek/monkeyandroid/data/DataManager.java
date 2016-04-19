@@ -62,7 +62,7 @@ public class DataManager {
                     @Override
                     public Observable<User> call(AccessTokenResp accessTokenResp) {
                         preferencesHelper.putAccessToken(accessTokenResp.getAccessToken());
-                        return githubApi.getUserInfo(accessTokenResp.getAccessToken());
+                        return githubApi.getUserInfo();
                     }
                 }).doOnNext(new Action1<User>() {
             @Override
@@ -83,27 +83,19 @@ public class DataManager {
     }
 
     public Observable<Response<Void>> checkIfStaring(final String owner, final String repo) {
-        if (!TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
-            return githubApi.checkIfStaring(owner, repo, preferencesHelper.getAccessToken());
+        if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
+            return null;
         }
 
-        return null;
+        return githubApi.checkIfStaring(owner, repo);
     }
 
     public Observable<Response<Void>> starRepo(final String owner, final String repo) {
-        if (!TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
-            return githubApi.starRepo(owner, repo, preferencesHelper.getAccessToken());
-        }
-
-        return null;
+        return githubApi.starRepo(owner, repo);
     }
 
     public Observable<Response<Void>> unstarRepo(final String owner, final String repo) {
-        if (!TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
-            return githubApi.unstarRepo(owner, repo, preferencesHelper.getAccessToken());
-        }
-
-        return null;
+        return githubApi.unstarRepo(owner, repo);
     }
 
     public Observable<WrapList<User>> getUsers(final String query, final int page) {
@@ -111,15 +103,11 @@ public class DataManager {
     }
 
     public Observable<String> getReadme(final String owner, final String repo, final String cssFile) {
-        Observable<RepoContent> readme = TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getReadme(owner, repo) :
-                githubApi.getReadme(owner, repo, preferencesHelper.getAccessToken());
-
-        return readme.flatMap(new Func1<RepoContent, Observable<String>>() {
+        return githubApi.getReadme(owner, repo).flatMap(new Func1<RepoContent, Observable<String>>() {
             @Override
             public Observable<String> call(RepoContent repoContent) {
                 String markdown = new String(EncodingUtil.fromBase64(repoContent.getContent()));
-                return TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? simpleApi.markdown(markdown) :
-                        simpleApi.markdown(GithubApi.AUTH_TOKEN + preferencesHelper.getAccessToken(), markdown);
+                return simpleApi.markdown(markdown);
             }
         }).flatMap(new Func1<String, Observable<String>>() {
             @Override
@@ -134,16 +122,13 @@ public class DataManager {
      * get single user info,and check if following. perfect.
      */
     public Observable<WrapUser> getSingleUser(final String username) {
-        Observable<WrapUser> single = TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getSingleUser(username) :
-                githubApi.getSingleUser(username, preferencesHelper.getAccessToken());
-
-        return single.flatMap(new Func1<WrapUser, Observable<WrapUser>>() {
+        return githubApi.getSingleUser(username).flatMap(new Func1<WrapUser, Observable<WrapUser>>() {
             @Override
             public Observable<WrapUser> call(final WrapUser wrapUser) {
                 if (TextUtils.isEmpty(preferencesHelper.getAccessToken())) {
                     return Observable.just(wrapUser);
                 } else {
-                    return githubApi.checkIfFollowing(username, preferencesHelper.getAccessToken())
+                    return githubApi.checkIfFollowing(username)
                             .flatMap(new Func1<Response<Void>, Observable<WrapUser>>() {
                                 @Override
                                 public Observable<WrapUser> call(Response<Void> voidResponse) {
@@ -160,13 +145,19 @@ public class DataManager {
     }
 
     public Observable<List<User>> getFollowing(final String username, final int page) {
-        return TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getFollowing(username, page) :
-                githubApi.getFollowing(username, page, preferencesHelper.getAccessToken());
+        return githubApi.getFollowing(username, page);
     }
 
     public Observable<List<User>> getFollowers(final String username, final int page) {
-        return TextUtils.isEmpty(preferencesHelper.getAccessToken()) ? githubApi.getFollowers(username, page) :
-                githubApi.getFollowers(username, page, preferencesHelper.getAccessToken());
+        return githubApi.getFollowers(username, page);
+    }
+
+    public Observable<Response<Void>> followUser(final String login) {
+        return githubApi.followUser(login);
+    }
+
+    public Observable<Response<Void>> unfollowUser(final String login) {
+        return githubApi.unfollowUser(login);
     }
 
     private void handleSaveUser(final User user) {
