@@ -12,12 +12,3 @@ before_install:
 
 script:
   - ./gradlew assembleRelease
-
-env:
-  global:
-    - ADB_INSTALL_TIMEOUT=8
-
-notifications:
-  email: false
-
-sudo: false
