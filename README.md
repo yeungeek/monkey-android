@@ -7,16 +7,14 @@ iOS version:[Monkey](https://github.com/coderyi/Monkey)
 [![Build Status](https://travis-ci.org/yeungeek/monkey-android.svg?branch=master)](https://travis-ci.org/yeungeek/monkey-android)
 
 ## Download
-fir.im
+Google Play:  [Monkey](https://play.google.com/store/apps/details?id=com.yeungeek.monkeyandroid)
+
+fir.im: http://fir.im/monkeyandroid
+
 ![](images/fir.png)
 
 ## API
 GitHub interface: https://developer.github.com/v3/
-
-## App Preview
-![](images/monkey.gif)
-![](images/preview1.png) ![](images/preview2.png)
-![](images/preview3.png)
 
 ## Function (~~Done~~)
 * ~~sign in~~
@@ -32,6 +30,13 @@ GitHub interface: https://developer.github.com/v3/
 * search
 * open url(scheme)
 * showcases
+
+## App Preview
+![](images/monkey.gif)
+
+![](images/preview1.png)
+![](images/preview2.png)
+![](images/preview3.png)
 
 ## Open source projects
 * [RxJava](https://github.com/ReactiveX/RxJava/)

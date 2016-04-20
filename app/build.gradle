@@ -115,6 +115,10 @@ android {
         xiaomi {
             manifestPlaceholders = [app_channel: "xiaomi"]
         }
+
+        googleplay{
+            manifestPlaceholders = [app_channel: "googleplay"]
+        }
     }
 
     compileOptions {
