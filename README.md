@@ -3,6 +3,9 @@ Is a GitHub third party client, show the rank of users and repositories,trending
 Base on Material Design,use MVP pattern
 iOS version:[Monkey](https://github.com/coderyi/Monkey)
 
+## Status
+[![Build Status](https://travis-ci.org/yeungeek/monkey-android.svg?branch=master)](https://travis-ci.org/yeungeek/monkey-android)
+
 ## API
 GitHub interface: https://developer.github.com/v3/
 
