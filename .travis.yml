@@ -6,10 +6,10 @@ android:
     - build-tools-23.0.2
     - extra-android-m2repository
     - extra-android-support
-    - sys-img-armeabi-android-19
+    - sys-img-armeabi-v7a-android-19
 
 before_script:
-  - echo no | android create avd --force -n test -t android-19 --abi armeabi
+  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell settings put global window_animation_scale 0 &
