@@ -77,9 +77,15 @@
 -keep public class android.support.v7.internal.widget.** { *; }
 -keep public class android.support.v7.internal.view.menu.** { *; }
 
+# -keep class android.support.v4.** { *; }
+# -keep interface android.support.v4.app.** { *; }
+-keep public class * extends android.support.v4.app.Fragment
+
 -keep public class * extends android.support.v4.view.ActionProvider {
     public <init>(android.content.Context);
 }
+
+-keep class android.support.v7.widget.RoundRectDrawable { *; }
 
 # retrofit2
 -dontwarn retrofit2.**

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.tencent.bugly.beta.Beta;
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.User;
 import com.yeungeek.monkeyandroid.data.remote.GithubApi;
@@ -69,6 +70,8 @@ public class MainActivity extends BaseLceActivity<View, User, MainMvpView, MainP
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // init upgrade
+        Beta.init(getApplicationContext(),false);
 
         if (null != navigationView) {
             setupDrawerContent(navigationView);

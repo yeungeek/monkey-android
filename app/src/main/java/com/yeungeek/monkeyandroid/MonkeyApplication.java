@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.stetho.Stetho;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.yeungeek.monkeyandroid.injection.component.ApplicationComponent;
 import com.yeungeek.monkeyandroid.injection.component.DaggerApplicationComponent;
@@ -24,8 +26,8 @@ public class MonkeyApplication extends Application {
         }
 
         initComponent();
-        initAnalysis();
         initStetho();
+        initUpgrade();
     }
 
     private void initComponent() {
@@ -38,13 +40,16 @@ public class MonkeyApplication extends Application {
         mApplicationComponent.inject(this);
     }
 
-    private void initAnalysis() {
-        CrashReport.initCrashReport(this, BuildConfig.BUGLY_APPID, false);
-//        CrashReport.testJavaCrash();
+    private void initStetho() {
+        Stetho.initializeWithDefaults(this);
     }
 
-    private void initStetho(){
-        Stetho.initializeWithDefaults(this);
+    private void initUpgrade() {
+        Beta.autoInit = false;
+        Beta.autoCheckUpgrade = true;
+        Beta.upgradeCheckPeriod = 60 * 1000;
+
+        Bugly.init(this, BuildConfig.BUGLY_APPID, false);
     }
 
     public static MonkeyApplication get(final Context context) {

@@ -87,7 +87,8 @@ ext {
     ]
 
     analysisDependencies = [
-            bugly: "com.tencent.bugly:crashreport:${buglyVersion}"
+            bugly       : "com.tencent.bugly:crashreport:${latestVersion}",
+            buglyUpgrade: "com.tencent.bugly:crashreport_upgrade:${latestVersion}"
     ]
 
     utilDependencies = [

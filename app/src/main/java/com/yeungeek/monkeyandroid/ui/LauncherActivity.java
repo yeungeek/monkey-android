@@ -1,5 +1,6 @@
 package com.yeungeek.monkeyandroid.ui;
 
+import com.tencent.bugly.beta.Beta;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 import com.yeungeek.monkeyandroid.R;

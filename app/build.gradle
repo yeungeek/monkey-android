@@ -32,9 +32,22 @@ bugly {
     appKey = BUGLY_APPKEY
 }
 
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 0 // bump for dogfood builds, public betas, etc.
+
+def isCi = "true".equals(System.getenv("CI"))
+def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
+    dexOptions {
+        // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
+        preDexLibraries = preDexEnabled && !isCi
+    }
 
     defaultConfig {
         applicationId "com.yeungeek.monkeyandroid"
@@ -42,14 +55,18 @@ android {
         targetSdkVersion rootProject.ext.targetSdk
 
         // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
-        versionName project.VERSION_NAME
-        versionCode Integer.parseInt(project.VERSION_CODE)
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
 
         buildConfigField "String", "BUGLY_APPID", "\"${BUGLY_APPID}\""
 
+        manifestPlaceholders = [bugly_appid: "${BUGLY_APPID}",
+                                app_version: "${versionName}",
+                                app_channel: "internal"]
+
         ndk {
             //设置支持的SO库架构
-            abiFilters 'armeabi', 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'armeabi'//, 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
 
@@ -74,8 +91,22 @@ android {
         release {
             signingConfig signingConfigs.release
 
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        internal {
+            manifestPlaceholders = [app_channel: "internal"]
+        }
+
+        yingyongbao {
+            manifestPlaceholders = [app_channel: "yingyongbao"]
+        }
+
+        xiaomi {
+            manifestPlaceholders = [app_channel: "xiaomi"]
         }
     }
 
@@ -145,7 +176,7 @@ dependencies {
     compile uiWidgetDependencies.awesomeSplash
 
     //analysis
-    compile analysisDependencies.bugly
+    compile analysisDependencies.buglyUpgrade
 
     // Test
     testCompile injectDependencies.dagger
