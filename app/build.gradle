@@ -5,6 +5,7 @@ apply plugin: 'build-time-tracker'
 apply plugin: 'bugly'
 
 apply from: '../config/quality/quality.gradle'
+apply from: '../buildsystem/artifacts.gradle'
 
 buildtimetracker {
     reporters {
@@ -101,9 +102,9 @@ android {
             manifestPlaceholders = [app_channel: "internal"]
         }
 
-        yingyongbao {
-            manifestPlaceholders = [app_channel: "yingyongbao"]
-        }
+//        yingyongbao {
+//            manifestPlaceholders = [app_channel: "yingyongbao"]
+//        }
 
         xiaomi {
             manifestPlaceholders = [app_channel: "xiaomi"]
