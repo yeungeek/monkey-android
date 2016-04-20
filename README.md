@@ -1,5 +1,5 @@
 # Monkey for GitHub, Android Version
-Is a GitHub third party client, show the rank of users and repositories,trending.
+A GitHub third party client, show the rank of users and repositories,trending.
 Base on Material Design,use MVP pattern
 iOS version:[Monkey](https://github.com/coderyi/Monkey)
 
@@ -7,7 +7,8 @@ iOS version:[Monkey](https://github.com/coderyi/Monkey)
 [![Build Status](https://travis-ci.org/yeungeek/monkey-android.svg?branch=master)](https://travis-ci.org/yeungeek/monkey-android)
 
 ## Download
-[Monkey](http://fir.im/monkeyandroid)
+fir.im
+![](images/fir.png)
 
 ## API
 GitHub interface: https://developer.github.com/v3/
@@ -30,7 +31,7 @@ GitHub interface: https://developer.github.com/v3/
 ## TO DO
 * search
 * open url(scheme)
-
+* showcases
 
 ## Open source projects
 * [RxJava](https://github.com/ReactiveX/RxJava/)
