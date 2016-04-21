@@ -108,7 +108,7 @@ public class LoadingFooter extends RelativeLayout {
                 mLoadingView.setVisibility(showView ? VISIBLE : GONE);
 
                 mLoadingProgress.setVisibility(View.VISIBLE);
-                mLoadingText.setText("正在加载中…");
+                mLoadingText.setText(getContext().getString(R.string.msg_loading));
                 break;
             case TheEnd:
                 setOnClickListener(null);
