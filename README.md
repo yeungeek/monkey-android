@@ -5,6 +5,7 @@ iOS version:[Monkey](https://github.com/coderyi/Monkey)
 
 ## Status
 [![Build Status](https://travis-ci.org/yeungeek/monkey-android.svg?branch=master)](https://travis-ci.org/yeungeek/monkey-android)
+[![Coverage Status](https://coveralls.io/repos/github/yeungeek/monkey-android/badge.svg?branch=master)](https://coveralls.io/github/yeungeek/monkey-android?branch=master)
 
 ## Download
 Google Play:  [Monkey](https://play.google.com/store/apps/details?id=com.yeungeek.monkeyandroid)
