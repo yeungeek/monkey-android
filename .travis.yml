@@ -1,6 +1,6 @@
 branches:
-	only:
-	  - master
+  only:
+    - master
 
 language: android
 sudo: false
