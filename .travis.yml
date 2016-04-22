@@ -29,7 +29,4 @@ before_install:
   - chmod +x gradlew
 
 script:
-  - ./gradlew connectedAndroidTest test
-
-after_success:
-  - ./gradlew cobertura coveralls
+  - ./gradlew connectedAndroidTest coveralls

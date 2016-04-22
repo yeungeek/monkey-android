@@ -3,7 +3,6 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'build-time-tracker'
 apply plugin: 'bugly'
-apply plugin: "net.saliman.cobertura"
 apply plugin: "com.github.kt3k.coveralls"
 
 apply from: '../config/quality/quality.gradle'
@@ -35,7 +34,14 @@ bugly {
     appKey = BUGLY_APPKEY
 }
 
-cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
+}
+
+tasks.coveralls {
+    dependsOn 'connectedAndroidTest'
+    onlyIf { System.env.'CI' }
+}
 
 def versionMajor = 1
 def versionMinor = 0
