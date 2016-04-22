@@ -35,12 +35,7 @@ bugly {
 }
 
 coveralls {
-    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
-}
-
-tasks.coveralls {
-    dependsOn 'connectedAndroidTest'
-    onlyIf { System.env.'CI' }
+    jacocoReportPath = "${buildDir}/reports/coverage/internal/report.xml"
 }
 
 def versionMajor = 1
