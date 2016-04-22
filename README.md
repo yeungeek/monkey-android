@@ -55,3 +55,4 @@ GitHub interface: https://developer.github.com/v3/
 ## References
 * [ribot-app-android](https://github.com/ribot/ribot-app-android)
 * [Monkey](https://github.com/coderyi/Monkey)
+* [GithubTrends](https://github.com/laowch/GithubTrends)

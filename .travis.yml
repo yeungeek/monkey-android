@@ -1,4 +1,10 @@
+branches:
+	only:
+	- master
+
 language: android
+sudo: false
+
 android:
   components:
     - platform-tools
@@ -13,3 +19,6 @@ before_install:
 
 script:
   - ./gradlew assembleRelease
+
+after_success:
+  ./gradlew cobertura coveralls
