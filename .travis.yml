@@ -1,6 +1,6 @@
 branches:
 	only:
-	- master
+	  - master
 
 language: android
 sudo: false
@@ -21,4 +21,4 @@ script:
   - ./gradlew assembleRelease
 
 after_success:
-  ./gradlew cobertura coveralls
+  - ./gradlew cobertura coveralls
