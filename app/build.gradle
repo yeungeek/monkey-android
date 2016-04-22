@@ -3,10 +3,11 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'build-time-tracker'
 apply plugin: 'bugly'
-apply plugin: "com.github.kt3k.coveralls"
+apply plugin: 'com.github.kt3k.coveralls'
 
 apply from: '../config/quality/quality.gradle'
 apply from: '../buildsystem/artifacts.gradle'
+apply from: '../buildsystem/jacoco.gradle'
 
 buildtimetracker {
     reporters {
@@ -35,7 +36,7 @@ bugly {
 }
 
 coveralls {
-    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
+    jacocoReportPath = "${project.buildDir}/reports/jacoco/testInternalDebugUnitTestCoverage/jacocoTestReport.xml"
 }
 
 def versionMajor = 1
@@ -110,21 +111,21 @@ android {
     }
 
     productFlavors {
-//        internal {
-//            manifestPlaceholders = [app_channel: "internal"]
-//        }
-//
-//        yingyongbao {
-//            manifestPlaceholders = [app_channel: "yingyongbao"]
-//        }
-//
-//        xiaomi {
-//            manifestPlaceholders = [app_channel: "xiaomi"]
-//        }
-//
-//        googleplay{
-//            manifestPlaceholders = [app_channel: "googleplay"]
-//        }
+        internal {
+            manifestPlaceholders = [app_channel: "internal"]
+        }
+
+        yingyongbao {
+            manifestPlaceholders = [app_channel: "yingyongbao"]
+        }
+
+        xiaomi {
+            manifestPlaceholders = [app_channel: "xiaomi"]
+        }
+
+        googleplay{
+            manifestPlaceholders = [app_channel: "googleplay"]
+        }
     }
 
     compileOptions {
