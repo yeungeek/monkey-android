@@ -5,10 +5,6 @@ branches:
 language: android
 sudo: false
 
-env:
-  matrix:
-    - ANDROID_TARGET=android-23 ANDROID_ABI=armeabi-v7a
-
 android:
   components:
     - platform-tools
@@ -17,14 +13,6 @@ android:
     - build-tools-23.0.2
     - extra-android-m2repository
     - extra-android-support
-    - sys-img-armeabi-v7a-android-23
-
-before_script:
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-
 
 before_install:
   - chmod +x gradlew

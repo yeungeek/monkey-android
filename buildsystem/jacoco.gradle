@@ -1,4 +1,5 @@
 //https://blog.gouline.net/code-coverage-on-android-with-jacoco-92ec90c9355e#.v34ksl11k
+//https://github.com/bumptech/glide
 apply plugin: 'jacoco'
 
 jacoco {
