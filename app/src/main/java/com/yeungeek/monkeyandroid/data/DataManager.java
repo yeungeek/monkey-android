@@ -21,7 +21,6 @@ import com.yeungeek.monkeyandroid.util.HttpStatus;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -112,7 +111,7 @@ public class DataManager {
                 try {
                     markdown = new String(EncodingUtil.fromBase64(repoContent.getContent()),"UTF-8");
                 } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    Timber.e(e,"### UnsupportedEncodingException");
                 }
                 return simpleApi.markdown(markdown);
             }

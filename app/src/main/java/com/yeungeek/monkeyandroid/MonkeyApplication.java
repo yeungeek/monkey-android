@@ -6,7 +6,6 @@ import android.content.Context;
 import com.facebook.stetho.Stetho;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.yeungeek.monkeyandroid.injection.component.ApplicationComponent;
 import com.yeungeek.monkeyandroid.injection.component.DaggerApplicationComponent;
 import com.yeungeek.monkeyandroid.injection.module.ApplicationModule;
