@@ -36,7 +36,7 @@ bugly {
 }
 
 coveralls {
-    jacocoReportPath = "${project.buildDir}/reports/jacoco/testInternalDebugUnitTestCoverage/jacocoTestReport.xml"
+    jacocoReportPath = "${project.buildDir}/reports/jacoco/testInternalDebugUnitTestCoverage/testInternalDebugUnitTestCoverage.xml"
 }
 
 def versionMajor = 1
