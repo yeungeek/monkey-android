@@ -20,6 +20,8 @@ import com.yeungeek.monkeyandroid.util.EncodingUtil;
 import com.yeungeek.monkeyandroid.util.HttpStatus;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -106,7 +108,12 @@ public class DataManager {
         return githubApi.getReadme(owner, repo).flatMap(new Func1<RepoContent, Observable<String>>() {
             @Override
             public Observable<String> call(RepoContent repoContent) {
-                String markdown = new String(EncodingUtil.fromBase64(repoContent.getContent()));
+                String markdown = null;
+                try {
+                    markdown = new String(EncodingUtil.fromBase64(repoContent.getContent()),"UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 return simpleApi.markdown(markdown);
             }
         }).flatMap(new Func1<String, Observable<String>>() {

@@ -43,7 +43,7 @@ public class UserDetailPresenter extends MvpLceRxPresenter<UserDetailMvpView, Wr
 
     public void unfollowUser(final String login) {
         mFollow = new FollowSubscriber(false);
-        dataManager.followUser(login)
+        dataManager.unfollowUser(login)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mFollow);
