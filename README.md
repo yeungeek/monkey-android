@@ -1,6 +1,6 @@
 # Monkey for GitHub, Android Version
-A GitHub third party client, show the rank of users and repositories,trending.
-Base on Material Design,use MVP pattern
+A GitHub third party client, show the rank of users and repositories,trending.  
+Base on Material Design,use MVP pattern  
 iOS version:[Monkey](https://github.com/coderyi/Monkey)
 
 ## Status
@@ -17,20 +17,20 @@ fir.im: http://fir.im/monkeyandroid
 ## API
 GitHub interface: https://developer.github.com/v3/
 
-## Function (~~Done~~)
-* ~~sign in~~
-* ~~user list~~
-* ~~repo list~~
-* ~~trending(daily,weekly,monthly)~~
-* ~~user detail~~
-* ~~repo detail~~
-* ~~follow user~~
-* ~~star repo~~
+## Function (- [x] Done)
+- [x] sign in
+- [x] user list
+- [x] repo list
+- [x] trending(daily,weekly,monthly)
+- [x] user detail
+- [x] repo detail
+- [x] follow user
+- [x] star repo
 
 ## TO DO
-* search
-* open url(scheme)
-* showcases
+- [ ]  search
+- [ ]  open url(scheme)
+- [ ]  showcases
 
 ## App Preview
 ![](images/monkey.gif)
