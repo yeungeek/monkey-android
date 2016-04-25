@@ -51,6 +51,8 @@ ext {
 
     // Test Libs
     junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    robolectricVersion = '3.0'
     leakcanaryVersion = '1.3.1'
 
     //dependencies
@@ -110,5 +112,7 @@ ext {
             daggerCompiler : "com.google.dagger:dagger-compiler:${dagger2Version}",
             javaxAnnotation: "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             junit          : "junit:junit:${junitVersion}",
+            mockito        : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric    : "org.robolectric:robolectric:${robolectricVersion}",
     ]
 }

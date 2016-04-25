@@ -51,11 +51,6 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
-    dexOptions {
-        // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
-        preDexLibraries = preDexEnabled && !isCi
-    }
-
     defaultConfig {
         applicationId "com.yeungeek.monkeyandroid"
         minSdkVersion rootProject.ext.minSdk
@@ -140,6 +135,16 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
+    //http://g.co/androidstudio/not-mocked
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    dexOptions {
+        // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
+        preDexLibraries = preDexEnabled && !isCi
+    }
 }
 
 dependencies {
@@ -200,6 +205,8 @@ dependencies {
     testCompile injectDependencies.dagger
     testCompile injectDependencies.javaxAnnotation
     testCompile domainTestDependencies.junit
+    testCompile domainTestDependencies.mockito
+    testCompile domainTestDependencies.robolectric
 
     testApt injectDependencies.daggerCompiler
 }
