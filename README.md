@@ -17,7 +17,7 @@ fir.im: http://fir.im/monkeyandroid
 ## API
 GitHub interface: https://developer.github.com/v3/
 
-## Function (- [x] Done)
+## Function
 - [x] sign in
 - [x] user list
 - [x] repo list
