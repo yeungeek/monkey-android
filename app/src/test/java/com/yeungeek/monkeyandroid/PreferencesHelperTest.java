@@ -31,5 +31,7 @@ public class PreferencesHelperTest {
         String token = "token";
         mPreferencesHelper.putAccessToken(token);
         Assert.assertEquals(token, mPreferencesHelper.getAccessToken());
+
+
     }
 }
