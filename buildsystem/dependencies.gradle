@@ -49,6 +49,9 @@ ext {
     aboutitMetaVersion = '1.0.0'
     awesomeSplashVersion = "v1.0.0"
 
+    //ads
+    playServicesVersion = "8.4.0"
+
     // Test Libs
     junitVersion = '4.12'
     mockitoVersion = '1.10.19'
@@ -114,5 +117,9 @@ ext {
             junit          : "junit:junit:${junitVersion}",
             mockito        : "org.mockito:mockito-core:${mockitoVersion}",
             robolectric    : "org.robolectric:robolectric:${robolectricVersion}",
+    ]
+
+    profitDependencies = [
+            playServicesAds: "com.google.android.gms:play-services-ads:${playServicesVersion}"
     ]
 }

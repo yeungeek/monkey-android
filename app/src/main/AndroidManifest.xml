@@ -40,22 +40,33 @@
         <activity
             android:name=".ui.AboutActivity"/>
 
+        <!--Include the AdActivity configChanges and theme. -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent"/>
+
         <!-- bugly -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:theme="@android:style/Theme.Translucent"/>
+
         <meta-data
             android:name="BUGLY_APPID"
-            android:value="${bugly_appid}" />
+            android:value="${bugly_appid}"/>
         <!-- 配置APP版本号 -->
         <meta-data
             android:name="BUGLY_APP_VERSION"
-            android:value="${app_version}" />
+            android:value="${app_version}"/>
         <!-- 配置APP渠道号 -->
         <meta-data
             android:name="BUGLY_APP_CHANNEL"
-            android:value="${app_channel}" />
+            android:value="${app_channel}"/>
 
+        <!--This meta-data tag is required to use Google Play Services.-->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
         <meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
             android:value="GlideModule"/>

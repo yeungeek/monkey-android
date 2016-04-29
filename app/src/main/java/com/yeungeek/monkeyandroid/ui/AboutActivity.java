@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.snilius.aboutit.AboutIt;
 import com.snilius.aboutit.meta.LibAndroidSupportLibrary;
 import com.snilius.aboutit.meta.LibOkHttp;
@@ -35,6 +37,8 @@ public class AboutActivity extends BaseActivity {
     Toolbar toolbar;
     @Bind(R.id.id_toolbar_image)
     ImageView avatar;
+    @Bind(R.id.adView)
+    AdView mAdView;
 
     @Inject
     DataManager dataManager;
@@ -48,7 +52,6 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
@@ -72,6 +75,14 @@ public class AboutActivity extends BaseActivity {
         if (null != dataManager) {
             Glide.with(this).load(dataManager.getPreferencesHelper().getUserAvatar()).into(avatar);
         }
+
+        initAds();
+
+    }
+
+    private void initAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

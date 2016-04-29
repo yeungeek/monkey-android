@@ -42,4 +42,7 @@
     <string name="menu_title_about">About</string>
 
     <string name="title_about_desc">Monkey android is a GitHub third party client, show the rank of users and repositories,trending. Base on Material Design,use MVP pattern</string>
+
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <!--<string name="banner_ad_unit_id">ca-app-pub-4106776683609657/2279239023</string>-->
 </resources>

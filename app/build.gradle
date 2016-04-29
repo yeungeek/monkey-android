@@ -94,6 +94,8 @@ android {
             ndk {
                 abiFilters 'armeabi'//, 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
             }
+
+            resValue "string", "banner_ad_unit_id", "${BANNER_AD_UNIT_ID_RELEASE}"
         }
 
         debug {
@@ -102,6 +104,7 @@ android {
                 abiFilters 'armeabi', 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
             }
             testCoverageEnabled = true
+            resValue "string", "banner_ad_unit_id", "${BANNER_AD_UNIT_ID_DEBUG}"
         }
     }
 
@@ -154,6 +157,7 @@ dependencies {
     def rxDependencies = rootProject.ext.rxDependencies
     def utilDependencies = rootProject.ext.utilDependencies
     def analysisDependencies = rootProject.ext.analysisDependencies
+    def profitDependencies = rootProject.ext.profitDependencies
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':mvp')
@@ -201,6 +205,7 @@ dependencies {
     //analysis
     compile analysisDependencies.buglyUpgrade
 
+    compile profitDependencies.playServicesAds
     // Test
     testCompile injectDependencies.dagger
     testCompile injectDependencies.javaxAnnotation

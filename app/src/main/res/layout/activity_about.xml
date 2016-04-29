@@ -51,4 +51,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"/>
     </android.support.v4.widget.NestedScrollView>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:adSize="BANNER"
+        app:adUnitId="@string/banner_ad_unit_id"/>
 </android.support.design.widget.CoordinatorLayout>
