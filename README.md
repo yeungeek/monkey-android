@@ -8,7 +8,7 @@ iOS version:[Monkey](https://github.com/coderyi/Monkey)
 [![Coverage Status](https://coveralls.io/repos/github/yeungeek/monkey-android/badge.svg?branch=master)](https://coveralls.io/github/yeungeek/monkey-android?branch=master)
 
 ## Download
-![https://www.android.com/images/brand/get_it_on_play_logo_large.png](https://play.google.com/store/apps/details?id=com.yeungeek.monkeyandroid)
+[![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_large.png)](https://play.google.com/store/apps/details?id=com.yeungeek.monkeyandroid)
 
 fir.im: http://fir.im/monkeyandroid
 
