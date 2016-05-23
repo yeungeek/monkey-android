@@ -4,6 +4,7 @@ apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'build-time-tracker'
 apply plugin: 'bugly'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'com.google.gms.google-services'
 
 apply from: '../config/quality/quality.gradle'
 apply from: '../buildsystem/artifacts.gradle'
@@ -205,7 +206,7 @@ dependencies {
     //analysis
     compile analysisDependencies.buglyUpgrade
 
-    compile profitDependencies.playServicesAds
+    compile profitDependencies.fireBaseAds
     // Test
     testCompile injectDependencies.dagger
     testCompile injectDependencies.javaxAnnotation

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "423857193954",
+    "firebase_url": "https://monkey-android-7aa77.firebaseio.com",
+    "project_id": "monkey-android-7aa77",
+    "storage_bucket": "monkey-android-7aa77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423857193954:android:540ddf433cc50b06",
+        "android_client_info": {
+          "package_name": "com.yeungeek.monkeyandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423857193954-99shkcq9omsambusgjo3den5pqsqtihb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuo6NGWj9m6C8Hx5Fd7qFc-puIiZBABoE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

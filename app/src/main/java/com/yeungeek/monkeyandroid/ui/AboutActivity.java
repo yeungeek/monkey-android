@@ -25,9 +25,14 @@ import com.yeungeek.monkeyandroid.data.meta.LibRxJava;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseActivity;
 import com.yeungeek.monkeyandroid.util.AppCst;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by yeungeek on 2016/4/11.
@@ -76,8 +81,24 @@ public class AboutActivity extends BaseActivity {
             Glide.with(this).load(dataManager.getPreferencesHelper().getUserAvatar()).into(avatar);
         }
 
-        initAds();
 
+        Observable.empty().delay(1000, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
+                initAds();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
     }
 
     private void initAds() {

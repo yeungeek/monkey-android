@@ -50,7 +50,7 @@ ext {
     awesomeSplashVersion = "v1.0.0"
 
     //ads
-    playServicesVersion = "8.4.0"
+    playServicesVersion = "9.0.0"
 
     // Test Libs
     junitVersion = '4.12'
@@ -120,6 +120,7 @@ ext {
     ]
 
     profitDependencies = [
-            playServicesAds: "com.google.android.gms:play-services-ads:${playServicesVersion}"
+            playServicesAds: "com.google.android.gms:play-services-ads:${playServicesVersion}",
+            fireBaseAds: "com.google.firebase:firebase-ads:${playServicesVersion}"
     ]
 }
