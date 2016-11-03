@@ -3,6 +3,8 @@ A GitHub third party client, show the rank of users and repositories,trending.
 Base on Material Design,use MVP pattern  
 iOS version:[Monkey](https://github.com/coderyi/Monkey)
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Monkey%20for%20GitHub-brightgreen.svg?style=flat)](http://android-arsenal.com/details/3/3717)
+
 ## Status
 [![Build Status](https://travis-ci.org/yeungeek/monkey-android.svg?branch=master)](https://travis-ci.org/yeungeek/monkey-android)
 [![Coverage Status](https://coveralls.io/repos/github/yeungeek/monkey-android/badge.svg?branch=master)](https://coveralls.io/github/yeungeek/monkey-android?branch=master)
