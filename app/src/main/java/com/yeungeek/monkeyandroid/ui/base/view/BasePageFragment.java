@@ -8,6 +8,7 @@ import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.ui.base.adapter.EndlessRecyclerOnScrollListener;
 import com.yeungeek.monkeyandroid.ui.base.adapter.LoadingFooter;
 import com.yeungeek.monkeyandroid.ui.base.adapter.RecyclerViewStateUtils;
+import com.yeungeek.monkeyandroid.ui.detail.UserDetailFragment;
 import com.yeungeek.monkeyandroid.util.AppCst;
 import com.yeungeek.mvp.common.MvpPresenter;
 import com.yeungeek.mvp.common.lce.MvpLceView;
@@ -101,6 +102,11 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
                 Timber.d("### checkCanDoRefresh: %s", getParentFragment());
+                if (getParentFragment() instanceof UserDetailFragment) {
+                    return ((UserDetailFragment) getParentFragment()).getOffset() == 0 &&
+                            PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+                }
+
                 return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
             }
 

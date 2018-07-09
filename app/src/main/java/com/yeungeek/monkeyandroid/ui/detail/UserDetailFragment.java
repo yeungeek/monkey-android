@@ -31,6 +31,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 /**
  * Created by yeungeek on 2016/4/10.
@@ -69,6 +70,7 @@ public class UserDetailFragment extends BaseLceFragment<View, WrapUser, UserDeta
     private User mUser;
     private UserPagerAdapter mUserPagerAdapter;
     private boolean mCurrentFollowing;
+    private int mOffset;
 
     private String mFollowing;
     private String mFollowers;
@@ -103,6 +105,14 @@ public class UserDetailFragment extends BaseLceFragment<View, WrapUser, UserDeta
                 actionBar.setTitle(mUser.getLogin());
             }
         }
+
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                Timber.d("### onOffsetChanged: %s", verticalOffset);
+                mOffset = verticalOffset;
+            }
+        });
 
         loadData(false);
     }
@@ -162,6 +172,10 @@ public class UserDetailFragment extends BaseLceFragment<View, WrapUser, UserDeta
         if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).activityComponent().inject(this);
         }
+    }
+
+    public int getOffset() {
+        return mOffset;
     }
 
     private void updateUser(final WrapUser user) {
