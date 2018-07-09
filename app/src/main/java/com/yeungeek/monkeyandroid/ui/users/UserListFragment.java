@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.yeungeek.monkeyandroid.R;
 import com.yeungeek.monkeyandroid.data.model.Language;
@@ -12,6 +13,7 @@ import com.yeungeek.monkeyandroid.data.model.WrapList;
 import com.yeungeek.monkeyandroid.ui.base.adapter.HeaderAndFooterRecyclerViewAdapter;
 import com.yeungeek.monkeyandroid.ui.base.view.BaseLceActivity;
 import com.yeungeek.monkeyandroid.ui.base.view.BasePageFragment;
+import com.yeungeek.monkeyandroid.ui.detail.DetailActivity;
 import com.yeungeek.monkeyandroid.util.AppCst;
 
 import javax.inject.Inject;
@@ -42,6 +44,16 @@ public class UserListFragment extends BasePageFragment<WrapList<User>, UserMvpVi
     @Override
     protected void initAdapter() {
         adapter = new UserAdapter(getActivity());
+        adapter.setOnItemClickListener(new UserAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+                User user = adapter.getUser(recyclerView.getChildLayoutPosition(view));
+                if (null != user) {
+                    startActivity(DetailActivity.getStartIntent(getActivity().getApplicationContext(), user));
+                }
+            }
+        });
+
         mHeaderAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mHeaderAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

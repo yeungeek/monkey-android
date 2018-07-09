@@ -26,6 +26,7 @@ import butterknife.OnClick;
 public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<User> users = new ArrayList<>();
+    private OnItemClickListener mOnItemClickListener;
 
     public UserAdapter(final Context context) {
         this.mContext = context;
@@ -34,7 +35,16 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_user, parent, false);
-        return new UserViewHolder(view);
+        UserViewHolder viewHolder = new UserViewHolder(view);
+        if (null != mOnItemClickListener) {
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(v);
+                }
+            });
+        }
+        return viewHolder;
     }
 
     @Override
@@ -70,14 +80,27 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Bind(R.id.id_user_avatar)
         ImageView userAvatar;
 
-        @OnClick(R.id.id_user_card)
-        public void onItemClick() {
-            mContext.startActivity(DetailActivity.getStartIntent(mContext, user));
-        }
+//        @OnClick(R.id.id_user_card)
+//        public void onItemClick() {
+//            mContext.startActivity(DetailActivity.getStartIntent(mContext, user));
+//        }
 
         public UserViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public User getUser(int position) {
+        return users.get(position);
+    }
+
+    public UserAdapter setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+        return this;
+    }
+
+    public static interface OnItemClickListener {
+        void onItemClick(View view);
     }
 }

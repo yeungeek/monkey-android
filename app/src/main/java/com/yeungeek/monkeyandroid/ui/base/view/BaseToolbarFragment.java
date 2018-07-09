@@ -1,5 +1,6 @@
 package com.yeungeek.monkeyandroid.ui.base.view;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -27,12 +28,16 @@ public abstract class BaseToolbarFragment extends BaseFragment {
     ViewPager viewPager;
     @Bind(R.id.fab)
     FloatingActionButton floatingActionButton;
+    @Bind(R.id.app_bar)
+    AppBarLayout appbar;
 
     @Inject
     protected DataManager dataManager;
     protected ViewPager.OnPageChangeListener onPageChangeListener;
     protected int mCurrentPosition = 0;
     private ActionBar actionBar;
+
+    protected int appbarOffset;
 
     @Override
     protected int getLayoutRes() {
@@ -68,6 +73,14 @@ public abstract class BaseToolbarFragment extends BaseFragment {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                Timber.d("### onOffsetChanged verticalOffset:%s,", verticalOffset);
+                appbarOffset = verticalOffset;
             }
         });
     }

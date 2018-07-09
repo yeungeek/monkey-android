@@ -2,6 +2,7 @@ package com.yeungeek.monkeyandroid.ui.detail;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -57,6 +58,9 @@ public class UserDetailFragment extends BaseLceFragment<View, WrapUser, UserDeta
     TextView mUserBlog;
     @Bind(R.id.id_user_create_time)
     TextView mCreateTime;
+
+    @Bind(R.id.app_bar)
+    AppBarLayout appbar;
 
     @Inject
     UserDetailPresenter userDetailPresenter;

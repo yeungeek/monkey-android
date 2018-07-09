@@ -100,6 +100,7 @@ public abstract class BasePageFragment<M, V extends MvpLceView<M>, P extends Mvp
         contentView.setPtrHandler(new PtrHandler() {
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                Timber.d("### checkCanDoRefresh: %s", getParentFragment());
                 return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
             }
 
